@@ -10,4 +10,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void testStuff() {
+        System.out.println("Android Studio marks 'Evgeniy' as a spelling mistake :D");
+    }
 }
