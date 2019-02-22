@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void testStuff() {
         System.out.println("Android Studio marks 'Evgeniy' as a spelling mistake :D");
+        System.out.println("It marks Bekker the same way...");
     }
 }
