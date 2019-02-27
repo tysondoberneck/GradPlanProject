@@ -10,4 +10,5 @@ public class CourseViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_view);
     }
+    // comment
 }
