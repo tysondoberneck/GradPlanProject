@@ -102,6 +102,8 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+        completions."</string>
+    <string name="toLogin_button">Login to I-Plan</string>
+    <string name="next_button">Next Step</string>
+    <string name="make_schedule">Generate Schedule</string>
 </resources>
