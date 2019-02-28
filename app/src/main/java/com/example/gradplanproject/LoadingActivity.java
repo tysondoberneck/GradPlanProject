@@ -1,11 +1,15 @@
 package com.example.gradplanproject;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 public class LoadingActivity extends AppCompatActivity {
+
+    final Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,21 +17,20 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
     }
 
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Log.d("Handler", "Running handler...");
+                Intent intent = new Intent(activity, CourseViewActivity.class);
+                startActivity(intent);
+            }
+        }, 3000);
 
-        Log.d("Loading", "Loading finished; starting next activity...");
-
-        Intent intent = new Intent(this, CourseViewActivity.class);
-        startActivity(intent);
-    }*/
+    }
 
     public void testStuff() {
         System.out.println("Android Studio marks 'Evgeniy' as a spelling mistake :D");
