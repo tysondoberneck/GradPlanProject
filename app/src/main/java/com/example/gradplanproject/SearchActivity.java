@@ -1,16 +1,31 @@
 package com.example.gradplanproject;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class SearchActivity extends AppCompatActivity {
+    public Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_search);
+
+            // When Toolbar works, we will use this code.
+//            Toolbar toolBar = findViewById(R.id.toolBar);
+//            toolBar.setTitle(getResources().getString(R.string.tournament));
+//            setSupportActionBar(toolBar);
+
+            DrawerUtil.getDrawer(this, toolBar);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
 
         Spinner spinner1 = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,

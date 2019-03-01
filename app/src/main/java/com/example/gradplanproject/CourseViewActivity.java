@@ -1,16 +1,31 @@
 package com.example.gradplanproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.view.View;
 
 public class CourseViewActivity extends AppCompatActivity {
+    public Toolbar toolBar; //Temporary code till toolbar works
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_view);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_course_view);
+
+            // When Toolbar works, we will use this code.
+//            Toolbar toolBar = findViewById(R.id.toolBar);
+//            toolBar.setTitle(getResources().getString(R.string.tournament));
+//            setSupportActionBar(toolBar);
+
+            DrawerUtil.getDrawer(this, toolBar);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void onClickLogin(View view) {
