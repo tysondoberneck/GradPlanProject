@@ -32,7 +32,7 @@ public class LoadingActivity extends AppCompatActivity {
 
     }
 
-    public void testStuff() {
+    protected void testStuff() {
         System.out.println("Android Studio marks 'Evgeniy' as a spelling mistake :D");
         System.out.println("It marks Bekker the same way...");
         System.out.println("Doberneck is a real word guys");
