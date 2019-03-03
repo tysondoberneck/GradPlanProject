@@ -4,6 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+
+import java.io.StringBufferInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseViewActivity extends AppCompatActivity {
 
@@ -11,6 +18,24 @@ public class CourseViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_view);
+
+        Spinner spinner = findViewById(R.id.spinner5);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.semester_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        List<String> list = new ArrayList<>();
+        list.add("Course Example 1");
+        list.add("Course Example 2");
+        list.add("Course Example 3");
+        list.add("Course Example 4");
+        list.add("Course Example 5");
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter aa = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(aa);
     }
 
     public void onClickLogin(View view) {

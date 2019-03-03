@@ -3,24 +3,44 @@
     <string name="toLogin_button">Login to I-Plan</string>
     <string name="next_button">Next Step</string>
     <string-array name="beforeTime_list">
+        <item>Ends before...</item>
         <item>9:00</item>
         <item>12:00</item>
         <item>3:00</item>
     </string-array>
     <string-array name="afterTime_list">
+        <item>Starts after...</item>
         <item>9:00</item>
         <item>12:00</item>
         <item>3:00</item>
     </string-array>
     <string-array name="day_list">
+        <item>Day(s)...</item>
         <item>MWF</item>
         <item>TR</item>
         <item>MTWRF</item>
     </string-array>
-    <string-array name="teacher_list">
+    <string-array name="instructor_list">
+        <item>Instructor...</item>
         <item>Burton</item>
         <item>Macbeth</item>
         <item>Cook</item>
+    </string-array>
+    <string-array name="semester_list">
+        <item>Spring 2019</item>
+        <item>Summer 2019</item>
+        <item>Fall 2019</item>
+        <item>Winter 2020</item>
+        <item>Spring 2020</item>
+        <item>Summer 2020</item>
+        <item>Fall 2020</item>
+    </string-array>
+    <string-array name="courseView_filler_list">
+        <item>Course Example 1</item>
+        <item>Course Example 2</item>
+        <item>Course Example 3</item>
+        <item>Course Example 4</item>
+        <item>Course Example 5</item>
     </string-array>
 
     <!-- Pre-defined strings -->

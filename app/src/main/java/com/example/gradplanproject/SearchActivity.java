@@ -32,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
 
         Spinner spinner4 = findViewById(R.id.spinner4);
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
-                R.array.teacher_list, android.R.layout.simple_spinner_item);
+                R.array.instructor_list, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner4.setAdapter(adapter4);
     }
