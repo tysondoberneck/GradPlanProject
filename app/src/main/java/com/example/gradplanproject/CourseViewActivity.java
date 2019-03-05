@@ -26,14 +26,12 @@ public class CourseViewActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         List<String> list = new ArrayList<>();
-        list.add("Course Example 1");
-        list.add("Course Example 2");
-        list.add("Course Example 3");
-        list.add("Course Example 4");
-        list.add("Course Example 5");
+        for ( int i = 0; i < 10; i++) {
+            list.add("Course Example " + i);
+        }
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter aa = new ArrayAdapter(this,
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, list);
         listView.setAdapter(aa);
     }

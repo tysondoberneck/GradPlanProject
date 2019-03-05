@@ -2,17 +2,37 @@ package com.example.gradplanproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.lang.reflect.Array;
+
 public class SearchActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    public String myDataset[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Spinner spinner1 = findViewById(R.id.spinner);
+        myDataset = new String[1000];
+        for ( int i = 0; i < 100; i++) {
+            myDataset[i] = "String Example #" + i;
+        }
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new RecyclerAdapter(myDataset);
+        recyclerView.setAdapter(mAdapter);
+
+        Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.beforeTime_list, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
