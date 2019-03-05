@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.lang.reflect.Array;
-
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -22,14 +20,14 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         myDataset = new String[1000];
-        for ( int i = 0; i < 100; i++) {
+        for ( int i = 0; i < 1000; i++) {
             myDataset[i] = "String Example #" + i;
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new RecyclerAdapter(myDataset);
+        mAdapter = new RecyclerAdapterPractice(myDataset);
         recyclerView.setAdapter(mAdapter);
 
         Spinner spinner1 = findViewById(R.id.spinner1);
