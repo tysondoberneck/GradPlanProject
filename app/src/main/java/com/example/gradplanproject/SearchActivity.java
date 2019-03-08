@@ -8,11 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
@@ -20,7 +17,6 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    //public String myDataset[];
     public List<Map<String, String>> courseListExample;
 
     @Override
@@ -28,17 +24,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        // RECYCLERVIEW
 
-//        myDataset = new String[1000];
-//        for ( int i = 0; i < 1000; i++) {
-//            myDataset[i] = "String Example #" + i;
-//        }
-//
-//        recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
-//        layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(mAdapter);
+        // Filler text for recyclerView. Eventually, the recyclerView should instead take in the
+        // intended list of Courses, which will be, basically, dressed-up Maps
 
         courseListExample = new ArrayList<>();
 
@@ -60,13 +48,17 @@ public class SearchActivity extends AppCompatActivity {
         courseListExample.get(2).put("name", "Linear Algebra");
         courseListExample.get(2).put("details", "Nelson - MWF - 11:30 AM");
 
+
+        // Instantiating recyclerView and setting layoutManager and custom Adapter class
+
         recyclerView = findViewById(R.id.recyclerView1);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerAdapter(courseListExample);
         recyclerView.setAdapter(adapter);
 
-        // RECYCLERVIEW
+
+        // Filling each Spinner with appropriate text (from strings.xml) using ArrayAdapter
 
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
