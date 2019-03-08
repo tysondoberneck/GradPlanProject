@@ -12,11 +12,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="6dip"
+        android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_launcher"
         android:text="CS124"
         android:textAllCaps="false"
-        android:textSize="30sp" />
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/courseName"
@@ -27,18 +29,20 @@
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@id/courseCode"
-        android:gravity="center_vertical"
+        android:gravity="right"
+        android:textAlignment="gravity"
         android:text="Intro to Software Development"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/courseDetails"
         android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/courseCode"
-        android:singleLine="true"
+        android:gravity="right"
+        android:textAlignment="gravity"
         android:text="Macbeth - MWF - 12:45 PM"
         android:textSize="16sp" />
 
