@@ -155,4 +155,9 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="gpp">Grad Plan Plus</string>
+    <string name="view_courses">View Courses</string>
+    <string name="search_courses">Search Courses</string>
+    <string name="view_schedule">View Schedules</string>
+    <string name="schedule_act">This is the Schedule Activity</string>
 </resources>

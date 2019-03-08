@@ -1,14 +1,15 @@
 package com.example.gradplanproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,21 @@ public class CourseViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_view);
+        //Create Toolbar/NavDrawer
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_course_view);
+
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            toolbar.setTitle(getResources().getString(R.string.gpp));
+            setSupportActionBar(toolbar);
+
+            DrawerUtil.getDrawer(this, toolbar);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+        //
 
         Spinner spinner = findViewById(R.id.spinner5);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

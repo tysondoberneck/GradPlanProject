@@ -1,9 +1,11 @@
 package com.example.gradplanproject;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -21,9 +23,21 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        //Create Toolbar/NavDrawer
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_search);
 
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            toolbar.setTitle(getResources().getString(R.string.gpp));
+            setSupportActionBar(toolbar);
+
+            DrawerUtil.getDrawer(this, toolbar);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+        //
 
         // Filler text for recyclerView. Eventually, the recyclerView should instead take in the
         // intended list of Courses, which will be, basically, dressed-up Maps
