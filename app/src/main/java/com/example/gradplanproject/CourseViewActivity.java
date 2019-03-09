@@ -1,17 +1,28 @@
 package com.example.gradplanproject;
 
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class CourseViewActivity extends AppCompatActivity {
 
@@ -58,5 +69,29 @@ public class CourseViewActivity extends AppCompatActivity {
     public void onClickNext(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
+    }
+
+    public void callFirebase(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("semesters").document("2019;SP")
+                .collection("sections").document("CS124-01");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        System.out.println("yay " + document);
+                    } else {
+                        Log.d(TAG, "No such document");
+                        System.out.println("nay " + document);
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    System.out.println("nothing worked =\\");
+                }
+            }
+        });
     }
 }

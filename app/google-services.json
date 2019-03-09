@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "54028526088",
+    "firebase_url": "https://grad-plan-plus.firebaseio.com",
+    "project_id": "grad-plan-plus",
+    "storage_bucket": "grad-plan-plus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54028526088:android:366d52b67ec43550",
+        "android_client_info": {
+          "package_name": "com.example.gradplanproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54028526088-qrnkheeol09mgvm5allnvundu7gsp4pq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAn1TcYdTFGVb-TDFZq_DnFvgpyRn-z-0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
