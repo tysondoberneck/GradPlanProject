@@ -8,6 +8,7 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -23,11 +24,13 @@ public class DrawerUtil {
         drawerEmptyItem.withEnabled(false);
 
         PrimaryDrawerItem drawerViewCourses = new PrimaryDrawerItem().withIdentifier(1)
-                .withName(R.string.view_courses).withIcon(R.drawable.material_drawer_badge);
+                .withName(R.string.view_courses).withIcon(android.R.drawable.ic_menu_more);
         PrimaryDrawerItem drawerSearch = new PrimaryDrawerItem().withIdentifier(2)
-                .withName(R.string.search_courses).withIcon(R.drawable.material_drawer_badge);
+                .withName(R.string.search_courses).withIcon(android.R.drawable.ic_search_category_default);
         PrimaryDrawerItem drawerSchedule = new PrimaryDrawerItem().withIdentifier(3)
-                .withName(R.string.view_schedule).withIcon(R.drawable.material_drawer_badge);
+                .withName(R.string.view_schedule).withIcon(android.R.drawable.ic_menu_my_calendar);
+        PrimaryDrawerItem drawerSettings = new PrimaryDrawerItem().withIdentifier(4)
+                .withName(R.string.drawer_settings).withIcon(android.R.drawable.ic_menu_preferences);
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
@@ -43,10 +46,14 @@ public class DrawerUtil {
                 .withCloseOnClick(true)
                 .withSelectedItem(-1)
                 .addDrawerItems(
+                        new DividerDrawerItem(),
                         drawerEmptyItem,drawerEmptyItem,drawerEmptyItem,
                         drawerViewCourses,
                         drawerSearch,
-                        drawerSchedule
+                        drawerSchedule,
+                        drawerEmptyItem, drawerEmptyItem, drawerEmptyItem,
+                        new DividerDrawerItem(),
+                        drawerSettings
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override

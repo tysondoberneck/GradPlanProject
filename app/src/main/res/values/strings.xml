@@ -160,4 +160,5 @@
     <string name="search_courses">Search Courses</string>
     <string name="view_schedule">View Schedules</string>
     <string name="schedule_act">This is the Schedule Activity</string>
+    <string name="drawer_settings">Settings</string>
 </resources>
