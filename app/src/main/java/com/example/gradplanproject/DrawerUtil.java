@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -25,8 +29,13 @@ public class DrawerUtil {
         PrimaryDrawerItem drawerSchedule = new PrimaryDrawerItem().withIdentifier(3)
                 .withName(R.string.view_schedule).withIcon(R.drawable.material_drawer_badge);
 
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(activity)
+                .withHeaderBackground(R.drawable.ic_launcher_background)
+                .build();
 
         Drawer result = new DrawerBuilder()
+                .withAccountHeader(headerResult)
                 .withActivity(activity)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggle(true)
