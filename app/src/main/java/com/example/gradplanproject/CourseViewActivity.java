@@ -74,7 +74,7 @@ public class CourseViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void callFirebase(View view) {
+    public void callFirebaseDocument(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("semesters").document("2019;SP")
                 .collection("sections").document("CS124-01");
