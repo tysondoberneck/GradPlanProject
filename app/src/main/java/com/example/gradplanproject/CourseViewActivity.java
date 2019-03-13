@@ -15,9 +15,12 @@ import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +96,28 @@ public class CourseViewActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    public void callFirebaseCollection(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("semesters").document("2019;SP").collection("sections")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            System.out.println("Task is successful");
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            System.out.println("In the else");
+                        }
+                        System.out.println("outside");
+                    }
+                });
+
     }
 }
