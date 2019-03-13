@@ -22,12 +22,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 public class CourseViewActivity extends AppCompatActivity {
+
+    public static final String TAG = "CourseViewActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class CourseViewActivity extends AppCompatActivity {
             DrawerUtil.getDrawer(this, toolbar);
         }
         catch(Exception e) {
-            System.out.println(e);
+            Log.e(TAG, e.getMessage());
         }
         //
 

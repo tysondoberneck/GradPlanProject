@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class ScheduleActivity extends AppCompatActivity {
+
+    public static final String TAG = "ScheduleActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,7 @@ public class ScheduleActivity extends AppCompatActivity {
             DrawerUtil.getDrawer(this, toolbar);
         }
         catch(Exception e) {
-            System.out.println(e);
+            Log.e(TAG, e.getMessage());
         }
         //
     }

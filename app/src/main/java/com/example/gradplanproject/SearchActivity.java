@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
+
+    public static final String TAG = "SearchActivity";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -35,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
             DrawerUtil.getDrawer(this, toolbar);
         }
         catch(Exception e) {
-            System.out.println(e);
+            Log.e(TAG, e.getMessage());
         }
         //
 
