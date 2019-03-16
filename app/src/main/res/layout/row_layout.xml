@@ -1,49 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip" >
-
-    <TextView
-        android:id="@+id/courseCode"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="6dip"
-        android:layout_marginBottom="8dp"
-        android:src="@mipmap/ic_launcher"
-        android:text="CS124"
-        android:textAllCaps="false"
-        android:textSize="26sp" />
+    android:layout_height="54dp"
+    android:padding="6dip">
 
     <TextView
         android:id="@+id/courseName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/courseDetails"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@id/courseCode"
-        android:gravity="right"
-        android:textAlignment="gravity"
-        android:text="Intro to Software Development"
+        android:layout_above="@id/courseDetails"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:text="CS124 - Intro to Software Development"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/courseDetails"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/courseCode"
-        android:gravity="right"
-        android:textAlignment="gravity"
-        android:text="Macbeth - MWF - 12:45 PM"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:text="Macbeth - MWF - 12:45-1:45 PM"
         android:textSize="16sp" />
 
 </RelativeLayout>

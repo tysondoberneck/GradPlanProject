@@ -20,7 +20,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView courseCode;
+        //public TextView courseCode;
         public TextView courseName;
         public TextView courseDetails;
         public View layout;
@@ -29,7 +29,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(v);
             layout = v;
 
-            courseCode = (TextView) v.findViewById(R.id.courseCode);
+            //courseCode = (TextView) v.findViewById(R.id.courseCode);
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
         }
@@ -75,9 +75,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         // The LayoutManager loops through the list provided by the Adapter, providing a new
         // position index each time.
 
-        holder.courseCode.setText(values.get(position).get("code"));
-        holder.courseName.setText(values.get(position).get("name"));
-        holder.courseDetails.setText(values.get(position).get("details"));
+        String firstLine = values.get(position).get("code") + " - " + values.get(position).get("name");
+        String secondLine = values.get(position).get("details");
+
+        //holder.courseCode.setText(values.get(position).get("code"));
+        holder.courseName.setText(firstLine);
+        holder.courseDetails.setText(secondLine);
 
         // Provided onClickListener; currently set to remove an item when clicked on, but could
         // be made more useful later.

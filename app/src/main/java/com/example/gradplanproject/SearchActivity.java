@@ -49,23 +49,38 @@ public class SearchActivity extends AppCompatActivity {
         courseListExample = new ArrayList<>();
 
         Map<String, String> map1 = new HashMap<>();
+        map1.put("code", "CS235");
+        map1.put("name", "Software Design and Development");
+        map1.put("details", "Burton - MWF - 9:00 AM");
         courseListExample.add(map1);
-        courseListExample.get(0).put("code", "CS235");
-        courseListExample.get(0).put("name", "Software Design and Development");
-        courseListExample.get(0).put("details", "Burton - MWF - 9:00 AM");
+//        courseListExample.get(0).put("code", "CS235");
+//        courseListExample.get(0).put("name", "Software Design and Development");
+//        courseListExample.get(0).put("details", "Burton - MWF - 9:00 AM");
 
         Map<String, String> map2 = new HashMap<>();
+        map2.put("code", "FDREL225");
+        map2.put("name", "Foundations of the Restoration");
+        map2.put("details", "Taylor - TR - 7:45 AM");
         courseListExample.add(map2);
-        courseListExample.get(1).put("code", "FDREL225");
-        courseListExample.get(1).put("name", "Foundations of the Restoration");
-        courseListExample.get(1).put("details", "Taylor - TR - 7:45 AM");
+//        courseListExample.get(1).put("code", "FDREL225");
+//        courseListExample.get(1).put("name", "Foundations of the Restoration");
+//        courseListExample.get(1).put("details", "Taylor - TR - 7:45 AM");
 
         Map<String, String> map3 = new HashMap<>();
+        map3.put("code", "MATH341");
+        map3.put("name", "Linear Algebra");
+        map3.put("details", "Nelson - MWF - 11:30 AM");
         courseListExample.add(map3);
-        courseListExample.get(2).put("code", "MATH341");
-        courseListExample.get(2).put("name", "Linear Algebra");
-        courseListExample.get(2).put("details", "Nelson - MWF - 11:30 AM");
+//        courseListExample.get(2).put("code", "MATH341");
+//        courseListExample.get(2).put("name", "Linear Algebra");
+//        courseListExample.get(2).put("details", "Nelson - MWF - 11:30 AM");
 
+        courseListExample.add(map1);
+        courseListExample.add(map2);
+        courseListExample.add(map3);
+        courseListExample.add(map1);
+        courseListExample.add(map2);
+        courseListExample.add(map3);
 
         // Instantiating recyclerView and setting layoutManager and custom Adapter class
 
