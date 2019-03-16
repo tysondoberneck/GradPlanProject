@@ -90,16 +90,16 @@ public class SearchActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
-        Spinner spinner3 = findViewById(R.id.spinner3);
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
-                R.array.day_list, android.R.layout.simple_spinner_item);
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner3.setAdapter(adapter3);
-
-        Spinner spinner4 = findViewById(R.id.spinner4);
-        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
-                R.array.instructor_list, android.R.layout.simple_spinner_item);
-        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner4.setAdapter(adapter4);
+//        Spinner spinner3 = findViewById(R.id.spinner3);
+//        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+//                R.array.day_list, android.R.layout.simple_spinner_item);
+//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner3.setAdapter(adapter3);
+//
+//        Spinner spinner4 = findViewById(R.id.spinner4);
+//        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
+//                R.array.instructor_list, android.R.layout.simple_spinner_item);
+//        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner4.setAdapter(adapter4);
     }
 }
