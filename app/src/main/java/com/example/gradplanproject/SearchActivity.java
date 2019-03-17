@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -116,5 +117,11 @@ public class SearchActivity extends AppCompatActivity {
 //                R.array.instructor_list, android.R.layout.simple_spinner_item);
 //        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spinner4.setAdapter(adapter4);
+    }
+
+    public void testSpinnerData(View view) {
+        Spinner mySpinner = findViewById(R.id.spinner1);
+        String text = mySpinner.getSelectedItem().toString();
+        Log.i(TAG, "This is the data from the spinner: " + text);
     }
 }
