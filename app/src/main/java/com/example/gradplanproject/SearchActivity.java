@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -18,6 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
+
+    private boolean monday = false;
+    private boolean tuesday = false;
+    private boolean wednesday = false;
+    private boolean thursday = false;
+    private boolean friday = false;
 
     public static final String TAG = "SearchActivity";
 
@@ -100,5 +107,42 @@ public class SearchActivity extends AppCompatActivity {
         Spinner mySpinner = findViewById(R.id.spinner1);
         String text = mySpinner.getSelectedItem().toString();
         Log.i(TAG, "This is the data from the spinner: " + text);
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.checkBox1:
+                if(checked)
+                    monday = true;
+                else
+                    monday = false;
+                break;
+            case R.id.checkBox2:
+                if (checked)
+                    tuesday = true;
+                else
+                    tuesday = false;
+                break;
+            case R.id.checkBox3:
+                if(checked)
+                    wednesday = true;
+                else
+                    wednesday = false;
+                break;
+            case R.id.checkBox4:
+                if (checked)
+                    thursday = true;
+                else
+                    thursday = false;
+                break;
+            case R.id.checkBox5:
+                if (checked)
+                    friday = true;
+                else
+                    friday = false;
+                break;
+        }
     }
 }

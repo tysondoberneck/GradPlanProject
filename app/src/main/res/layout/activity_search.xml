@@ -86,7 +86,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox2"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2" />
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+        android:onClick="onCheckboxClicked"/>
 
     <CheckBox
         android:id="@+id/checkBox2"
@@ -95,7 +96,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox3"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox3" />
+        app:layout_constraintEnd_toStartOf="@+id/checkBox3"
+        android:onClick="onCheckboxClicked"/>
 
     <CheckBox
         android:id="@+id/checkBox3"
@@ -104,7 +106,8 @@
         android:layout_marginStart="200dp"
         android:layout_marginLeft="200dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView1" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView1"
+        android:onClick="onCheckboxClicked"/>
 
     <CheckBox
         android:id="@+id/checkBox4"
@@ -113,7 +116,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox3"
-        app:layout_constraintStart_toEndOf="@+id/checkBox3" />
+        app:layout_constraintStart_toEndOf="@+id/checkBox3"
+        android:onClick="onCheckboxClicked"/>
 
     <CheckBox
         android:id="@+id/checkBox5"
@@ -122,8 +126,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox4"
-        app:layout_constraintStart_toEndOf="@+id/checkBox4" />
-
+        app:layout_constraintStart_toEndOf="@+id/checkBox4"
+        android:onClick="onCheckboxClicked"/>
     <EditText
         android:id="@+id/editText"
         android:layout_width="0dp"
@@ -181,7 +185,7 @@
         android:text="M"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox1"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox1" />
+        app:layout_constraintEnd_toStartOf="@+id/checkBox1"/>
 
     <TextView
         android:id="@+id/textView3"
