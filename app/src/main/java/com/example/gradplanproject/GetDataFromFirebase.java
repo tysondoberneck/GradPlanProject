@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 
 import static android.content.ContentValues.TAG;
 
-public class getDataFromFirebase {
+public class GetDataFromFirebase {
         public void getData2() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("semesters").document("2019;SP");

@@ -1,5 +1,6 @@
 package com.example.gradplanproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,6 +16,16 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,42 +67,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         // Filler text for recyclerView. Eventually, the recyclerView should instead take in the
-        // intended list of Courses, which will be, basically, dressed-up Maps
-
-        courseListExample = new ArrayList<>();
-
-        Map<String, String> map1 = new HashMap<>();
-        map1.put("code", "CS235");
-        map1.put("name", "Software Design and Development");
-        map1.put("details", "Burton - MWF - 9:00 AM");
-        courseListExample.add(map1);
-
-        Map<String, String> map2 = new HashMap<>();
-        map2.put("code", "FDREL225");
-        map2.put("name", "Foundations of the Restoration");
-        map2.put("details", "Taylor - TR - 7:45 AM");
-        courseListExample.add(map2);
-
-        Map<String, String> map3 = new HashMap<>();
-        map3.put("code", "MATH341");
-        map3.put("name", "Linear Algebra");
-        map3.put("details", "Nelson - MWF - 11:30 AM");
-        courseListExample.add(map3);
-
-        courseListExample.add(map1);
-        courseListExample.add(map2);
-        courseListExample.add(map3);
-        courseListExample.add(map1);
-        courseListExample.add(map2);
-        courseListExample.add(map3);
-
-        // Instantiating recyclerView and setting layoutManager and custom Adapter class
-
-        recyclerView = findViewById(R.id.recyclerView1);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerAdapter(courseListExample);
-        recyclerView.setAdapter(adapter);
+        // intended list of Courses, which will be, basically, dressed-up Maps]
 
         // Filling each Spinner with appropriate text (from strings.xml) using ArrayAdapter
 
@@ -189,5 +165,61 @@ public class SearchActivity extends AppCompatActivity {
         String startTime = mySpinner2.getSelectedItem().toString();
 
         System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday);
+
+        final Map<String, String> map1 = new HashMap<>();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", "CS124")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            System.out.println("Task is successful");
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                                map1.put("class", document.getData());
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+//                            System.out.println("In the else");
+//                        }
+//                        System.out.println("outside");
+//                    }
+//                });
+
+        DocumentReference docRef = db.collection("semesters").document("2019;SP").collection("sections").document("CS124-01");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        map1.put("class", document.getData().toString());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+
+
+        courseListExample = new ArrayList<>();
+
+//        Map<String, String> map1 = new HashMap<>();
+//        map1.put("code", "CS235");
+//        map1.put("name", "Software Design and Development");
+//        map1.put("details", "Burton - MWF - 9:00 AM");
+        courseListExample.add(map1);
+
+        recyclerView = findViewById(R.id.recyclerView1);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RecyclerAdapter(courseListExample);
+        recyclerView.setAdapter(adapter);
     }
 }
