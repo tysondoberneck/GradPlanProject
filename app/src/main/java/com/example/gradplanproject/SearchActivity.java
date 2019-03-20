@@ -145,4 +145,36 @@ public class SearchActivity extends AppCompatActivity {
                 break;
         }
     }
+
+
+//    public void testSearchViewData(View view) {
+//
+//        SearchView sv = findViewById(R.id.searchView1);
+//        String text = sv.get().toString();
+//
+//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//
+//                adapter.getFilter().filter(newText);
+//            }
+//            return false;
+//        }
+//    });
+//    }
+
+    public void testQueryAndDisplayData(View view) {
+
+        Spinner mySpinner1 = findViewById(R.id.spinner1);
+        String endTime = mySpinner1.getSelectedItem().toString();
+
+        Spinner mySpinner2 = findViewById(R.id.spinner2);
+        String startTime = mySpinner2.getSelectedItem().toString();
+    }
 }
