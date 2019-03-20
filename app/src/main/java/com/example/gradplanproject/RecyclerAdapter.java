@@ -53,6 +53,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         values = courseList;
     }
 
+    /**
+     *
+     * @param parent The group the new View will be a part of.
+     * @param viewType The type of View to be generated.
+     * @return The newly generated ViewHolder
+     */
+
     // The following overridden methods are called by the LayoutManager as necessary. We should
     // never have to call them ourselves.
 
@@ -69,11 +76,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return vh;
     }
 
+
+    /**
+     * LayoutManager uses this to set the data for each ViewHolder. This is called automatically
+     * each item in the implemented container.
+     * @param holder Specifies the ViewHolder currently being managed.
+     * @param position The "index" variable that LayoutManager uses to iterate through the
+     *                 container.
+     */
+
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-
-        // The LayoutManager loops through the list provided by the Adapter, providing a new
-        // position index each time.
 
         String firstLine = values.get(position).get("code") + " - " + values.get(position).get("name");
         String secondLine = values.get(position).get("details");
@@ -82,20 +95,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.courseName.setText(firstLine);
         holder.courseDetails.setText(secondLine);
 
-        // Provided onClickListener; currently set to remove an item when clicked on, but could
-        // be made more useful later.
+        /**
+         * An onClickListener that applies to each individual object in the RecyclerView; in other
+         * words, clicking on a single section in the list could add it to the user's list
+         * of saved sections.
+         */
 
-        /*
-        holder.courseName.setOnClickListener(new OnClickListener() {
+        holder.courseName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(position);
+
             }
         });
-        */
     }
 
-    // Another method called by LayoutManager to know how many ViewHolders to set.
+
+    /**
+     * LayoutManager calls this function to know how many ViewHolders to set.
+     * @return Size of the implemented container.
+     */
 
     @Override
     public int getItemCount() {
