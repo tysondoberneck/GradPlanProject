@@ -11,7 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +28,8 @@ public class SearchActivity extends AppCompatActivity {
     private boolean wednesday = false;
     private boolean thursday = false;
     private boolean friday = false;
+
+    private boolean switchState = false;
 
     public static final String TAG = "SearchActivity";
 
@@ -146,6 +151,12 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    public void onCheckedChanged(View view) {
+        Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
+
+        switchState = simpleSwitch.isChecked();
+        System.out.println("Switch: " + switchState);
+    }
 
 //    public void testSearchViewData(View view) {
 //
@@ -177,6 +188,6 @@ public class SearchActivity extends AppCompatActivity {
         Spinner mySpinner2 = findViewById(R.id.spinner2);
         String startTime = mySpinner2.getSelectedItem().toString();
 
-        System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday + "\n");
+        System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday);
     }
 }
