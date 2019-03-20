@@ -176,5 +176,7 @@ public class SearchActivity extends AppCompatActivity {
 
         Spinner mySpinner2 = findViewById(R.id.spinner2);
         String startTime = mySpinner2.getSelectedItem().toString();
+
+        System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday + "\n");
     }
 }
