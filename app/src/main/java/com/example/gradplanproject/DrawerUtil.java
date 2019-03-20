@@ -16,8 +16,33 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import androidx.appcompat.widget.Toolbar;
 
+/**
+ * Contains code to build a navigation drawer using the MaterialDrawer library by Mike Penz.
+ * This code can be called by any Activity wanting to create a Nav Drawer, and each activity
+ * will contain the same drawer.
+ *
+ * License for MaterialDrawer:
+ * Copyright 2018 Mike Penz
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 public class DrawerUtil {
 
+    /**
+     * Builds the drawer for the passed activity, using the passed Toolbar.
+     * @param activity The activity to use the drawer.
+     * @param toolbar The toolbar to use drawer functionality (like hamburger icon).
+     */
     public static void getDrawer(final Activity activity, Toolbar toolbar) {
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem drawerEmptyItem = new PrimaryDrawerItem().withIdentifier(0).withName("");
