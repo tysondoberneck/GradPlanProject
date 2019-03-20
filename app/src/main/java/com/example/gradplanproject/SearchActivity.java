@@ -38,9 +38,12 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public List<Map<String, String>> courseListExample;
 
+    /**
+     * Creates the Toolbar/NavDrawer
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Create Toolbar/NavDrawer
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
@@ -55,8 +58,11 @@ public class SearchActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
 
-        // Filler text for recyclerView. Eventually, the recyclerView should instead take in the
-        // intended list of Courses, which will be, basically, dressed-up Maps
+        /**
+         * courseListExample is just filler data at this point. We will be implementing
+         * a pull from FireStore to populate the RecyclerView box. It currently just returns
+         * null - null, but it will get fixed.
+         */
 
         courseListExample = new ArrayList<>();
 
@@ -85,7 +91,10 @@ public class SearchActivity extends AppCompatActivity {
         courseListExample.add(map2);
         courseListExample.add(map3);
 
-        // Instantiating recyclerView and setting layoutManager and custom Adapter class
+
+        /**
+         * Instantiating recyclerView and setting layoutManager and custom Adapter class
+         */
 
         recyclerView = findViewById(R.id.recyclerView1);
         layoutManager = new LinearLayoutManager(this);
@@ -93,7 +102,10 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter(courseListExample);
         recyclerView.setAdapter(adapter);
 
-        // Filling each Spinner with appropriate text (from strings.xml) using ArrayAdapter
+        /**
+         * Filling each Spinner with appropriate text (from strings.xml) using ArrayAdapter
+         */
+
 
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
@@ -108,12 +120,20 @@ public class SearchActivity extends AppCompatActivity {
         spinner2.setAdapter(adapter2);
     }
 
+    /**
+     * Just a test to see what spinner data is returned into the log.
+     * @param view
+     */
     public void testSpinnerData(View view) {
         Spinner mySpinner = findViewById(R.id.spinner1);
         String text = mySpinner.getSelectedItem().toString();
         Log.i(TAG, "This is the data from the spinner: " + text);
     }
 
+    /**
+     * Early version of the day selector checkboxes. Boolean true/false returns based on click.
+     * @param view
+     */
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -151,6 +171,10 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Test function for the switch to check what it returns.
+     * @param view
+     */
     public void onCheckedChanged(View view) {
         Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
 
@@ -180,6 +204,10 @@ public class SearchActivity extends AppCompatActivity {
 //    });
 //    }
 
+    /**
+     * Another test to see what is returned on day preference checkboxes based on which ones are clicked.
+     * @param view
+     */
     public void testQueryAndDisplayData(View view) {
 
         Spinner mySpinner1 = findViewById(R.id.spinner1);
