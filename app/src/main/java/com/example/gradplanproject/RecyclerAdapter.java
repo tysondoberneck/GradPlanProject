@@ -1,13 +1,18 @@
 package com.example.gradplanproject;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A RecyclerView.Adapter class must be overridden by any program that makes use of the
@@ -18,6 +23,7 @@ import android.widget.TextView;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<Map<String, String>> values;
+    private WeakReference<Activity> weakRef;
 
     /**
      * The ViewHolder class represents each item in the RecyclerView's list.
@@ -28,6 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         //public TextView courseCode;
         public TextView courseName;
         public TextView courseDetails;
+        public ImageButton addButton;
         public View layout;
 
         public ViewHolder(View v) {
@@ -37,6 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             //courseCode = (TextView) v.findViewById(R.id.courseCode);
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
+            addButton = v.findViewById(R.id.addButton);
         }
     }
 
@@ -54,8 +62,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
     */
 
-    public RecyclerAdapter(List<Map<String, String>> courseList) {
+    public RecyclerAdapter(List<Map<String, String>> courseList, WeakReference<Activity> wr) {
         values = courseList;
+        weakRef = wr;
     }
 
 
@@ -102,10 +111,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
          * of saved sections.
          */
 
-        holder.courseName.setOnClickListener(new View.OnClickListener() {
+        holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(weakRef.get().getApplicationContext(),
+                        "Adding Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
             }
         });
     }
