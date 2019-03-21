@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="54dp"
     android:padding="6dip">
@@ -31,5 +32,17 @@
         android:layout_marginLeft="6dp"
         android:text="Macbeth - MWF - 12:45-1:45 PM"
         android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/addButton"
+        android:layout_width="32dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
