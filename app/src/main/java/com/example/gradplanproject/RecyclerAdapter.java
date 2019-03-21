@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * A RecyclerView.Adapter class must be overridden by any program that makes use of the
+ * RecyclerView. The main purpose of this class is to define how each object in the RecyclerView
+ * will look and determine what will (or won't) happen when the user clicks on an item.
+ */
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    // The RecyclerView.Adapter class must be extended and overloaded by anyone wishing to use
-    // the RecyclerView. The ViewHolder is a class that must also be overloaded inside this adapter;
-    // this class can contain multiple Views (textViews, imageViews, all sorts of stuff) and
-    // represents a single item or object in the list represented by the RecyclerView.
-
     private List<Map<String, String>> values;
+
+    /**
+     * The ViewHolder class represents each item in the RecyclerView's list.
+     */
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -53,21 +58,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         values = courseList;
     }
 
+
     /**
-     *
+     * LayoutManager will call this function once for every item in the provided container, using
+     * the layout we provide to format each View object.
      * @param parent The group the new View will be a part of.
      * @param viewType The type of View to be generated.
      * @return The newly generated ViewHolder
      */
 
-    // The following overridden methods are called by the LayoutManager as necessary. We should
-    // never have to call them ourselves.
-
     @Override
     public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        // Inflater uses layout XML file, which we must also provide, to set the layout for each
-        // viewHolder.
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.row_layout, parent, false);
