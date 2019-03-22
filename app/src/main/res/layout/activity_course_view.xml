@@ -27,7 +27,7 @@
         android:onClick="callFirebaseDocument"
         android:text="Get FB Document"
         app:layout_constraintBaseline_toBaselineOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="@+id/listView" />
+        app:layout_constraintStart_toStartOf="@+id/recyclerView2" />
 
     <Button
         android:id="@+id/button3"
@@ -37,7 +37,7 @@
         android:onClick="callFirebaseCollection"
         android:text="Get FB Collection"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/listView" />
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView2" />
 
     <Button
         android:id="@+id/button2"
@@ -64,8 +64,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"

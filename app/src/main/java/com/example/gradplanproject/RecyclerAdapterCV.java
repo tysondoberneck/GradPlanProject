@@ -34,7 +34,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         //public TextView courseCode;
         public TextView courseName;
         public TextView courseDetails;
-        public ImageButton addButton;
+        public ImageButton removeButton;
         public View layout;
 
         public ViewHolder(View v) {
@@ -44,7 +44,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             //courseCode = (TextView) v.findViewById(R.id.courseCode);
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
-            addButton = v.findViewById(R.id.addButton);
+            removeButton = v.findViewById(R.id.removeButton);
         }
     }
 
@@ -80,7 +80,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     public RecyclerAdapterCV.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.search_layout, parent, false);
+        View v = inflater.inflate(R.layout.course_view_layout, parent, false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
@@ -111,11 +111,11 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
          * of saved sections.
          */
 
-        holder.addButton.setOnClickListener(new View.OnClickListener() {
+        holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(weakRef.get().getApplicationContext(),
-                        "Adding Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
+                        "Removing Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
             }
         });
     }
