@@ -1,11 +1,5 @@
 package com.example.gradplanproject;
 
-import java.lang.ref.WeakReference;
-import java.util.List;
-import java.util.Map;
-
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +8,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
+import java.util.List;
+import java.util.Map;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * A RecyclerView.Adapter class must be overridden by any program that makes use of the
  * RecyclerView. The main purpose of this class is to define how each object in the RecyclerView
  * will look and determine what will (or won't) happen when the user clicks on an item.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.ViewHolder> {
 
     private List<Map<String, String>> values;
     private WeakReference<Activity> weakRef;
@@ -62,7 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
     */
 
-    public RecyclerAdapter(List<Map<String, String>> courseList, WeakReference<Activity> wr) {
+    public RecyclerAdapterCV(List<Map<String, String>> courseList, WeakReference<Activity> wr) {
         values = courseList;
         weakRef = wr;
     }
@@ -77,10 +77,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
      */
 
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerAdapterCV.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.row_layout, parent, false);
+        View v = inflater.inflate(R.layout.search_layout, parent, false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
