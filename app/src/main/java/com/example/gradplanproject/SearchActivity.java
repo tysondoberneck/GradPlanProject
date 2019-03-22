@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -74,19 +77,19 @@ public class SearchActivity extends AppCompatActivity {
         Map<String, String> map1 = new HashMap<>();
         map1.put("code", "CS235");
         map1.put("name", "Software Design and Development");
-        map1.put("details", "Burton - MWF - 9:00 AM");
+        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
         courseListExample.add(map1);
 
         Map<String, String> map2 = new HashMap<>();
         map2.put("code", "FDREL225");
         map2.put("name", "Foundations of the Restoration");
-        map2.put("details", "Taylor - TR - 7:45 AM");
+        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
         courseListExample.add(map2);
 
         Map<String, String> map3 = new HashMap<>();
         map3.put("code", "MATH341");
         map3.put("name", "Linear Algebra");
-        map3.put("details", "Nelson - MWF - 11:30 AM");
+        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
         courseListExample.add(map3);
 
         courseListExample.add(map1);
@@ -104,7 +107,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView1);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerAdapter(courseListExample);
+        adapter = new RecyclerAdapter(courseListExample, new WeakReference<Activity>(this));
         recyclerView.setAdapter(adapter);
 
         /**
