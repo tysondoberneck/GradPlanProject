@@ -1,6 +1,9 @@
 package com.example.gradplanproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -18,8 +21,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -217,5 +222,14 @@ public class SearchActivity extends AppCompatActivity {
         String startTime = mySpinner2.getSelectedItem().toString();
 
         System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday);
+    }
+
+    public void saveCourse(Map<String, String> course) {
+        SharedPreferences pref = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
+        Set<String> courseSet = new HashSet<String>();
+        courseSet.add(course.get("code"));
+        courseSet.add(course.get("name"));
+        courseSet.add(course.get("details"));
+        pref.edit().putStringSet(course.get("code"), courseSet).commit();
     }
 }

@@ -1,11 +1,13 @@
 package com.example.gradplanproject;
 
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +26,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class CourseViewActivity extends AppCompatActivity {
 
@@ -120,5 +127,21 @@ public class CourseViewActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public Map<String,String> loadCourse(String code) {
+        SharedPreferences pref = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
+
+        Set<String> courseSet = new HashSet<String>();
+        courseSet = pref.getStringSet(code, null);
+
+        Map<String,String> courseMap = new HashMap<String,String>();
+
+        Iterator<String> it = courseSet.iterator();
+        courseMap.put("code", it.next());
+        courseMap.put("name", it.next());
+        courseMap.put("details", it.next());
+
+        return courseMap;
     }
 }
