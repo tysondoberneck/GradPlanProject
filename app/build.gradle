@@ -39,6 +39,9 @@ dependencies {
     //adding Firebase
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
+
+    //GSON
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
 //more Firebase

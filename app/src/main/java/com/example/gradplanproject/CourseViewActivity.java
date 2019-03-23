@@ -46,6 +46,8 @@ public class CourseViewActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public List<Map<String, String>> courseListExample;
 
+    protected static SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Create Toolbar/NavDrawer
@@ -62,6 +64,8 @@ public class CourseViewActivity extends AppCompatActivity {
         catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
+
+        prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
         //
 
         Spinner spinner = findViewById(R.id.spinner5);
@@ -161,22 +165,13 @@ public class CourseViewActivity extends AppCompatActivity {
                         System.out.println("outside");
                     }
                 });
-
     }
 
+    /*
     public Map<String,String> loadCourse(String code) {
-        SharedPreferences pref = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
-
-        Set<String> courseSet = new HashSet<String>();
-        courseSet = pref.getStringSet(code, null);
-
-        Map<String,String> courseMap = new HashMap<String,String>();
-
-        Iterator<String> it = courseSet.iterator();
-        courseMap.put("code", it.next());
-        courseMap.put("name", it.next());
-        courseMap.put("details", it.next());
+        SharedPreferences prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
 
         return courseMap;
     }
+    */
 }

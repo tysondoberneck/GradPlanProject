@@ -19,6 +19,8 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.google.gson.Gson;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +36,8 @@ public class SearchActivity extends AppCompatActivity {
     private boolean wednesday = false;
     private boolean thursday = false;
     private boolean friday = false;
+
+    protected static SharedPreferences prefs;
 
     private boolean switchState = false;
 
@@ -63,6 +67,8 @@ public class SearchActivity extends AppCompatActivity {
         catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
+
+        prefs = getSharedPreferences("PREF_NAME", MODE_PRIVATE);
 
         /**
          * courseListExample is just filler data at this point. We will be implementing
@@ -225,12 +231,11 @@ public class SearchActivity extends AppCompatActivity {
         System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday);
     }
 
-    public void saveCourse(Map<String, String> course) {
-        SharedPreferences pref = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
-        Set<String> courseSet = new HashSet<String>();
-        courseSet.add(course.get("code"));
-        courseSet.add(course.get("name"));
-        courseSet.add(course.get("details"));
-        pref.edit().putStringSet(course.get("code"), courseSet).commit();
+    public static void saveCourse(Course course) {
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(course);
+        prefsEditor.putString("Course", json);
+        prefsEditor.commit();
     }
 }
