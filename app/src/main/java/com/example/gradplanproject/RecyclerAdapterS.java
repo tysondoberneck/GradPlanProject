@@ -23,6 +23,7 @@ import android.widget.Toast;
 public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.ViewHolder> {
 
     private List<Map<String, String>> values;
+    private List<Course> list;
     private WeakReference<Activity> weakRef;
 
     /**
@@ -62,8 +63,9 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
     }
     */
 
-    public RecyclerAdapterS(List<Map<String, String>> courseList, WeakReference<Activity> wr) {
-        values = courseList;
+
+    public RecyclerAdapterS(List<Course> courseList, WeakReference<Activity> wr) {
+        list = courseList;
         weakRef = wr;
     }
 
@@ -98,8 +100,8 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        String firstLine = values.get(position).get("code") + " - " + values.get(position).get("name");
-        String secondLine = values.get(position).get("details");
+        String firstLine = list.get(position).getCode() + " - " + list.get(position).getName();
+        String secondLine = list.get(position).getDetails();
 
         //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);
@@ -114,6 +116,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchActivity.saveCourse(list.get(position));
                 Toast.makeText(weakRef.get().getApplicationContext(),
                         "Adding Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
             }
@@ -128,6 +131,6 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
     @Override
     public int getItemCount() {
-        return values.size();
+        return list.size();
     }
 }

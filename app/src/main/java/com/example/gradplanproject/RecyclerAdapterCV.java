@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.ViewHolder> {
 
     private List<Map<String, String>> values;
+    private List<Course> list;
     private WeakReference<Activity> weakRef;
 
     /**
@@ -62,8 +63,8 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     }
     */
 
-    public RecyclerAdapterCV(List<Map<String, String>> courseList, WeakReference<Activity> wr) {
-        values = courseList;
+    public RecyclerAdapterCV(List<Course> courseList, WeakReference<Activity> wr) {
+        list = courseList;
         weakRef = wr;
     }
 
@@ -98,8 +99,8 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        String firstLine = values.get(position).get("code") + " - " + values.get(position).get("name");
-        String secondLine = values.get(position).get("details");
+        String firstLine = list.get(position).getCode() + " - " + list.get(position).getName();
+        String secondLine = list.get(position).getDetails();
 
         //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);
@@ -128,6 +129,6 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
 
     @Override
     public int getItemCount() {
-        return values.size();
+        return list.size();
     }
 }

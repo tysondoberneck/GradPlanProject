@@ -46,6 +46,7 @@ public class CourseViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter rAdapter;
     private RecyclerView.LayoutManager layoutManager;
     public List<Map<String, String>> courseListExample;
+    public List<Course> courseList;
 
     protected static SharedPreferences prefs;
 
@@ -67,7 +68,6 @@ public class CourseViewActivity extends AppCompatActivity {
         }
 
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
-        //
 
         Spinner spinner = findViewById(R.id.spinner5);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -75,40 +75,37 @@ public class CourseViewActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-//        List<String> list = new ArrayList<>();
-//        for ( int i = 0; i < 10; i++) {
-//            list.add("Course Example " + i);
-//        }
+//        courseListExample = new ArrayList<>();
 //
-//        ListView listView = (ListView) findViewById(R.id.listView);
-//        ArrayAdapter<String> aa = new ArrayAdapter<>(this,
-//                android.R.layout.simple_list_item_1, list);
-//        listView.setAdapter(aa);
+//        Map<String, String> map1 = new HashMap<>();
+//        map1.put("code", "CS235");
+//        map1.put("name", "Software Design and Development");
+//        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
+//        courseListExample.add(map1);
+//
+//        Map<String, String> map2 = new HashMap<>();
+//        map2.put("code", "FDREL225");
+//        map2.put("name", "Foundations of the Restoration");
+//        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
+//        courseListExample.add(map2);
+//
+//        Map<String, String> map3 = new HashMap<>();
+//        map3.put("code", "MATH341");
+//        map3.put("name", "Linear Algebra");
+//        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
+//        courseListExample.add(map3);
 
-        courseListExample = new ArrayList<>();
+        courseList = new ArrayList<>();
 
-        Map<String, String> map1 = new HashMap<>();
-        map1.put("code", "CS235");
-        map1.put("name", "Software Design and Development");
-        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
-        courseListExample.add(map1);
+        Course course1 = loadCourse("Course");
+        if (course1 != null) {
+            courseList.add(course1);
+        }
 
-        Map<String, String> map2 = new HashMap<>();
-        map2.put("code", "FDREL225");
-        map2.put("name", "Foundations of the Restoration");
-        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
-        courseListExample.add(map2);
-
-        Map<String, String> map3 = new HashMap<>();
-        map3.put("code", "MATH341");
-        map3.put("name", "Linear Algebra");
-        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
-
-        courseListExample.add(map3);
         recyclerView = findViewById(R.id.recyclerView2);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        rAdapter = new RecyclerAdapterCV(courseListExample, new WeakReference<Activity>(this));
+        rAdapter = new RecyclerAdapterCV(courseList, new WeakReference<Activity>(this));
         recyclerView.setAdapter(rAdapter);
     }
 

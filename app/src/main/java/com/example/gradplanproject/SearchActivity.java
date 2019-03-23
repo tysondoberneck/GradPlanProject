@@ -47,6 +47,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     public List<Map<String, String>> courseListExample;
+    public List<Course> courseList;
 
     /**
      * Creates the Toolbar/NavDrawer
@@ -76,32 +77,53 @@ public class SearchActivity extends AppCompatActivity {
          * null - null, but it will get fixed.
          */
 
-        courseListExample = new ArrayList<>();
+//        courseListExample = new ArrayList<>();
+//
+//        Map<String, String> map1 = new HashMap<>();
+//        map1.put("code", "CS235");
+//        map1.put("name", "Software Design and Development");
+//        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
+//        courseListExample.add(map1);
+//
+//        Map<String, String> map2 = new HashMap<>();
+//        map2.put("code", "FDREL225");
+//        map2.put("name", "Foundations of the Restoration");
+//        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
+//        courseListExample.add(map2);
+//
+//        Map<String, String> map3 = new HashMap<>();
+//        map3.put("code", "MATH341");
+//        map3.put("name", "Linear Algebra");
+//        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
+//        courseListExample.add(map3);
+//
+//        courseListExample.add(map1);
+//        courseListExample.add(map2);
+//        courseListExample.add(map3);
+//        courseListExample.add(map1);
+//        courseListExample.add(map2);
+//        courseListExample.add(map3);
 
-        Map<String, String> map1 = new HashMap<>();
-        map1.put("code", "CS235");
-        map1.put("name", "Software Design and Development");
-        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
-        courseListExample.add(map1);
+        courseList = new ArrayList<>();
 
-        Map<String, String> map2 = new HashMap<>();
-        map2.put("code", "FDREL225");
-        map2.put("name", "Foundations of the Restoration");
-        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
-        courseListExample.add(map2);
+        Course course1 = new Course("Software Design and Development", "CS235",
+                "Section 01: Burton - MWF - 9:00-10:00 AM");
+        courseList.add(course1);
 
-        Map<String, String> map3 = new HashMap<>();
-        map3.put("code", "MATH341");
-        map3.put("name", "Linear Algebra");
-        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
-        courseListExample.add(map3);
+        Course course2 = new Course("Foundations of the Restoration", "FDREL225",
+                "Section 03: Taylor - TR - 7:45-8:45 AM");
+        courseList.add(course2);
 
-        courseListExample.add(map1);
-        courseListExample.add(map2);
-        courseListExample.add(map3);
-        courseListExample.add(map1);
-        courseListExample.add(map2);
-        courseListExample.add(map3);
+        Course course3 = new Course("Linear Algebra", "MATH341",
+                "Section 07: Nelson - MWF - 11:30-12:30 PM");
+        courseList.add(course3);
+
+        courseList.add(course1);
+        courseList.add(course2);
+        courseList.add(course3);
+        courseList.add(course1);
+        courseList.add(course2);
+        courseList.add(course3);
 
 
         /**
@@ -111,7 +133,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView1);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerAdapterS(courseListExample, new WeakReference<Activity>(this));
+        adapter = new RecyclerAdapterS(courseList, new WeakReference<Activity>(this));
         recyclerView.setAdapter(adapter);
 
         /**
@@ -237,5 +259,6 @@ public class SearchActivity extends AppCompatActivity {
         String json = gson.toJson(course);
         prefsEditor.putString("Course", json);
         prefsEditor.commit();
+        Log.d(TAG, "course saved to SharedPreferences");
     }
 }
