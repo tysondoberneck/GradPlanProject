@@ -258,7 +258,7 @@ public class SearchActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(course);
         Set courseSet = new HashSet<>();
-        prefs.getStringSet(String.valueOf(R.string.spring_2019), courseSet);
+        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019), courseSet);
         courseSet.add(json);
         prefsEditor.putStringSet(String.valueOf(R.string.spring_2019), courseSet);
         prefsEditor.commit();

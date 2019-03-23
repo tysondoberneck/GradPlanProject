@@ -109,6 +109,8 @@ public class CourseViewActivity extends AppCompatActivity {
             courseList.add(addCourse);
         }
 
+        System.out.println(courseList.size());
+
         recyclerView = findViewById(R.id.recyclerView2);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -173,7 +175,6 @@ public class CourseViewActivity extends AppCompatActivity {
     }
 
     public Set loadCourseSet() {
-        Gson gson = new Gson();
         Set courseSet = new HashSet<>(prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourse));
 
         return courseSet;
