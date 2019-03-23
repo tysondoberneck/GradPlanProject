@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -167,11 +168,11 @@ public class CourseViewActivity extends AppCompatActivity {
                 });
     }
 
-    /*
-    public Map<String,String> loadCourse(String code) {
-        SharedPreferences prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
+    public Course loadCourse(String code) {
+        Gson gson = new Gson();
+        String json = prefs.getString(code, "Empty");
+        Course course = gson.fromJson(json, Course.class);
 
-        return courseMap;
+        return course;
     }
-    */
 }
