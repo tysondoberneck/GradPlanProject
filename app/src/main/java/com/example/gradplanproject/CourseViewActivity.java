@@ -45,6 +45,7 @@ public class CourseViewActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter rAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Set defaultCourse;
     public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
 
@@ -66,6 +67,8 @@ public class CourseViewActivity extends AppCompatActivity {
         catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
+
+        defaultCourse = new HashSet<>();
 
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
 
@@ -97,9 +100,13 @@ public class CourseViewActivity extends AppCompatActivity {
 
         courseList = new ArrayList<>();
 
-        Course course1 = loadCourse("Course");
-        if (course1 != null) {
-            courseList.add(course1);
+        Set<String> courseSet = new HashSet<>(loadCourseSet());
+        Gson gson = new Gson();
+        Course addCourse;
+
+        for(String course : courseSet) {
+            addCourse = gson.fromJson(course, Course.class);
+            courseList.add(addCourse);
         }
 
         recyclerView = findViewById(R.id.recyclerView2);
@@ -165,11 +172,10 @@ public class CourseViewActivity extends AppCompatActivity {
                 });
     }
 
-    public Course loadCourse(String code) {
+    public Set loadCourseSet() {
         Gson gson = new Gson();
-        String json = prefs.getString(code, "Empty");
-        Course course = gson.fromJson(json, Course.class);
+        Set courseSet = new HashSet<>(prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourse));
 
-        return course;
+        return courseSet;
     }
 }
