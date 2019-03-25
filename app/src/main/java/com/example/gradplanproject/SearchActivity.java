@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -238,19 +239,41 @@ public class SearchActivity extends AppCompatActivity {
 //    });
 //    }
 
+
+    public void getDataFromForm(View view, String courseCodeOrName, String startTime, String endTime, String instructor) {
+
+        // Get the data from the two text boxes and two spinners
+        EditText editText2 = findViewById(R.id.editText2);
+        courseCodeOrName = editText2.getText().toString();
+
+        Spinner mySpinner1 = findViewById(R.id.spinner1);
+        endTime = mySpinner1.getSelectedItem().toString();
+
+        Spinner mySpinner2 = findViewById(R.id.spinner2);
+        startTime = mySpinner2.getSelectedItem().toString();
+
+        EditText editText = findViewById(R.id.editText2);
+        instructor = editText.getText().toString();
+
+        //run the function to retrieve data from the checkboxes and switch button.
+        //There are private global variables to store that data
+        onCheckboxClicked(view);
+        onCheckedChanged(view);
+    }
+
     /**
      * Another test to see what is returned on day preference checkboxes based on which ones are clicked.
      * @param view
      */
     public void testQueryAndDisplayData(View view) {
 
-        Spinner mySpinner1 = findViewById(R.id.spinner1);
-        String endTime = mySpinner1.getSelectedItem().toString();
+        String courseCodeOrName = "";
+        String endTime = "";
+        String startTime = "";
+        String instructor = "";
 
-        Spinner mySpinner2 = findViewById(R.id.spinner2);
-        String startTime = mySpinner2.getSelectedItem().toString();
-
-        System.out.println("Let's test the days of the week:" + monday + " " + tuesday + " " + wednesday + " " + thursday + " " + friday);
+        getDataFromForm(view, courseCodeOrName, startTime, endTime, instructor);
+        Log.d(TAG, "Here are the values: Course Code" + courseCodeOrName + " Start Time -  " + startTime + " End Time - " + endTime + " instructor - " + instructor);
     }
 
     public static void saveCourse(Course course) {
