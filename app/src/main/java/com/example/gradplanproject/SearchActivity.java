@@ -240,25 +240,37 @@ public class SearchActivity extends AppCompatActivity {
 //    }
 
 
-    public void getDataFromForm(View view, String courseCodeOrName, String startTime, String endTime, String instructor) {
+    public WidgetDataStorage getDataFromForm(View view) {
 
         // Get the data from the two text boxes and two spinners
         EditText editText2 = findViewById(R.id.editText2);
-        courseCodeOrName = editText2.getText().toString();
+        String courseCodeOrName = editText2.getText().toString();
 
         Spinner mySpinner1 = findViewById(R.id.spinner1);
-        endTime = mySpinner1.getSelectedItem().toString();
+        String endTime = mySpinner1.getSelectedItem().toString();
 
         Spinner mySpinner2 = findViewById(R.id.spinner2);
-        startTime = mySpinner2.getSelectedItem().toString();
+        String startTime = mySpinner2.getSelectedItem().toString();
 
-        EditText editText = findViewById(R.id.editText2);
-        instructor = editText.getText().toString();
+        EditText editText = findViewById(R.id.editText);
+        String instructor = editText.getText().toString();
 
-        //run the function to retrieve data from the checkboxes and switch button.
+        //check if the switch is on or off
+        boolean filterFull = false;
+        Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
+        if (simpleSwitch.isChecked() == true) {
+            filterFull = true;
+        }
+
+        //run the function to retrieve data from the checkboxes.
         //There are private global variables to store that data
-        onCheckboxClicked(view);
-        onCheckedChanged(view);
+        //onCheckboxClicked(view);
+
+        //create a new WidgetDataStorage object with the parameters
+        //retrieved from the widgets
+        //and then return it
+        WidgetDataStorage wds = new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, filterFull);
+        return wds;
     }
 
     /**
@@ -266,14 +278,10 @@ public class SearchActivity extends AppCompatActivity {
      * @param view
      */
     public void testQueryAndDisplayData(View view) {
+        WidgetDataStorage wds = getDataFromForm(view);
 
-        String courseCodeOrName = "";
-        String endTime = "";
-        String startTime = "";
-        String instructor = "";
-
-        getDataFromForm(view, courseCodeOrName, startTime, endTime, instructor);
-        Log.d(TAG, "Here are the values: Course Code" + courseCodeOrName + " Start Time -  " + startTime + " End Time - " + endTime + " instructor - " + instructor);
+        //test data
+        Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isFilterFull());
     }
 
     public static void saveCourse(Course course) {
