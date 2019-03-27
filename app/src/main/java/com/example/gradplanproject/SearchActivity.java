@@ -287,13 +287,30 @@ public class SearchActivity extends AppCompatActivity {
     public static void saveCourse(Course course) {
         SharedPreferences.Editor prefsEditor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(course);
-        Set defaultCourseSet = new HashSet<>();
-        Set courseSet;
-        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourseSet);
-        courseSet.add(json);
-        prefsEditor.putStringSet(String.valueOf(R.string.spring_2019), courseSet);
+
+        String jsonCourse = gson.toJson(course);
+        String def = "";
+        String jsonCourseList = prefs.getString(String.valueOf(R.string.spring_2019New), def);
+
+        List<String> courseStrings = new ArrayList<>();
+
+        courseStrings = gson.fromJson(jsonCourseList, ArrayList.class);
+
+        courseStrings.add(jsonCourse);
+
+        prefsEditor.putString(String.valueOf(R.string.spring_2019New), gson.toJson(courseStrings));
         prefsEditor.apply();
-        Log.d(TAG, "course saved to SharedPreferences");
+
+        System.out.println(courseStrings);
+
+
+//        String json = gson.toJson(course);
+//        Set<String> defaultCourseSet = new HashSet<>();
+//        Set<String> courseSet;
+//        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourseSet);
+//        courseSet.add(json);
+//        prefsEditor.putStringSet(String.valueOf(R.string.spring_2019), courseSet);
+//        prefsEditor.apply();
+//        Log.d(TAG, "course saved to SharedPreferences");
     }
 }
