@@ -56,12 +56,13 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         values.add(position, item);
         notifyItemInserted(position);
     }
+    */
 
     public void remove(int position) {
-        values.remove(position);
+        list.remove(position);
         notifyItemRemoved(position);
     }
-    */
+
 
     public RecyclerAdapterCV(List<Course> courseList, WeakReference<Activity> wr) {
         list = courseList;
