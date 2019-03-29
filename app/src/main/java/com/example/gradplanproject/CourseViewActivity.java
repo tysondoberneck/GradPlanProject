@@ -177,9 +177,11 @@ public class CourseViewActivity extends AppCompatActivity {
     public List loadCourseList() {
         Gson gson = new Gson();
         String def = "";
-        String courseStrings = prefs.getString(String.valueOf(R.string.spring_2019New), def);
-        List<String> courseList = new ArrayList<>(gson.fromJson(courseStrings, List.class));
+        String courseStrings = prefs.getString(String.valueOf(R.string.spring_2019_list), def);
+        if(courseStrings != null) {
+            List<String> courseList = new ArrayList<>(gson.fromJson(courseStrings, List.class));
+        }
 
-        return courseList; //
+        return courseList;
     }
 }

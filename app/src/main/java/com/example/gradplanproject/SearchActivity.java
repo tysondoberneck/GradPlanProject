@@ -290,9 +290,9 @@ public class SearchActivity extends AppCompatActivity {
         String json = gson.toJson(course);
         Set defaultCourseSet = new HashSet<>();
         Set courseSet;
-        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourseSet);
+        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019_list), defaultCourseSet);
         courseSet.add(json);
-        prefsEditor.putStringSet(String.valueOf(R.string.spring_2019), courseSet);
+        prefsEditor.putStringSet(String.valueOf(R.string.spring_2019_list), courseSet);
         prefsEditor.apply();
         Log.d(TAG, "course saved to SharedPreferences");
     }
