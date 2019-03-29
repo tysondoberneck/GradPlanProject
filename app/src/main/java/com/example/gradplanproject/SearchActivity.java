@@ -321,7 +321,9 @@ public class SearchActivity extends AppCompatActivity {
 
         List<String> courseStrings = new ArrayList<>();
 
-        courseStrings = gson.fromJson(jsonCourseList, ArrayList.class);
+        if(gson.fromJson(jsonCourseList, ArrayList.class) != null) {
+            courseStrings = gson.fromJson(jsonCourseList, ArrayList.class);
+        }
 
         courseStrings.add(jsonCourse);
 

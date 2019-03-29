@@ -78,35 +78,28 @@ public class CourseViewActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-//        courseListExample = new ArrayList<>();
-//
-//        Map<String, String> map1 = new HashMap<>();
-//        map1.put("code", "CS235");
-//        map1.put("name", "Software Design and Development");
-//        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
-//        courseListExample.add(map1);
-//
-//        Map<String, String> map2 = new HashMap<>();
-//        map2.put("code", "FDREL225");
-//        map2.put("name", "Foundations of the Restoration");
-//        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
-//        courseListExample.add(map2);
-//
-//        Map<String, String> map3 = new HashMap<>();
-//        map3.put("code", "MATH341");
-//        map3.put("name", "Linear Algebra");
-//        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
-//        courseListExample.add(map3);
+        Gson gson = new Gson();
+
+        if(!prefs.contains(String.valueOf(R.string.spring_2019_list))) {
+            SharedPreferences.Editor prefsEditor = prefs.edit();
+            Course exampleCourse = new Course("Default","","Add a course in search activity",0);
+            String jsonExample = gson.toJson(exampleCourse);
+            List<String> exampleList = new ArrayList<>();
+            exampleList.add(jsonExample);
+            prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(exampleList));
+            prefsEditor.apply();
+        }
 
         courseList = new ArrayList<>();
 
         List<String> courseStringList = new ArrayList<>(loadCourseList());
-        Gson gson = new Gson();
         Course addCourse;
+        System.out.println(courseStringList);
 
         for(String courseString : courseStringList) {
             addCourse = gson.fromJson(courseString, Course.class);
             courseList.add(addCourse);
+            System.out.println(courseString);
         }
 
         System.out.println(courseList.size());
@@ -179,8 +172,9 @@ public class CourseViewActivity extends AppCompatActivity {
         String def = "";
         String courseStrings = prefs.getString(String.valueOf(R.string.spring_2019_list), def);
 
-        List<String> courseList = new ArrayList<>(gson.fromJson(courseStrings, List.class));
+        System.out.println(courseStrings);
 
+        List<String> courseList = new ArrayList<>(gson.fromJson(courseStrings, List.class));
 
         return courseList;
     }
