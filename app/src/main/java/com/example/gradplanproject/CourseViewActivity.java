@@ -152,7 +152,6 @@ public class CourseViewActivity extends AppCompatActivity {
         });
     }
 
-
     public void callFirebaseCollection(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("semesters").document("2019;SP").collection("sections")

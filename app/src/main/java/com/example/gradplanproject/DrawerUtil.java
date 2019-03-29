@@ -59,7 +59,7 @@ public class DrawerUtil {
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
-                .withHeaderBackground(R.drawable.ic_launcher_background)
+                .withHeaderBackground(R.drawable.ic_gpp_header)
                 .build();
 
         Drawer result = new DrawerBuilder()
