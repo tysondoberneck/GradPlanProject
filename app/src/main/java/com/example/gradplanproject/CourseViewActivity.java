@@ -100,12 +100,12 @@ public class CourseViewActivity extends AppCompatActivity {
 
         courseList = new ArrayList<>();
 
-        Set<String> courseSet = new HashSet<>(loadCourseSet());
+        List<String> courseStringList = new ArrayList<>(loadCourseList());
         Gson gson = new Gson();
         Course addCourse;
 
-        for(String course : courseSet) {
-            addCourse = gson.fromJson(course, Course.class);
+        for(String courseString : courseStringList) {
+            addCourse = gson.fromJson(courseString, Course.class);
             courseList.add(addCourse);
         }
 
@@ -152,6 +152,7 @@ public class CourseViewActivity extends AppCompatActivity {
         });
     }
 
+
     public void callFirebaseCollection(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("semesters").document("2019;SP").collection("sections")
@@ -173,9 +174,12 @@ public class CourseViewActivity extends AppCompatActivity {
                 });
     }
 
-    public Set loadCourseSet() {
-        Set courseSet = new HashSet<>(prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourse));
+    public List loadCourseList() {
+        Gson gson = new Gson();
+        String def = "";
+        String courseStrings = prefs.getString(String.valueOf(R.string.spring_2019New), def);
+        List<String> courseList = new ArrayList<>(gson.fromJson(courseStrings, List.class));
 
-        return courseSet;
+        return courseList; //
     }
 }
