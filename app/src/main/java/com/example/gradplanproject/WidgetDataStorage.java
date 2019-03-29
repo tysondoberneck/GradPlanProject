@@ -8,14 +8,14 @@ public class WidgetDataStorage {
     private String startTime;
     private String endTime;
     private String instructor;
-    private boolean filterFull;
+    private boolean sectionFull;
 
     public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull) {
         this.courseCodeOrName = courseCodeOrName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.instructor = instructor;
-        this.filterFull = filterFull;
+        this.sectionFull = filterFull;
     }
 
     public String getCourseCodeOrName() {
@@ -50,11 +50,11 @@ public class WidgetDataStorage {
         this.instructor = instructor;
     }
 
-    public boolean isFilterFull() {
-        return filterFull;
+    public boolean isSectionFull() {
+        return sectionFull;
     }
 
-    public void setFilterFull(boolean filterFull) {
-        this.filterFull = filterFull;
+    public void setSectionFull(boolean sectionFull) {
+        this.sectionFull = sectionFull;
     }
 }

@@ -1,8 +1,8 @@
 package com.example.gradplanproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import android.app.Activity;
@@ -20,11 +20,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -108,15 +112,15 @@ public class SearchActivity extends AppCompatActivity {
         courseList = new ArrayList<>();
 
         Course course1 = new Course("Software Design and Development", "CS235",
-                "Section 01: Burton - MWF - 9:00-10:00 AM");
+                "Section 01: Burton - MWF - 9:00-10:00 AM", 3);
         courseList.add(course1);
 
         Course course2 = new Course("Foundations of the Restoration", "FDREL225",
-                "Section 03: Taylor - TR - 7:45-8:45 AM");
+                "Section 03: Taylor - TR - 7:45-8:45 AM", 3);
         courseList.add(course2);
 
         Course course3 = new Course("Linear Algebra", "MATH341",
-                "Section 07: Nelson - MWF - 11:30-12:30 PM");
+                "Section 07: Nelson - MWF - 11:30-12:30 PM", 3);
         courseList.add(course3);
 
         courseList.add(course1);
@@ -256,10 +260,10 @@ public class SearchActivity extends AppCompatActivity {
         String instructor = editText.getText().toString();
 
         //check if the switch is on or off
-        boolean filterFull = false;
+        boolean sectionFull = false;
         Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
         if (simpleSwitch.isChecked() == true) {
-            filterFull = true;
+            sectionFull = true;
         }
 
         //run the function to retrieve data from the checkboxes.
@@ -269,19 +273,43 @@ public class SearchActivity extends AppCompatActivity {
         //create a new WidgetDataStorage object with the parameters
         //retrieved from the widgets
         //and then return it
-        WidgetDataStorage wds = new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, filterFull);
+        WidgetDataStorage wds = new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, sectionFull);
         return wds;
     }
 
     /**
-     * Another test to see what is returned on day preference checkboxes based on which ones are clicked.
+     * This function will call the getDataFromForm function to get all the data from the widgets
+     * and then it will filter and display the courses according to those parameters that
+     * the user has input in the widgets
      * @param view
      */
     public void testQueryAndDisplayData(View view) {
         WidgetDataStorage wds = getDataFromForm(view);
+        //ArrayList<Course> courses = new ArrayList<>();
 
         //test data
-        Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isFilterFull());
+        Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", wds.getCourseCodeOrName()).whereEqualTo("section", "03").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //This is how we can access the data
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Log.d(TAG, "This is the amount of credits of this course: " + document.get("credits"));
+
+                                //Course course = new Course();
+                                //courses.add(course);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        //Log.d(TAG, "This is the result of filtering: " + sections);
     }
 
     public static void saveCourse(Course course) {
