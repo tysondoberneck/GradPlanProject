@@ -61,6 +61,8 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     public void remove(int position) {
         list.remove(position);
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position, list.size());
+        // NEEDS TO BE MOVED TO SEARCHACTIVITY SO IT CAN UPDATE SHAREDPREFERENCES
     }
 
 
@@ -108,9 +110,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         holder.courseDetails.setText(secondLine);
 
         /**
-         * An onClickListener that applies to each individual object in the RecyclerView; in other
-         * words, clicking on a single section in the list could add it to the user's list
-         * of saved sections.
+         * An onClickListener that applies to each individual object in the RecyclerView
          */
 
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +118,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             public void onClick(View v) {
                 Toast.makeText(weakRef.get().getApplicationContext(),
                         "Removing Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
+                remove(position);
             }
         });
     }
