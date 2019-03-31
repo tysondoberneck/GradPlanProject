@@ -285,7 +285,7 @@ public class SearchActivity extends AppCompatActivity {
      */
     public void testQueryAndDisplayData(View view) {
         WidgetDataStorage wds = getDataFromForm(view);
-        //ArrayList<Course> courses = new ArrayList<>();
+        final List<Course> courses = new ArrayList<>();
 
         //test data
         Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
@@ -296,13 +296,19 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Gson gson = new Gson();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //This is how we can access the data
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 Log.d(TAG, "This is the amount of credits of this course: " + document.get("credits"));
 
-                                //Course course = new Course();
-                                //courses.add(course);
+                                Log.i(TAG, document.toString());
+
+                                String courseString = gson.toJson(document.getData());
+                                Course course = gson.fromJson(courseString, Course.class);
+                                courses.add(course);
+                                courseList.add(course);
+                                adapter.notifyDataSetChanged();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
