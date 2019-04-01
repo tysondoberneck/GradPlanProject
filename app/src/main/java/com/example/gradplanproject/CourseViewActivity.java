@@ -92,23 +92,47 @@ public class CourseViewActivity extends AppCompatActivity {
 
         courseList = new ArrayList<>();
 
-        List<String> courseStringList = new ArrayList<>(loadCourseList());
-        Course addCourse;
-        System.out.println(courseStringList);
-
-        for(String courseString : courseStringList) {
-            addCourse = gson.fromJson(courseString, Course.class);
-            courseList.add(addCourse);
-            System.out.println(courseString);
-        }
-
-        System.out.println(courseList.size());
-
         recyclerView = findViewById(R.id.recyclerView2);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         rAdapter = new RecyclerAdapterCV(courseList, new WeakReference<Activity>(this));
         recyclerView.setAdapter(rAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Gson gson = new Gson();
+
+        List<String> courseStringList = new ArrayList<>(loadCourseList());
+        Course addCourse;
+        courseList.clear();
+
+        for(String courseString : courseStringList) {
+            addCourse = gson.fromJson(courseString, Course.class);
+            courseList.add(addCourse);
+        }
+
+        rAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Gson gson = new Gson();
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+
+        List<String> courseStrings = new ArrayList<>();
+
+        for(Course course : courseList) {
+            String jsonCourse = gson.toJson(course);
+            courseStrings.add(jsonCourse);
+        }
+
+        prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(courseStrings));
+        prefsEditor.apply();
     }
 
     public void onClickLogin(View view) {

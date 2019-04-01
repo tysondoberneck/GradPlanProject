@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +43,13 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             super(v);
             layout = v;
 
-            //courseCode = (TextView) v.findViewById(R.id.courseCode);
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
             removeButton = v.findViewById(R.id.removeButton);
         }
     }
 
-    // Provided by the tutorial; neither are useful yet, but could be modified for use later...
+    // Provided by the tutorial
 
     /*
     public void add(int position, String item) {
@@ -62,7 +62,6 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         list.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, list.size());
-        // NEEDS TO BE MOVED TO SEARCHACTIVITY SO IT CAN UPDATE SHAREDPREFERENCES
     }
 
 
@@ -102,8 +101,23 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        String firstLine = list.get(position).getCode() + " - " + list.get(position).getName();
-        String secondLine = list.get(position).getDetails();
+        Course c = list.get(position);
+
+        String firstLine = c.getCourse() + " - " + c.getName();
+        String secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
+                + " - ";
+
+        ArrayList daysList = (ArrayList)c.getSchedules().get(0).get("days");
+        for (int i = 0; i <= 5; i++)
+            secondLine += daysList.get(i);
+
+        if ( c.getSchedules().size() == 2 ) {
+            daysList = (ArrayList)c.getSchedules().get(1).get("days");
+            for (int i = 0; i <= 5; i++)
+                secondLine += daysList.get(i);
+        }
+
+        secondLine += " - " + c.getSchedules().get(0).get("time");
 
         //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);

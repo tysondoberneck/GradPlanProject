@@ -336,9 +336,6 @@ public class SearchActivity extends AppCompatActivity {
         prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(courseStrings));
         prefsEditor.apply();
 
-        System.out.println(courseStrings);
-
-
 //        String json = gson.toJson(course);
 //        Set<String> defaultCourseSet = new HashSet<>();
 //        Set<String> courseSet;

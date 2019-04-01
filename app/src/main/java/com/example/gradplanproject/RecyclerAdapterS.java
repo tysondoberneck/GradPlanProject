@@ -119,7 +119,6 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
         secondLine += " - " + c.getSchedules().get(0).get("time");
 
-        //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);
         holder.courseDetails.setText(secondLine);
 
