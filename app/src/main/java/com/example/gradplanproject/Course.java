@@ -74,6 +74,60 @@ public class Course {
     public void setName(String name) { this.name = name; }
 
 
+    public ArrayList<Map<String, Object>> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(ArrayList<Map<String, Object>> schedules) {
+        this.schedules = schedules;
+    }
+
+
+    public int getSeatsFilled() {
+        return seatsFilled;
+    }
+
+    public void setSeatsFilled(int seatsFilled) {
+        this.seatsFilled = seatsFilled;
+    }
+
+
+    public int getSeatsTotal() {
+        return seatsTotal;
+    }
+
+    public void setSeatsTotal(int seatsTotal) {
+        this.seatsTotal = seatsTotal;
+    }
+
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
     public String getDetails() { return details; }
 
     public void setDetails(String details) { this.details = details; }

@@ -1,6 +1,7 @@
 package com.example.gradplanproject;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -100,8 +101,23 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        String firstLine = list.get(position).getCode() + " - " + list.get(position).getName();
-        String secondLine = list.get(position).getDetails();
+        Course c = list.get(position);
+
+        String firstLine = c.getCourse() + " - " + c.getName();
+        String secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
+                + " - ";
+
+        ArrayList daysList = (ArrayList)c.getSchedules().get(0).get("days");
+        for (int i = 0; i <= 5; i++)
+            secondLine += daysList.get(i);
+
+        if ( c.getSchedules().size() == 2 ) {
+            daysList = (ArrayList)c.getSchedules().get(1).get("days");
+            for (int i = 0; i <= 5; i++)
+                secondLine += daysList.get(i);
+        }
+
+        secondLine += " - " + c.getSchedules().get(0).get("time");
 
         //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);

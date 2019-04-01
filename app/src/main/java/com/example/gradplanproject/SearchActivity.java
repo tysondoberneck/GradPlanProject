@@ -111,24 +111,24 @@ public class SearchActivity extends AppCompatActivity {
 
         courseList = new ArrayList<>();
 
-        Course course1 = new Course("Software Design and Development", "CS235",
-                "Section 01: Burton - MWF - 9:00-10:00 AM", 3);
-        courseList.add(course1);
-
-        Course course2 = new Course("Foundations of the Restoration", "FDREL225",
-                "Section 03: Taylor - TR - 7:45-8:45 AM", 3);
-        courseList.add(course2);
-
-        Course course3 = new Course("Linear Algebra", "MATH341",
-                "Section 07: Nelson - MWF - 11:30-12:30 PM", 3);
-        courseList.add(course3);
-
-        courseList.add(course1);
-        courseList.add(course2);
-        courseList.add(course3);
-        courseList.add(course1);
-        courseList.add(course2);
-        courseList.add(course3);
+//        Course course1 = new Course("Software Design and Development", "CS235",
+//                "Section 01: Burton - MWF - 9:00-10:00 AM", 3);
+//        courseList.add(course1);
+//
+//        Course course2 = new Course("Foundations of the Restoration", "FDREL225",
+//                "Section 03: Taylor - TR - 7:45-8:45 AM", 3);
+//        courseList.add(course2);
+//
+//        Course course3 = new Course("Linear Algebra", "MATH341",
+//                "Section 07: Nelson - MWF - 11:30-12:30 PM", 3);
+//        courseList.add(course3);
+//
+//        courseList.add(course1);
+//        courseList.add(course2);
+//        courseList.add(course3);
+//        courseList.add(course1);
+//        courseList.add(course2);
+//        courseList.add(course3);
 
 
         /**
