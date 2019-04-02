@@ -285,28 +285,34 @@ public class SearchActivity extends AppCompatActivity {
      */
     public void testQueryAndDisplayData(View view) {
         WidgetDataStorage wds = getDataFromForm(view);
-        final List<Course> courses = new ArrayList<>();
+        //final List<Course> courses = new ArrayList<>();
 
         //test data
         Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
 
+        courseList.clear();
+        adapter.notifyDataSetChanged();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", wds.getCourseCodeOrName()).whereEqualTo("section", "03").get()
+        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", wds.getCourseCodeOrName()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             Gson gson = new Gson();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //This is how we can access the data
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Log.d(TAG, "This is the amount of credits of this course: " + document.get("credits"));
+                                // Remove this line from the above to have SEARCH call the whole course list
+                                // .whereEqualTo("course", wds.getCourseCodeOrName())
 
-                                Log.i(TAG, document.toString());
+                                //This is how we can access the data
+
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                //Log.d(TAG, "This is the amount of credits of this course: " + document.get("credits"));
+                                //Log.i(TAG, document.toString());
 
                                 String courseString = gson.toJson(document.getData());
                                 Course course = gson.fromJson(courseString, Course.class);
-                                courses.add(course);
+                                //courses.add(course);
                                 courseList.add(course);
                                 adapter.notifyDataSetChanged();
                             }

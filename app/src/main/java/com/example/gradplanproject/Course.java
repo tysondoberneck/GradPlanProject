@@ -7,7 +7,7 @@ public class Course {
 
     private String code;
     private String course;
-    private int credits;
+    private float credits;
     private ArrayList<Map<String, String>> instructors;
     private String name;
     private ArrayList<Map<String, Object>> schedules;
@@ -55,7 +55,7 @@ public class Course {
     public void setCourse(String course) { this.course = course; }
 
 
-    public int getCredits() {
+    public float getCredits() {
         return credits;
     }
 
