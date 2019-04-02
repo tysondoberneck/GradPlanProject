@@ -36,12 +36,6 @@ import java.util.Set;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private boolean monday = false;
-    private boolean tuesday = false;
-    private boolean wednesday = false;
-    private boolean thursday = false;
-    private boolean friday = false;
-
     protected static SharedPreferences prefs;
 
     private boolean switchState = false;
@@ -53,6 +47,8 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
+
+    private String [] days;
 
     /**
      * Creates the Toolbar/NavDrawer
@@ -81,33 +77,6 @@ public class SearchActivity extends AppCompatActivity {
          * a pull from FireStore to populate the RecyclerView box. It currently just returns
          * null - null, but it will get fixed.
          */
-
-//        courseListExample = new ArrayList<>();
-//
-//        Map<String, String> map1 = new HashMap<>();
-//        map1.put("code", "CS235");
-//        map1.put("name", "Software Design and Development");
-//        map1.put("details", "Section 01: Burton - MWF - 9:00-10:00 AM");
-//        courseListExample.add(map1);
-//
-//        Map<String, String> map2 = new HashMap<>();
-//        map2.put("code", "FDREL225");
-//        map2.put("name", "Foundations of the Restoration");
-//        map2.put("details", "Section 03: Taylor - TR - 7:45-8:45 AM");
-//        courseListExample.add(map2);
-//
-//        Map<String, String> map3 = new HashMap<>();
-//        map3.put("code", "MATH341");
-//        map3.put("name", "Linear Algebra");
-//        map3.put("details", "Section 07: Nelson - MWF - 11:30-12:30 PM");
-//        courseListExample.add(map3);
-//
-//        courseListExample.add(map1);
-//        courseListExample.add(map2);
-//        courseListExample.add(map3);
-//        courseListExample.add(map1);
-//        courseListExample.add(map2);
-//        courseListExample.add(map3);
 
         courseList = new ArrayList<>();
 
@@ -179,33 +148,33 @@ public class SearchActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.checkBox1:
                 if(checked)
-                    monday = true;
+                    days[0] = "M";
                 else
-                    monday = false;
+                    days[0] = "";
                 break;
             case R.id.checkBox2:
-                if (checked)
-                    tuesday = true;
+                if(checked)
+                    days[1] = "T";
                 else
-                    tuesday = false;
+                    days[1] = "";
                 break;
             case R.id.checkBox3:
                 if(checked)
-                    wednesday = true;
+                    days[2] = "W";
                 else
-                    wednesday = false;
+                    days[2] = "";
                 break;
             case R.id.checkBox4:
-                if (checked)
-                    thursday = true;
+                if(checked)
+                    days[3] = "R";
                 else
-                    thursday = false;
+                    days[3] = "";
                 break;
             case R.id.checkBox5:
-                if (checked)
-                    friday = true;
+                if(checked)
+                    days[4] = "F";
                 else
-                    friday = false;
+                    days[4] = "";
                 break;
         }
     }
@@ -273,7 +242,7 @@ public class SearchActivity extends AppCompatActivity {
         //create a new WidgetDataStorage object with the parameters
         //retrieved from the widgets
         //and then return it
-        WidgetDataStorage wds = new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, sectionFull);
+        WidgetDataStorage wds = new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, sectionFull, days);
         return wds;
     }
 

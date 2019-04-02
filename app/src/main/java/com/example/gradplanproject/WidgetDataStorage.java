@@ -10,12 +10,20 @@ public class WidgetDataStorage {
     private String instructor;
     private boolean sectionFull;
 
-    public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull) {
+    public String[] getDays() { return days; }
+
+
+    public void setDays(String[] days) { this.days = days; }
+
+    private String [] days;
+
+    public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull, String [] days) {
         this.courseCodeOrName = courseCodeOrName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.instructor = instructor;
         this.sectionFull = filterFull;
+        this.days = days;
     }
 
     public String getCourseCodeOrName() {
