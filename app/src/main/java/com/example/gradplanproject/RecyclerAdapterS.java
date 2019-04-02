@@ -134,7 +134,6 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
                     secondLine += daysList.get(i);
                 else if ( daysList2.get(i).length() != 0)
                     secondLine += daysList2.get(i);
-
             }
         }
 

@@ -45,7 +45,6 @@ public class CourseViewActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter rAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private Set defaultCourse;
     public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
 
@@ -68,8 +67,6 @@ public class CourseViewActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
 
-        defaultCourse = new HashSet<>();
-
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
 
         Spinner spinner = findViewById(R.id.spinner5);
@@ -82,8 +79,8 @@ public class CourseViewActivity extends AppCompatActivity {
 
         if(!prefs.contains(String.valueOf(R.string.spring_2019_list))) {
             SharedPreferences.Editor prefsEditor = prefs.edit();
-            Course exampleCourse = new Course("Default","","Add a course in search activity",0);
-            String jsonExample = gson.toJson(exampleCourse);
+            Course defaultCourse = new Course();
+            String jsonExample = gson.toJson(defaultCourse);
             List<String> exampleList = new ArrayList<>();
             exampleList.add(jsonExample);
             prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(exampleList));

@@ -1,6 +1,8 @@
 package com.example.gradplanproject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Course {
@@ -26,9 +28,26 @@ public class Course {
         code = "Code";
         course = "Course";
         credits = 3;
-        // instructors = ???
+
+        instructors = new ArrayList<Map<String, String>>();
+        Map<String, String> mapInstructor = new HashMap<>();
+        mapInstructor.put("first", "Instructor");
+        instructors.add(mapInstructor);
+
         name = "Name";
-        // schedules = ???
+
+        schedules = new ArrayList<Map<String, Object>>();
+        Map<String, Object> mapSchedule = new HashMap<>();
+        List<String> array = new ArrayList<>();
+        array.add("M");
+        array.add("T");
+        array.add("W");
+        array.add("R");
+        array.add("F");
+        array.add("S");
+        mapSchedule.put("days", array);
+        schedules.add(mapSchedule);
+
         seatsFilled = 0;
         seatsTotal = 100;
         section = "01";
