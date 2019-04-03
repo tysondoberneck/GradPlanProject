@@ -114,28 +114,32 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
                     + " - ";
         }
 
-        ArrayList<String> daysList;
-        ArrayList<String> daysList2;
-        ArrayList<String> daysList3;
+        List<String> daysList = c.getSingleDaysArray();
+        for (int i = 0; i <= 5; i++)
+            secondLine += daysList.get(i);
 
-        if ( c.getSchedules().size() == 1 ) {
-            daysList = (ArrayList) c.getSchedules().get(0).get("days");
-            for (int i = 0; i <= 5; i++)
-                secondLine += daysList.get(i);
-        }
-
-        if ( c.getSchedules().size() == 2 ) {
-            daysList = (ArrayList)c.getSchedules().get(0).get("days");
-            daysList2 = (ArrayList)c.getSchedules().get(1).get("days");
-            for (int i = 0; i <= 5; i++) {
-                if ( daysList.get(i) == daysList2.get(i) )
-                    secondLine += daysList.get(i);
-                else if ( daysList.get(i).length() != 0)
-                    secondLine += daysList.get(i);
-                else if ( daysList2.get(i).length() != 0)
-                    secondLine += daysList2.get(i);
-            }
-        }
+//        ArrayList<String> daysList;
+//        ArrayList<String> daysList2;
+//        ArrayList<String> daysList3;
+//
+//        if ( c.getSchedules().size() == 1 ) {
+//            daysList = (ArrayList) c.getSchedules().get(0).get("days");
+//            for (int i = 0; i <= 5; i++)
+//                secondLine += daysList.get(i);
+//        }
+//
+//        if ( c.getSchedules().size() == 2 ) {
+//            daysList = (ArrayList)c.getSchedules().get(0).get("days");
+//            daysList2 = (ArrayList)c.getSchedules().get(1).get("days");
+//            for (int i = 0; i <= 5; i++) {
+//                if ( daysList.get(i) == daysList2.get(i) )
+//                    secondLine += daysList.get(i);
+//                else if ( daysList.get(i).length() != 0)
+//                    secondLine += daysList.get(i);
+//                else if ( daysList2.get(i).length() != 0)
+//                    secondLine += daysList2.get(i);
+//            }
+//        }
 
         secondLine += " - " + c.getSchedules().get(0).get("time");
 
