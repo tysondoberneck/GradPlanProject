@@ -302,24 +302,24 @@ public class SearchActivity extends AppCompatActivity {
                                 }
 
                                 if (wds.isSectionFull()) {
-                                    if (course.getSeatsFilled() == course.getSeatsTotal())
+                                    if (course.getSeatsFilled() >= course.getSeatsTotal())
                                         continue;
                                 }
 
 //                                if (course.getSchedules().size() == 1) {
-//                                    boolean matches = true;
-//                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
-//                                    for (int i = 0; i < 5; i++) {
-//                                        if (wds.getDays().get(i) != daysList.get(i)) {
-//                                            matches = false;
-//                                            continue;
-//                                        }
-//                                    }
-//                                    if (matches == false)
-//                                        continue;
-//                                }
+////                                    boolean matches = true;
+////                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
+////                                    for (int i = 0; i < 5; i++) {
+////                                        if (wds.getDays().get(i).length() != 0)
+////                                            if (wds.getDays().get(i) != daysList.get(i)) {
+////                                                matches = false;
+////                                                continue;
+////                                            }
+////                                    }
+////                                    if (matches == false)
+////                                        continue;
+////                                }
 
-                                //courses.add(course);
                                 courseList.add(course);
                                 adapter.notifyDataSetChanged();
                             }
