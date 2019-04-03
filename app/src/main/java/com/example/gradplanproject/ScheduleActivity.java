@@ -53,49 +53,6 @@ public class ScheduleActivity extends AppCompatActivity {
 
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //Junk data for tests
-//        Course course1 = new Course();
-//
-//        Course course2 = new Course();
-//
-//        course1.setCode("CS235");
-//        course2.setCode("CS124");
-//
-//        ArrayList<Map<String, Object>> course1Schedules = new ArrayList<Map<String, Object>>();
-//        Map<String, Object> mapSchedule = new HashMap<>();
-//        List<String> array = new ArrayList<>();
-//        array.add("M");
-//        array.add("");
-//        array.add("W");
-//        array.add("");
-//        array.add("F");
-//        array.add("");
-//        mapSchedule.put("days", array);
-//        mapSchedule.put("start","1:30 PM");
-//        mapSchedule.put("end","2:30 PM");
-//        course1Schedules.add(mapSchedule);
-//        course1.setSchedules(course1Schedules);
-//
-//        ArrayList<Map<String, Object>> course2Schedules = new ArrayList<Map<String, Object>>();
-//        Map<String, Object> c2MapSchedule = new HashMap<>();
-//        List<String> c2Array = new ArrayList<>();
-//        c2Array.add("");
-//        c2Array.add("T");
-//        c2Array.add("");
-//        c2Array.add("R");
-//        c2Array.add("");
-//        c2Array.add("");
-//        c2MapSchedule.put("days", c2Array);
-//        c2MapSchedule.put("start","12:45 PM");
-//        c2MapSchedule.put("end","1:45 PM");
-//        course2Schedules.add(c2MapSchedule);
-//        course2.setSchedules(course2Schedules);
-//
-//        List<Course> courseList = new ArrayList<Course>();
-//        courseList.add(course1);
-//        courseList.add(course2);
-        //End junk data
-
         List<Course> courseList = new ArrayList<Course>(loadCourseList());
 
         ViewGroup mondayParent = (ViewGroup)findViewById(R.id.mondayInsertPoint);
@@ -119,41 +76,42 @@ public class ScheduleActivity extends AppCompatActivity {
             //Get days for current course
             ArrayList<String> daysArray = new ArrayList<String>((ArrayList<String>)courseList.get(i).getSchedules().get(0).get("days"));
             //Set text to current course's code
-            textView.setText(courseList.get(i).getCode());
+            textView.setText(courseList.get(i).getCourse());
             //Define layout parameters
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.topMargin = getDP((String)(courseList.get(i).getSchedules().get(0).get("start")));
             textView.setLayoutParams(params);
-            textView.getLayoutParams().height = (int) (60 * density);
+            textView.getLayoutParams().height = (int) (getHeight((String)courseList.get(i).getSchedules().get(0).get("start"),(String)courseList.get(i).getSchedules().get(0).get("end")) * density);
+            System.out.println("Height: " + (getHeight((String)courseList.get(i).getSchedules().get(0).get("start"),(String)courseList.get(i).getSchedules().get(0).get("start")) * density));
             //Add text for course time
             textView.append("\n" + (String)(courseList.get(i).getSchedules().get(0).get("start")) + " - " + (String)(courseList.get(i).getSchedules().get(0).get("end")));
 
             //If course takes place on a day, make a new TextView with the same text and parameters as template, and add it to the days RelativeLayout.
-            if(daysArray.get(0).equals("M")) {
+            if(courseList.get(i).getSingleDaysArray().get(0).equals("M")) {
                 TextView mondayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 mondayText.setText(textView.getText());
                 mondayText.setLayoutParams(textView.getLayoutParams());
                 mondayParent.addView(mondayText);
             }
-            if(daysArray.get(1).equals("T")) {
+            if(courseList.get(i).getSingleDaysArray().get(1).equals("T")) {
                 TextView tuesdayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 tuesdayText.setText(textView.getText());
                 tuesdayText.setLayoutParams(textView.getLayoutParams());
                 tuesdayParent.addView(tuesdayText);
             }
-            if(daysArray.get(2).equals("W")) {
+            if(courseList.get(i).getSingleDaysArray().get(2).equals("W")) {
                 TextView wednesdayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 wednesdayText.setText(textView.getText());
                 wednesdayText.setLayoutParams(textView.getLayoutParams());
                 wednesdayParent.addView(wednesdayText);
             }
-            if(daysArray.get(3).equals("R")) {
+            if(courseList.get(i).getSingleDaysArray().get(3).equals("R")) {
                 TextView thursdayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 thursdayText.setText(textView.getText());
                 thursdayText.setLayoutParams(textView.getLayoutParams());
                 thursdayParent.addView(thursdayText);
             }
-            if(daysArray.get(4).equals("F")) {
+            if(courseList.get(i).getSingleDaysArray().get(4).equals("F")) {
                 TextView fridayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 fridayText.setText(textView.getText());
                 fridayText.setLayoutParams(textView.getLayoutParams());
@@ -207,6 +165,14 @@ public class ScheduleActivity extends AppCompatActivity {
             timeDP += ((Character.getNumericValue(timeChars[3])*10) + Character.getNumericValue(timeChars[4]));
         }
 
-        return (int) (timeDP * density);
+        return (int) ((timeDP-420) * density);
+    }
+
+    public int getHeight(String startTime, String endTime) {
+        System.out.println("Start: " + startTime);
+        System.out.println("End: " + endTime);
+        System.out.println("DP END:" + getDP(endTime));
+        System.out.println("DP START:" + getDP(startTime));
+        return (int)((getDP(endTime) - getDP(startTime))/3.45);
     }
 }

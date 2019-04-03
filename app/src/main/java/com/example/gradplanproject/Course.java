@@ -18,7 +18,7 @@ public class Course {
     private String section;
     private String status;
     private String type;
-
+    private List<String> singleDaysArray;
 
     // member variable used only for filler tests
     private String details;
@@ -49,6 +49,8 @@ public class Course {
         mapSchedule.put("time", "12:00 - 12:00 PM");
         schedules.add(mapSchedule);
 
+        singleDaysArray = new ArrayList<>();
+
         seatsFilled = 0;
         seatsTotal = 100;
         section = "XX";
@@ -63,6 +65,39 @@ public class Course {
         this.code = code;
         this.details = details;
         this.credits = credits;
+    }
+
+    /**
+     * Some courses contain multiple arrays for days. This function will form any extra day arrays into a single array.
+     * @return A single array containing Strings for every day this course takes place.
+     */
+    public List<String> getSingleDaysArray() {
+        if(this.getSchedules().size() == 1) {
+            singleDaysArray = (ArrayList<String>)this.getSchedules().get(0).get("days");
+        }
+        if(this.getSchedules().size() == 2) {
+            singleDaysArray = (ArrayList<String>)this.getSchedules().get(0).get("days");
+            List<String> tempArray = (ArrayList<String>)this.getSchedules().get(1).get("days");
+            for(int i = 0; i < singleDaysArray.size(); i++) {
+                if(singleDaysArray.get(i).isEmpty() && !tempArray.get(i).isEmpty()) {
+                    singleDaysArray.set(i, (tempArray.get(i)));
+                }
+            }
+        }
+        if(this.getSchedules().size() == 3) {
+            singleDaysArray = (ArrayList<String>)this.getSchedules().get(0).get("days");
+            List<String> tempArray1 = (ArrayList<String>)this.getSchedules().get(1).get("days");
+            List<String> tempArray2 = (ArrayList<String>)this.getSchedules().get(2).get("days");
+            for(int i = 0; i < singleDaysArray.size(); i++) {
+                if(singleDaysArray.get(i).isEmpty() && !tempArray1.get(i).isEmpty()) {
+                    singleDaysArray.set(i, (tempArray1.get(i)));
+                }
+                if(singleDaysArray.get(i).isEmpty() && !tempArray2.get(i).isEmpty()) {
+                    singleDaysArray.set(i, (tempArray2.get(i)));
+                }
+            }
+        }
+        return singleDaysArray;
     }
 
     public String getCode() { return code; }
