@@ -39,18 +39,19 @@ public class Course {
         schedules = new ArrayList<Map<String, Object>>();
         Map<String, Object> mapSchedule = new HashMap<>();
         List<String> array = new ArrayList<>();
-        array.add("M");
-        array.add("T");
-        array.add("W");
-        array.add("R");
-        array.add("F");
+        array.add("D");
+        array.add("A");
+        array.add("Y");
         array.add("S");
+        array.add("");
+        array.add("");
         mapSchedule.put("days", array);
+        mapSchedule.put("time", "12:00 - 12:00 PM");
         schedules.add(mapSchedule);
 
         seatsFilled = 0;
         seatsTotal = 100;
-        section = "01";
+        section = "XX";
         status = "Status";
         type = "Type";
 

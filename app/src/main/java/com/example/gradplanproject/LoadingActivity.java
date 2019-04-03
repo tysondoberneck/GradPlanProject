@@ -28,7 +28,7 @@ public class LoadingActivity extends AppCompatActivity {
                 Intent intent = new Intent(activity, CourseViewActivity.class);
                 startActivity(intent);
             }
-        }, 3000);
+        }, 1500);
 
     }
 

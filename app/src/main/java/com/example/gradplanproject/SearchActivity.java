@@ -121,6 +121,11 @@ public class SearchActivity extends AppCompatActivity {
                 R.array.beforeTime_list, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
+
+        // For filtering from the checkBoxes; used in onCheckboxClicked()
+        days = new ArrayList<>(5);
+        for (int i = 0; i < 5; i++)
+            days.add(i, "");
     }
 
     /**
@@ -139,9 +144,6 @@ public class SearchActivity extends AppCompatActivity {
      */
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        days = new ArrayList<>(5);
-        for (int i = 0; i < 5; i++)
-            days.add(i, "");
 
         switch(view.getId()) {
             case R.id.checkBox1:
@@ -254,7 +256,7 @@ public class SearchActivity extends AppCompatActivity {
      * the user has input in the widgets
      * @param view
      */
-    public void testQueryAndDisplayData(View view) {
+    public void searchCoursesByFilter(View view) {
         final WidgetDataStorage wds = getDataFromForm(view);
         //final List<Course> courses = new ArrayList<>();
 
@@ -306,21 +308,29 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                 }
 
-//                                if (course.getSchedules().size() == 1) {
-////                                    boolean matches = true;
-////                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
-////                                    for (int i = 0; i < 5; i++) {
-////                                        if (wds.getDays().get(i).length() != 0)
-////                                            if (wds.getDays().get(i) != daysList.get(i)) {
-////                                                matches = false;
-////                                                continue;
-////                                            }
-////                                    }
-////                                    if (matches == false)
-////                                        continue;
-////                                }
+                                if (course.getSchedules().size() == 1) {
+                                    boolean matches = true;
+                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
+                                    for (int i = 0; i < 5; i++) {
+                                        if (wds.getDays().get(i).length() != 0)
+                                            if (wds.getDays().get(i) != daysList.get(i)) {
+                                                matches = false;
+                                                continue;
+                                            }
+                                    }
+                                    if (matches == false)
+                                        continue;
+                                }
 
                                 courseList.add(course);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            if (courseList.size() == 0) {
+                                Course noResults = new Course();
+                                noResults.setCourse("NO RESULTS");
+                                noResults.setName("Try adjusting filter options");
+                                courseList.add(noResults);
                                 adapter.notifyDataSetChanged();
                             }
                         } else {
