@@ -1,17 +1,8 @@
 package com.example.gradplanproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
-
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,10 +20,14 @@ import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -218,7 +213,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Get the data from the two text boxes and two spinners
         EditText editText2 = findViewById(R.id.editText2);
-        String courseCodeOrName = editText2.getText().toString();
+        String courseCodeOrName = editText2.getText().toString().toUpperCase().replaceAll(" ","");
 
         Spinner mySpinner1 = findViewById(R.id.spinner1);
         String endTime = mySpinner1.getSelectedItem().toString();
