@@ -140,6 +140,8 @@ public class SearchActivity extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         days = new ArrayList<>(5);
+        for (int i = 0; i < 5; i++)
+            days.add(i, "");
 
         switch(view.getId()) {
             case R.id.checkBox1:
@@ -278,35 +280,37 @@ public class SearchActivity extends AppCompatActivity {
                                 String courseString = gson.toJson(document.getData());
                                 Course course = gson.fromJson(courseString, Course.class);
 
-                                if (wds.getInstructor() != course.getInstructors().get(0).get("first")) {
-                                    continue;
-                                }
+                                // wds.getInstructor().equals(course.getInstructors().get(0).get("first"))
 
-                                if (wds.getStartTime() != course.getSchedules().get(0).get("start")) {
-                                    continue;
-                                }
-
-                                if (wds.getStartTime() != course.getSchedules().get(0).get("end")) {
-                                    continue;
-                                }
-
-                                if (wds.isSectionFull()) {
-                                    if (course.getSeatsFilled() == course.getSeatsTotal())
-                                        continue;
-                                }
-
-                                if (course.getSchedules().size() == 1) {
-                                    boolean matches = true;
-                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
-                                    for (int i = 0; i < 5; i++) {
-                                        if (wds.getDays().get(i) != daysList.get(i)) {
-                                            matches = false;
-                                            continue;
-                                        }
-                                    }
-                                    if (matches == false)
-                                        continue;
-                                }
+//                                if (wds.getInstructor() != course.getInstructors().get(0).get("first")) {
+//                                    continue;
+//                                }
+//
+//                                if (wds.getStartTime() != course.getSchedules().get(0).get("start")) {
+//                                    continue;
+//                                }
+//
+//                                if (wds.getStartTime() != course.getSchedules().get(0).get("end")) {
+//                                    continue;
+//                                }
+//
+//                                if (wds.isSectionFull()) {
+//                                    if (course.getSeatsFilled() == course.getSeatsTotal())
+//                                        continue;
+//                                }
+//
+//                                if (course.getSchedules().size() == 1) {
+//                                    boolean matches = true;
+//                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
+//                                    for (int i = 0; i < 5; i++) {
+//                                        if (wds.getDays().get(i) != daysList.get(i)) {
+//                                            matches = false;
+//                                            continue;
+//                                        }
+//                                    }
+//                                    if (matches == false)
+//                                        continue;
+//                                }
 
                                 //courses.add(course);
                                 courseList.add(course);
