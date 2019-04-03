@@ -103,20 +103,36 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
 
         Course c = list.get(position);
 
-        String firstLine = c.getCourse() + " - " + c.getName();
+        String firstLine;
         String secondLine;
 
-        if (c.getInstructors().size() == 0) {
-            secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+        if( c.getType().equals("ONLN") ) {
+
+            firstLine = c.getCourse() + " - " + c.getName();
+
+            if (c.getInstructors().size() == 0) {
+                secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+            } else {
+                secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
+                        + " - ";
+            }
+
+            secondLine += "Online Course";
         }
         else {
-            secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
-                    + " - ";
-        }
 
-        List<String> daysList = c.getSingleDaysArray();
-        for (int i = 0; i <= 5; i++)
-            secondLine += daysList.get(i);
+            firstLine = c.getCourse() + " - " + c.getName();
+
+            if (c.getInstructors().size() == 0) {
+                secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+            } else {
+                secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
+                        + " - ";
+            }
+
+            List<String> daysList = c.getSingleDaysArray();
+            for (int i = 0; i <= 5; i++)
+                secondLine += daysList.get(i);
 
 //        ArrayList<String> daysList;
 //        ArrayList<String> daysList2;
@@ -141,7 +157,9 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
 //            }
 //        }
 
-        secondLine += " - " + c.getSchedules().get(0).get("time");
+            secondLine += " - " + c.getSchedules().get(0).get("time");
+
+        }
 
         //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);

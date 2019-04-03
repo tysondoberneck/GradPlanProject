@@ -47,6 +47,8 @@ public class Course {
         array.add("");
         mapSchedule.put("days", array);
         mapSchedule.put("time", "12:00 - 12:00 PM");
+        mapSchedule.put("start", "12:00 PM");
+        mapSchedule.put("end", "12:00 PM");
         schedules.add(mapSchedule);
 
         singleDaysArray = new ArrayList<>();
