@@ -44,8 +44,19 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_schedule);
+
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            toolbar.setTitle(getResources().getString(R.string.gpp));
+            setSupportActionBar(toolbar);
+
+            DrawerUtil.getDrawer(this, toolbar);
+        }
+        catch(Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
 
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
 
@@ -60,6 +71,7 @@ public class ScheduleActivity extends AppCompatActivity {
         ViewGroup wednesdayParent = (ViewGroup)findViewById(R.id.wednesdayInsertPoint);
         ViewGroup thursdayParent = (ViewGroup)findViewById(R.id.thursdayInsertPoint);
         ViewGroup fridayParent = (ViewGroup)findViewById(R.id.fridayInsertPoint);
+        ViewGroup onlineParent = (ViewGroup)findViewById(R.id.onlineInsertPoint);
 
 //        RelativeLayout.LayoutParams timelineParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 //
@@ -82,11 +94,10 @@ public class ScheduleActivity extends AppCompatActivity {
             params.topMargin = getDP((String)(courseList.get(i).getSchedules().get(0).get("start")));
             textView.setLayoutParams(params);
             textView.getLayoutParams().height = (int) (getHeight((String)courseList.get(i).getSchedules().get(0).get("start"),(String)courseList.get(i).getSchedules().get(0).get("end")) * density);
-            System.out.println("Height: " + (getHeight((String)courseList.get(i).getSchedules().get(0).get("start"),(String)courseList.get(i).getSchedules().get(0).get("start")) * density));
             //Add text for course time
             textView.append("\n" + (String)(courseList.get(i).getSchedules().get(0).get("start")) + " - " + (String)(courseList.get(i).getSchedules().get(0).get("end")));
 
-            //If course takes place on a day, make a new TextView with the same text and parameters as template, and add it to the days RelativeLayout.
+            //If course takes place on checked day, make a new TextView with the same text and parameters as template, and add it to the days RelativeLayout.
             if(courseList.get(i).getSingleDaysArray().get(0).equals("M")) {
                 TextView mondayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 mondayText.setText(textView.getText());
@@ -116,6 +127,15 @@ public class ScheduleActivity extends AppCompatActivity {
                 fridayText.setText(textView.getText());
                 fridayText.setLayoutParams(textView.getLayoutParams());
                 fridayParent.addView(fridayText);
+            }
+            if(courseList.get(i).getType().equals("ONLN"))  {
+                TextView onlineText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
+                params.topMargin = 20;
+                textView.setLayoutParams(params);
+                textView.getLayoutParams().height = (int) (60 * density);
+                onlineText.setText("   " + courseList.get(i).getCourse() + "   ");
+                onlineText.setLayoutParams(textView.getLayoutParams());
+                onlineParent.addView(onlineText);
             }
         }
     }
@@ -169,10 +189,6 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     public int getHeight(String startTime, String endTime) {
-        System.out.println("Start: " + startTime);
-        System.out.println("End: " + endTime);
-        System.out.println("DP END:" + getDP(endTime));
-        System.out.println("DP START:" + getDP(startTime));
         return (int)((getDP(endTime) - getDP(startTime))/3.45);
     }
 }
