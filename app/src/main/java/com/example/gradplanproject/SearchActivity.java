@@ -282,17 +282,19 @@ public class SearchActivity extends AppCompatActivity {
 
                                 // wds.getInstructor().equals(course.getInstructors().get(0).get("first"))
 
-                                if(wds.getInstructor().length() != 0)
-                                    if (wds.getInstructor().equals(course.getInstructors().get(0).get("first"))) {
+                                if (wds.getInstructor().length() != 0) {
+                                    if (!(wds.getInstructor().equals(course.getInstructors().get(0).get("first"))))
                                         continue;
-                                    }
-
-                                if (wds.getStartTime() != course.getSchedules().get(0).get("start")) {
-                                    continue;
                                 }
 
-                                if (wds.getStartTime() != course.getSchedules().get(0).get("end")) {
-                                    continue;
+                                if (!(wds.getStartTime().equals("Starts after..."))) {
+                                    if (!(wds.getStartTime().equals(course.getSchedules().get(0).get("start"))))
+                                        continue;
+                                }
+
+                                if (!(wds.getEndTime().equals("Ends before..."))) {
+                                    if (!(wds.getEndTime().equals(course.getSchedules().get(0).get("end"))))
+                                        continue;
                                 }
 
                                 if (wds.isSectionFull()) {
@@ -300,18 +302,18 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                 }
 
-                                if (course.getSchedules().size() == 1) {
-                                    boolean matches = true;
-                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
-                                    for (int i = 0; i < 5; i++) {
-                                        if (wds.getDays().get(i) != daysList.get(i)) {
-                                            matches = false;
-                                            continue;
-                                        }
-                                    }
-                                    if (matches == false)
-                                        continue;
-                                }
+//                                if (course.getSchedules().size() == 1) {
+//                                    boolean matches = true;
+//                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
+//                                    for (int i = 0; i < 5; i++) {
+//                                        if (wds.getDays().get(i) != daysList.get(i)) {
+//                                            matches = false;
+//                                            continue;
+//                                        }
+//                                    }
+//                                    if (matches == false)
+//                                        continue;
+//                                }
 
                                 //courses.add(course);
                                 courseList.add(course);
