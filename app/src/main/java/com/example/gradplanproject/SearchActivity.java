@@ -230,7 +230,14 @@ public class SearchActivity extends AppCompatActivity {
 
         //Instructor Search Box
         EditText editText = findViewById(R.id.editText);
-        String instructor = editText.getText().toString().replaceAll("[^a-zA-Z]+", "");
+        String instructor = "";
+        String tempinstructor = editText.getText().toString().replaceAll("[^a-zA-Z]+", "");
+        if (tempinstructor.length()>= 2) {
+            instructor = Character.toUpperCase(tempinstructor.charAt(0)) + tempinstructor.substring(1);
+        }
+
+
+
 
         //check if the switch is on or off
         boolean sectionFull = false;
