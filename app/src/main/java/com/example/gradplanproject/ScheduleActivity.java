@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 /**
- * Displays user created schedule based on the schedule stored in SharedPrefs (edited by Search and
+ * Displays user created schedule based on the schedule stored in SharedPreferences (edited by Search and
  * CourseView Activities)
  */
 public class ScheduleActivity extends AppCompatActivity {
@@ -44,51 +47,56 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
+
         density = getApplicationContext().getResources().getDisplayMetrics().density;
 
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        ViewGroup parent = (ViewGroup)findViewById(R.id.mondayInsertPoint);
 
-        Course course1 = new Course();
+        //Junk data for tests
+//        Course course1 = new Course();
+//
+//        Course course2 = new Course();
+//
+//        course1.setCode("CS235");
+//        course2.setCode("CS124");
+//
+//        ArrayList<Map<String, Object>> course1Schedules = new ArrayList<Map<String, Object>>();
+//        Map<String, Object> mapSchedule = new HashMap<>();
+//        List<String> array = new ArrayList<>();
+//        array.add("M");
+//        array.add("");
+//        array.add("W");
+//        array.add("");
+//        array.add("F");
+//        array.add("");
+//        mapSchedule.put("days", array);
+//        mapSchedule.put("start","1:30 PM");
+//        mapSchedule.put("end","2:30 PM");
+//        course1Schedules.add(mapSchedule);
+//        course1.setSchedules(course1Schedules);
+//
+//        ArrayList<Map<String, Object>> course2Schedules = new ArrayList<Map<String, Object>>();
+//        Map<String, Object> c2MapSchedule = new HashMap<>();
+//        List<String> c2Array = new ArrayList<>();
+//        c2Array.add("");
+//        c2Array.add("T");
+//        c2Array.add("");
+//        c2Array.add("R");
+//        c2Array.add("");
+//        c2Array.add("");
+//        c2MapSchedule.put("days", c2Array);
+//        c2MapSchedule.put("start","12:45 PM");
+//        c2MapSchedule.put("end","1:45 PM");
+//        course2Schedules.add(c2MapSchedule);
+//        course2.setSchedules(course2Schedules);
+//
+//        List<Course> courseList = new ArrayList<Course>();
+//        courseList.add(course1);
+//        courseList.add(course2);
+        //End junk data
 
-        Course course2 = new Course();
-
-        course1.setCode("CS235");
-        course2.setCode("CS124");
-
-        ArrayList<Map<String, Object>> course1Schedules = new ArrayList<Map<String, Object>>();
-        Map<String, Object> mapSchedule = new HashMap<>();
-        List<String> array = new ArrayList<>();
-        array.add("M");
-        array.add("");
-        array.add("W");
-        array.add("");
-        array.add("F");
-        array.add("");
-        mapSchedule.put("days", array);
-        mapSchedule.put("start","9:00 AM");
-        mapSchedule.put("end","10:00 AM");
-        course1Schedules.add(mapSchedule);
-        course1.setSchedules(course1Schedules);
-
-        ArrayList<Map<String, Object>> course2Schedules = new ArrayList<Map<String, Object>>();
-        Map<String, Object> c2MapSchedule = new HashMap<>();
-        List<String> c2Array = new ArrayList<>();
-        c2Array.add("");
-        c2Array.add("T");
-        c2Array.add("");
-        c2Array.add("R");
-        c2Array.add("");
-        c2Array.add("");
-        c2MapSchedule.put("days", c2Array);
-        c2MapSchedule.put("start","12:45 PM");
-        c2MapSchedule.put("end","1:45 PM");
-        course2Schedules.add(c2MapSchedule);
-        course2.setSchedules(course2Schedules);
-
-        List<Course> courseList = new ArrayList<Course>();
-        courseList.add(course1);
-        courseList.add(course2);
+        List<Course> courseList = new ArrayList<Course>(loadCourseList());
 
         ViewGroup mondayParent = (ViewGroup)findViewById(R.id.mondayInsertPoint);
         ViewGroup tuesdayParent = (ViewGroup)findViewById(R.id.tuesdayInsertPoint);
@@ -96,21 +104,31 @@ public class ScheduleActivity extends AppCompatActivity {
         ViewGroup thursdayParent = (ViewGroup)findViewById(R.id.thursdayInsertPoint);
         ViewGroup fridayParent = (ViewGroup)findViewById(R.id.fridayInsertPoint);
 
+//        RelativeLayout.LayoutParams timelineParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//
+//        Date currentTime = Calendar.getInstance().getTime();
+//        View timeline = (View) getLayoutInflater().inflate(R.layout.timeline, null);
+//        timelineParams.topMargin = (currentTime.getHours() * 60) + currentTime.getMinutes();
+//        ViewGroup timelineParent = (ViewGroup)findViewById(R.id.currentTimeMarkerLinearLayout);
+//
+//        timelineParent.addView(timeline);
+
         for(int i = 0; i < courseList.size(); i++) {
+            //Create template textview
             TextView textView = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
+            //Get days for current course
             ArrayList<String> daysArray = new ArrayList<String>((ArrayList<String>)courseList.get(i).getSchedules().get(0).get("days"));
+            //Set text to current course's code
             textView.setText(courseList.get(i).getCode());
+            //Define layout parameters
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            if(i == 0) {
-                params.topMargin = getDP((String)(courseList.get(i).getSchedules().get(0).get("start")));
-                textView.append("\n9:00 -\n10:00");
-            }
-            else {
-                params.topMargin = getDP((String)(courseList.get(i).getSchedules().get(0).get("start")));
-                textView.append("\n12:45 -\n1:45");
-            }
+            params.topMargin = getDP((String)(courseList.get(i).getSchedules().get(0).get("start")));
             textView.setLayoutParams(params);
             textView.getLayoutParams().height = (int) (60 * density);
+            //Add text for course time
+            textView.append("\n" + (String)(courseList.get(i).getSchedules().get(0).get("start")) + " - " + (String)(courseList.get(i).getSchedules().get(0).get("end")));
+
+            //If course takes place on a day, make a new TextView with the same text and parameters as template, and add it to the days RelativeLayout.
             if(daysArray.get(0).equals("M")) {
                 TextView mondayText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
                 mondayText.setText(textView.getText());
@@ -175,16 +193,19 @@ public class ScheduleActivity extends AppCompatActivity {
     public int getDP(String time) {
         char [] timeChars = time.toCharArray();
         int timeDP = 0;
+        //If hour is single digits (i.e. 9:00 AM, 4:00 PM, not 10:00 AM
         if(timeChars[1] == ':') {
             timeDP += (Character.getNumericValue(timeChars[0]) * 60);
-            timeDP += Character.getNumericValue(timeChars[2]) + Character.getNumericValue(timeChars[3]);
+            timeDP += (((Character.getNumericValue(timeChars[2])*10) + Character.getNumericValue(timeChars[3])));
+            if(timeChars[5] == 'P') {
+                //If time is PM, add 12 hours
+                timeDP += (12*60);
+            }
         }
         else {
             timeDP += (((Character.getNumericValue(timeChars[0]) + 9) + Character.getNumericValue(timeChars[1])) * 60);
-            timeDP += ((Character.getNumericValue(timeChars[3]) * 10) + Character.getNumericValue(timeChars[4]));
+            timeDP += ((Character.getNumericValue(timeChars[3])*10) + Character.getNumericValue(timeChars[4]));
         }
-
-        System.out.println(timeDP);
 
         return (int) (timeDP * density);
     }

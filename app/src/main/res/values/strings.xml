@@ -139,7 +139,7 @@
     </string-array>
 
     <!-- Pre-defined strings -->
-    <string name="app_name">GradPlanProject</string>
+    <string name="app_name">GradPlan Plus</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>

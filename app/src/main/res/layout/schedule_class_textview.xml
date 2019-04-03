@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView android:id="@+id/classTextView"
-    android:layout_width="match_parent"
+<TextView xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/classTextView"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_alignParentRight="true"
-    android:layout_marginRight="6dp"
-    android:layout_marginTop="180dp"
     android:gravity="center"
-    android:textSize="15sp"
+    android:textSize="13sp"
     android:layout_alignParentEnd="true"
-    android:layout_marginEnd="6dp"/>
+    android:layout_marginEnd="6dp"
+    tools:ignore="RtlHardcoded" />

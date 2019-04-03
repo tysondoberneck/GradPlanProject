@@ -3,6 +3,7 @@ package com.example.gradplanproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -60,6 +61,7 @@ public class DrawerUtil {
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
                 .withHeaderBackground(R.drawable.ic_gpp_header)
+                .withHeaderBackgroundScaleType(ImageView.ScaleType.FIT_CENTER)
                 .build();
 
         Drawer result = new DrawerBuilder()
