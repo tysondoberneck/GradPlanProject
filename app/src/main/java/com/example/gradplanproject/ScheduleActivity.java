@@ -35,6 +35,8 @@ public class ScheduleActivity extends AppCompatActivity {
      */
     private float density;
 
+    private int onlineCoursePlacement;
+
     /**
      * Editor to access SharedPreferences Course List
      */
@@ -57,6 +59,8 @@ public class ScheduleActivity extends AppCompatActivity {
         catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
+
+        onlineCoursePlacement = 0;
 
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
 
@@ -130,12 +134,13 @@ public class ScheduleActivity extends AppCompatActivity {
             }
             if(courseList.get(i).getType().equals("ONLN"))  {
                 TextView onlineText = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);
-                params.topMargin = 20;
+                params.topMargin = (int) (40 + (onlineCoursePlacement * (density*65)));
                 textView.setLayoutParams(params);
                 textView.getLayoutParams().height = (int) (60 * density);
                 onlineText.setText("   " + courseList.get(i).getCourse() + "   ");
                 onlineText.setLayoutParams(textView.getLayoutParams());
                 onlineParent.addView(onlineText);
+                onlineCoursePlacement++;
             }
         }
     }
