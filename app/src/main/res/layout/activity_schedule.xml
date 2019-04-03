@@ -575,7 +575,7 @@
                     <include layout="@layout/calendar_zebra" />
 
                     <RelativeLayout
-                        android:id="@+id/tuedayInsertPoint"
+                        android:id="@+id/tuesdayInsertPoint"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
@@ -605,7 +605,7 @@
                     <include layout="@layout/calendar_zebra" />
 
                     <RelativeLayout
-                        android:id="@+id/fridayInsertPoint"
+                        android:id="@+id/thursdayInsertPoint"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
@@ -620,7 +620,7 @@
                     <include layout="@layout/calendar_zebra" />
 
                     <RelativeLayout
-                        android:id="@+id/saturdayInsertPoint"
+                        android:id="@+id/fridayInsertPoint"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
