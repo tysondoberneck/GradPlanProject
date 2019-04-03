@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
     public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
 
-    private String [] days;
+    private ArrayList<String> days;
 
     /**
      * Creates the Toolbar/NavDrawer
@@ -144,37 +144,38 @@ public class SearchActivity extends AppCompatActivity {
      */
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
+        days = new ArrayList<>(5);
 
         switch(view.getId()) {
             case R.id.checkBox1:
                 if(checked)
-                    days[0] = "M";
+                    days.set(0, "M");
                 else
-                    days[0] = "";
+                    days.set(0, "");
                 break;
             case R.id.checkBox2:
                 if(checked)
-                    days[1] = "T";
+                    days.set(1, "T");
                 else
-                    days[1] = "";
+                    days.set(1, "");
                 break;
             case R.id.checkBox3:
                 if(checked)
-                    days[2] = "W";
+                    days.set(2, "W");
                 else
-                    days[2] = "";
+                    days.set(2, "");
                 break;
             case R.id.checkBox4:
                 if(checked)
-                    days[3] = "R";
+                    days.set(3, "R");
                 else
-                    days[3] = "";
+                    days.set(3, "");
                 break;
             case R.id.checkBox5:
                 if(checked)
-                    days[4] = "F";
+                    days.set(4, "F");
                 else
-                    days[4] = "";
+                    days.set(4, "");
                 break;
         }
     }
@@ -253,7 +254,7 @@ public class SearchActivity extends AppCompatActivity {
      * @param view
      */
     public void testQueryAndDisplayData(View view) {
-        WidgetDataStorage wds = getDataFromForm(view);
+        final WidgetDataStorage wds = getDataFromForm(view);
         //final List<Course> courses = new ArrayList<>();
 
         //test data
@@ -281,6 +282,37 @@ public class SearchActivity extends AppCompatActivity {
 
                                 String courseString = gson.toJson(document.getData());
                                 Course course = gson.fromJson(courseString, Course.class);
+
+                                if (wds.getInstructor() != course.getInstructors().get(0).get("first")) {
+                                    continue;
+                                }
+
+                                if (wds.getStartTime() != course.getSchedules().get(0).get("start")) {
+                                    continue;
+                                }
+
+                                if (wds.getStartTime() != course.getSchedules().get(0).get("end")) {
+                                    continue;
+                                }
+
+                                if (wds.isSectionFull()) {
+                                    if (course.getSeatsFilled() == course.getSeatsTotal())
+                                        continue;
+                                }
+
+                                if (course.getSchedules().size() == 1) {
+                                    boolean matches = true;
+                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
+                                    for (int i = 0; i < 5; i++) {
+                                        if (wds.getDays().get(i) != daysList.get(i)) {
+                                            matches = false;
+                                            continue;
+                                        }
+                                    }
+                                    if (matches == false)
+                                        continue;
+                                }
+
                                 //courses.add(course);
                                 courseList.add(course);
                                 adapter.notifyDataSetChanged();

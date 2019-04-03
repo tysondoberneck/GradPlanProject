@@ -1,5 +1,7 @@
 package com.example.gradplanproject;
 
+import java.util.ArrayList;
+
 /**
  * This class will store all the data from the widgets in the course search activity.
  */
@@ -9,15 +11,9 @@ public class WidgetDataStorage {
     private String endTime;
     private String instructor;
     private boolean sectionFull;
+    private ArrayList<String> days;
 
-    public String[] getDays() { return days; }
-
-
-    public void setDays(String[] days) { this.days = days; }
-
-    private String [] days;
-
-    public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull, String [] days) {
+    public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull, ArrayList<String> days) {
         this.courseCodeOrName = courseCodeOrName;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -65,4 +61,8 @@ public class WidgetDataStorage {
     public void setSectionFull(boolean sectionFull) {
         this.sectionFull = sectionFull;
     }
+
+    public ArrayList<String> getDays() { return days; }
+
+    public void setDays(ArrayList<String> days) { this.days = days; }
 }
