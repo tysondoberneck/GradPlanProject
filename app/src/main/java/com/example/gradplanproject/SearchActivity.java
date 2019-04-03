@@ -214,17 +214,21 @@ public class SearchActivity extends AppCompatActivity {
     public WidgetDataStorage getDataFromForm(View view) {
 
         // Get the data from the two text boxes and two spinners
+        //Course Code Search Box
         EditText editText2 = findViewById(R.id.editText2);
-        String courseCodeOrName = editText2.getText().toString().toUpperCase().replaceAll(" ","");
+        String courseCodeOrName = editText2.getText().toString().toUpperCase().replaceAll("[^a-zA-Z0-9]+", "");
 
+        //Start Time
         Spinner mySpinner1 = findViewById(R.id.spinner1);
         String startTime = mySpinner1.getSelectedItem().toString();
 
+        //End Time
         Spinner mySpinner2 = findViewById(R.id.spinner2);
         String endTime = mySpinner2.getSelectedItem().toString();
 
+        //Instructor Search Box
         EditText editText = findViewById(R.id.editText);
-        String instructor = editText.getText().toString();
+        String instructor = editText.getText().toString().replaceAll("[^a-zA-Z]+", "");
 
         //check if the switch is on or off
         boolean sectionFull = false;
