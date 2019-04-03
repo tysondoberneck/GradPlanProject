@@ -1,40 +1,631 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScheduleActivity">
+    android:orientation="vertical"
+    android:padding="0dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical">
-
-        <include
-            layout="@layout/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/dayLabelsLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="This is the Schedule Activity"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/schedule_act" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:baselineAligned="false">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:id="@+id/mondayHeaderRelativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp">
+
+            <TextView
+                android:id="@+id/mondayDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dp"
+                android:layout_marginLeft="34dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="25dp" />
+
+            <TextView
+                android:id="@+id/mondayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="6dp"
+                android:gravity="center"
+                android:text="@string/mon"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tuesdayHeaderRelativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/tuesdayDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:id="@+id/tuesdayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="6dp"
+                android:text="@string/tue"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wednesdayHeaderRelativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/wednesdayDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:id="@+id/wednesdayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="6dp"
+                android:text="@string/wed"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/thursdayHeaderRelativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/thursdayDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:id="@+id/thursdayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="6dp"
+                android:text="@string/thu"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fridayHeaderRelativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/fridayDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="6dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/fridayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="6dp"
+                android:text="@string/fri"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerView"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/dayLabelsLinearLayout"
+        android:background="@color/colorPrimary" />
+
+    <ScrollView
+        android:id="@+id/calendarScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/dividerView"
+        android:layout_alignParentBottom="true"
+        android:overScrollMode="never"
+        android:padding="0dp"
+        android:scrollbars="none"
+        android:fadingEdge="none" >
+
+        <RelativeLayout
+            android:id="@+id/calendarRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp" >
+
+            <LinearLayout
+                android:id="@+id/calendarSplitterRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:padding="0dp" >
+
+                <RelativeLayout
+                    android:id="@+id/hoursRelativeLayout"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="0dp" >
+
+                    <include layout="@layout/calendar_zebra" />
+
+                    <TextView
+                        android:id="@+id/time12amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:text="@string/time12am"
+                        android:textSize="15sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp" />
+
+                    <TextView
+                        android:id="@+id/time1amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="60dp"
+                        android:gravity="center"
+                        android:text="@string/time1am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time2amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="120dp"
+                        android:gravity="center"
+                        android:text="@string/time2am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time3amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="180dp"
+                        android:gravity="center"
+                        android:text="@string/time3am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time4amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="240dp"
+                        android:gravity="center"
+                        android:text="@string/time4am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time5amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="300dp"
+                        android:gravity="center"
+                        android:text="@string/time5am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time6amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="362dp"
+                        android:gravity="center"
+                        android:text="@string/time6am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time7amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="422dp"
+                        android:gravity="center"
+                        android:text="@string/time7am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time8amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="482dp"
+                        android:gravity="center"
+                        android:text="@string/time8am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time9amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="542dp"
+                        android:gravity="center"
+                        android:text="@string/time9am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time10amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="603dp"
+                        android:gravity="center"
+                        android:text="@string/time10am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time11amTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="663dp"
+                        android:gravity="center"
+                        android:text="@string/time11am"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time12pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="723dp"
+                        android:gravity="center"
+                        android:text="@string/time12pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time1pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="783dp"
+                        android:gravity="center"
+                        android:text="@string/time1pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time2pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="843dp"
+                        android:gravity="center"
+                        android:text="@string/time2pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time3pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="903dp"
+                        android:gravity="center"
+                        android:text="@string/time3pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time4pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="964dp"
+                        android:gravity="center"
+                        android:text="@string/time4pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time5pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1024dp"
+                        android:gravity="center"
+                        android:text="@string/time5pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time6pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1084dp"
+                        android:gravity="center"
+                        android:text="@string/time6pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time7pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1144dp"
+                        android:gravity="center"
+                        android:text="@string/time7pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time8pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1205dp"
+                        android:gravity="center"
+                        android:text="@string/time8pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time9pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1265dp"
+                        android:gravity="center"
+                        android:text="@string/time9pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time10pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1325dp"
+                        android:gravity="center"
+                        android:text="@string/time10pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/time11pmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="1385dp"
+                        android:gravity="center|top"
+                        android:text="@string/time11pm"
+                        android:textSize="15sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="6dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/mondayRelativeLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                    <include layout="@layout/calendar_zebra" />
+
+                    <RelativeLayout
+                        android:id="@+id/mondayInsertPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tuesdayRelativeLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" >
+
+                    <include layout="@layout/calendar_zebra" />
+
+                    <RelativeLayout
+                        android:id="@+id/tuedayInsertPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/wednesdayRelativeLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" >
+
+                    <include layout="@layout/calendar_zebra" />
+
+                    <RelativeLayout
+                        android:id="@+id/wednesdayInsertPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/thursdayRelativeLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" >
+
+                    <include layout="@layout/calendar_zebra" />
+
+                    <RelativeLayout
+                        android:id="@+id/fridayInsertPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/fridayRelativeLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" >
+
+                    <include layout="@layout/calendar_zebra" />
+
+                    <RelativeLayout
+                        android:id="@+id/saturdayInsertPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

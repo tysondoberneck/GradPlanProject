@@ -2,5 +2,5 @@
 <resources>
     <color name="colorPrimary">#0076C6</color>
     <color name="colorPrimaryDark">#0C4496</color>
-    <color name="colorAccent">#ADADAD</color>
+    <color name="calendar">#ADADAD</color>
 </resources>

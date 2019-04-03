@@ -17,9 +17,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import androidx.appcompat.widget.Toolbar;
 
 /**
- * Contains code to build a navigation drawer using the MaterialDrawer library by Mike Penz.
- * This code can be called by any Activity wanting to create a Nav Drawer, and each activity
- * will contain the same drawer.
+ * Contains code to build a navigation drawer using the open source MaterialDrawer library by Mike Penz.
+ * This code can be called by any Activity wanting to create a Nav Drawer, and each activity will
+ * contain the same drawer.
  *
  * License for MaterialDrawer:
  * Copyright 2018 Mike Penz

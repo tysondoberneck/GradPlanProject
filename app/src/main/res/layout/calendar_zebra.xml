@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="1440dp"
+    android:orientation="vertical">
+
+    <!--1 AM hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--2 AM hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--3 AM hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="58dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--4 AM hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="58dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--5 AM hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+    <!--One hour block-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="59dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+    <!--End hour block-->
+
+</LinearLayout>
