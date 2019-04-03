@@ -112,13 +112,13 @@ public class SearchActivity extends AppCompatActivity {
 
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.beforeTime_list, android.R.layout.simple_spinner_item);
+                R.array.afterTime_list, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
 
         Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.afterTime_list, android.R.layout.simple_spinner_item);
+                R.array.beforeTime_list, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
     }
@@ -218,10 +218,10 @@ public class SearchActivity extends AppCompatActivity {
         String courseCodeOrName = editText2.getText().toString().toUpperCase().replaceAll(" ","");
 
         Spinner mySpinner1 = findViewById(R.id.spinner1);
-        String endTime = mySpinner1.getSelectedItem().toString();
+        String startTime = mySpinner1.getSelectedItem().toString();
 
         Spinner mySpinner2 = findViewById(R.id.spinner2);
-        String startTime = mySpinner2.getSelectedItem().toString();
+        String endTime = mySpinner2.getSelectedItem().toString();
 
         EditText editText = findViewById(R.id.editText);
         String instructor = editText.getText().toString();
@@ -229,7 +229,7 @@ public class SearchActivity extends AppCompatActivity {
         //check if the switch is on or off
         boolean sectionFull = false;
         Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
-        if (simpleSwitch.isChecked() == true) {
+        if (simpleSwitch.isChecked()) {
             sectionFull = true;
         }
 
@@ -282,35 +282,36 @@ public class SearchActivity extends AppCompatActivity {
 
                                 // wds.getInstructor().equals(course.getInstructors().get(0).get("first"))
 
-//                                if (wds.getInstructor() != course.getInstructors().get(0).get("first")) {
-//                                    continue;
-//                                }
-//
-//                                if (wds.getStartTime() != course.getSchedules().get(0).get("start")) {
-//                                    continue;
-//                                }
-//
-//                                if (wds.getStartTime() != course.getSchedules().get(0).get("end")) {
-//                                    continue;
-//                                }
-//
-//                                if (wds.isSectionFull()) {
-//                                    if (course.getSeatsFilled() == course.getSeatsTotal())
-//                                        continue;
-//                                }
-//
-//                                if (course.getSchedules().size() == 1) {
-//                                    boolean matches = true;
-//                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
-//                                    for (int i = 0; i < 5; i++) {
-//                                        if (wds.getDays().get(i) != daysList.get(i)) {
-//                                            matches = false;
-//                                            continue;
-//                                        }
-//                                    }
-//                                    if (matches == false)
-//                                        continue;
-//                                }
+                                if(wds.getInstructor().length() != 0)
+                                    if (wds.getInstructor().equals(course.getInstructors().get(0).get("first"))) {
+                                        continue;
+                                    }
+
+                                if (wds.getStartTime() != course.getSchedules().get(0).get("start")) {
+                                    continue;
+                                }
+
+                                if (wds.getStartTime() != course.getSchedules().get(0).get("end")) {
+                                    continue;
+                                }
+
+                                if (wds.isSectionFull()) {
+                                    if (course.getSeatsFilled() == course.getSeatsTotal())
+                                        continue;
+                                }
+
+                                if (course.getSchedules().size() == 1) {
+                                    boolean matches = true;
+                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
+                                    for (int i = 0; i < 5; i++) {
+                                        if (wds.getDays().get(i) != daysList.get(i)) {
+                                            matches = false;
+                                            continue;
+                                        }
+                                    }
+                                    if (matches == false)
+                                        continue;
+                                }
 
                                 //courses.add(course);
                                 courseList.add(course);
