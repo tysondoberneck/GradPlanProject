@@ -2,6 +2,7 @@ package com.example.gradplanproject;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -112,13 +114,13 @@ public class SearchActivity extends AppCompatActivity {
 
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.afterTime_list, android.R.layout.simple_spinner_item);
+                R.array.startTime_list, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
 
         Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.beforeTime_list, android.R.layout.simple_spinner_item);
+                R.array.endTime_list, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
@@ -300,14 +302,50 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                 }
 
+//                                if (!(wds.getStartTime().equals("Starts after..."))) {
+//                                    if (!(wds.getStartTime().equals(course.getSchedules().get(0).get("start"))))
+//                                        continue;
+//                                }
+
                                 if (!(wds.getStartTime().equals("Starts after..."))) {
-                                    if (!(wds.getStartTime().equals(course.getSchedules().get(0).get("start"))))
+                                    Resources res = getResources();
+                                    String[] startTimeArray = res.getStringArray(R.array.startTime_list);
+                                    ArrayList<String> startTimeList = new ArrayList<>(Arrays.asList(startTimeArray));
+                                    int index = startTimeList.indexOf(wds.getStartTime());
+
+                                    boolean matchesStart = false;
+                                    for (; index < startTimeList.size(); index++)
+                                        if (startTimeList.get(index).equals(course.getSchedules().get(0).get("start"))) {
+                                            matchesStart = true;
+                                            break;
+                                        }
+
+                                    if (!matchesStart) {
                                         continue;
+                                    }
                                 }
 
+//                                if (!(wds.getEndTime().equals("Ends before..."))) {
+//                                    if (!(wds.getEndTime().equals(course.getSchedules().get(0).get("end"))))
+//                                        continue;
+//                                }
+
                                 if (!(wds.getEndTime().equals("Ends before..."))) {
-                                    if (!(wds.getEndTime().equals(course.getSchedules().get(0).get("end"))))
+                                    Resources res = getResources();
+                                    String[] endTimeArray = res.getStringArray(R.array.endTime_list);
+                                    ArrayList<String> endTimeList = new ArrayList<>(Arrays.asList(endTimeArray));
+                                    int index = endTimeList.indexOf(wds.getEndTime());
+
+                                    boolean matchesEnd = false;
+                                    for (; index > 0; index--)
+                                        if (endTimeList.get(index).equals(course.getSchedules().get(0).get("end"))) {
+                                            matchesEnd = true;
+                                            break;
+                                        }
+
+                                    if (!matchesEnd) {
                                         continue;
+                                    }
                                 }
 
                                 if (wds.isSectionFull()) {
@@ -315,16 +353,16 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                 }
 
-                                boolean matches = true;
+                                boolean matchesDays = true;
                                 List<String> daysList = course.getSingleDaysArray();
                                 for (int i = 0; i < 5; i++) {
                                     if (wds.getDays().get(i).length() != 0)
                                         if (!(wds.getDays().get(i).equals(daysList.get(i)))) {
-                                            matches = false;
+                                            matchesDays = false;
                                             break;
                                         }
                                 }
-                                if (matches == false)
+                                if (!matchesDays)
                                     continue;
 
 
