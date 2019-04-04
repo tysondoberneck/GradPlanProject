@@ -95,7 +95,7 @@ public class ScheduleActivity extends AppCompatActivity {
             textView.setText(courseList.get(i).getCourse());
             //Define layout parameters
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            params.topMargin = getDP((String)(courseList.get(i).getSchedules().get(0).get("start")));
+            params.topMargin = (int) (getDP((String)(courseList.get(i).getSchedules().get(0).get("start"))) * density);
             textView.setLayoutParams(params);
             textView.getLayoutParams().height = (int) (getHeight((String)courseList.get(i).getSchedules().get(0).get("start"),(String)courseList.get(i).getSchedules().get(0).get("end")) * density);
             //Add text for course time
@@ -175,25 +175,25 @@ public class ScheduleActivity extends AppCompatActivity {
      */
     public int getDP(String time) {
         char [] timeChars = time.toCharArray();
-        int timeDP = 0;
+        int minutes = 0;
         //If hour is single digits (i.e. 9:00 AM, 4:00 PM, not 10:00 AM
         if(timeChars[1] == ':') {
-            timeDP += (Character.getNumericValue(timeChars[0]) * 60);
-            timeDP += (((Character.getNumericValue(timeChars[2])*10) + Character.getNumericValue(timeChars[3])));
+            minutes += (Character.getNumericValue(timeChars[0]) * 60);
+            minutes += (((Character.getNumericValue(timeChars[2])*10) + Character.getNumericValue(timeChars[3])));
             if(timeChars[5] == 'P') {
                 //If time is PM, add 12 hours
-                timeDP += (12*60);
+                minutes += (12*60);
             }
         }
         else {
-            timeDP += (((Character.getNumericValue(timeChars[0]) + 9) + Character.getNumericValue(timeChars[1])) * 60);
-            timeDP += ((Character.getNumericValue(timeChars[3])*10) + Character.getNumericValue(timeChars[4]));
+            minutes += (((Character.getNumericValue(timeChars[0]) + 9) + Character.getNumericValue(timeChars[1])) * 60);
+            minutes += ((Character.getNumericValue(timeChars[3])*10) + Character.getNumericValue(timeChars[4]));
         }
 
-        return (int) ((timeDP-420) * density);
+        return ((minutes-420));
     }
 
     public int getHeight(String startTime, String endTime) {
-        return (int)((getDP(endTime) - getDP(startTime))/3.45);
+        return (int)((getDP(endTime) - getDP(startTime)));
     }
 }
