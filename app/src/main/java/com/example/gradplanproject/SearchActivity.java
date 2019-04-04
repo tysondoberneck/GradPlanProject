@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,6 +43,8 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private WeakReference<Activity> weakRef;
+
     public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
 
@@ -68,6 +71,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         prefs = getSharedPreferences("PREF_NAME", MODE_PRIVATE);
+        weakRef = new WeakReference<Activity>(this);
 
         /**
          * courseListExample is just filler data at this point. We will be implementing
@@ -266,6 +270,10 @@ public class SearchActivity extends AppCompatActivity {
      * @param view
      */
     public void searchCoursesByFilter(View view) {
+
+        Toast.makeText(weakRef.get().getApplicationContext(),
+                "Searching...", Toast.LENGTH_LONG).show();
+
         final WidgetDataStorage wds = getDataFromForm(view);
         //final List<Course> courses = new ArrayList<>();
 

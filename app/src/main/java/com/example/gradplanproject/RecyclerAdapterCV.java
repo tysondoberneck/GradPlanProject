@@ -173,7 +173,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             @Override
             public void onClick(View v) {
                 Toast.makeText(weakRef.get().getApplicationContext(),
-                        "Removing Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
+                        "Removing course...", Toast.LENGTH_LONG).show();
                 remove(position);
             }
         });

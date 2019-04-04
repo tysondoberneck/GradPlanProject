@@ -175,7 +175,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
             public void onClick(View v) {
                 SearchActivity.saveCourse(list.get(position));
                 Toast.makeText(weakRef.get().getApplicationContext(),
-                        "Adding Item #" + (position + 1) + "...", Toast.LENGTH_SHORT).show();
+                        "Adding course...", Toast.LENGTH_LONG).show();
             }
         });
     }
