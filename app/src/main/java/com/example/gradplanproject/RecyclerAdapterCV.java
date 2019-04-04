@@ -36,6 +36,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         //public TextView courseCode;
         public TextView courseName;
         public TextView courseDetails;
+        public TextView courseDetails2;
         public ImageButton removeButton;
         public View layout;
 
@@ -45,6 +46,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
 
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
+            courseDetails2 = (TextView) v.findViewById(R.id.courseDetails2);
             removeButton = v.findViewById(R.id.removeButton);
         }
     }
@@ -105,29 +107,31 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
 
         String firstLine;
         String secondLine;
+        String thirdLine;
 
         if( c.getType().equals("ONLN") ) {
 
-            firstLine = c.getCourse() + " - " + c.getName();
+            firstLine = c.getCode() + " - " + c.getName();
 
             if (c.getInstructors().size() == 0) {
-                secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+                secondLine = "None" + " - ";
             } else {
-                secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
-                        + " - ";
+                secondLine = c.getInstructors().get(0).get("first") + " - ";
             }
 
             secondLine += "Online Course";
+
+            thirdLine = "Credits : " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
+                + c.getSeatsTotal() + " Seats Filled";
         }
         else {
 
-            firstLine = c.getCourse() + " - " + c.getName();
+            firstLine = c.getCode() + " - " + c.getName();
 
             if (c.getInstructors().size() == 0) {
-                secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+                secondLine = "None" + " - ";
             } else {
-                secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
-                        + " - ";
+                secondLine = c.getInstructors().get(0).get("first") + " - ";
             }
 
             List<String> daysList = c.getSingleDaysArray();
@@ -159,11 +163,14 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
 
             secondLine += " - " + c.getSchedules().get(0).get("time");
 
+            thirdLine = "Credits : " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
+                    + c.getSeatsTotal() + " Seats Filled";
         }
 
         //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);
         holder.courseDetails.setText(secondLine);
+        holder.courseDetails2.setText(thirdLine);
 
         /**
          * An onClickListener that applies to each individual object in the RecyclerView

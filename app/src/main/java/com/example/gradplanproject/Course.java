@@ -28,6 +28,7 @@ public class Course {
 
 
     public Course() {
+
         code = "Code";
         course = "Course";
         credits = 3;
@@ -35,6 +36,8 @@ public class Course {
         instructors = new ArrayList<Map<String, String>>();
         Map<String, String> mapInstructor = new HashMap<>();
         mapInstructor.put("first", "Instructor");
+        mapInstructor.put("middle", "Name");
+        mapInstructor.put("last", "Here");
         instructors.add(mapInstructor);
 
         name = "Name";
@@ -52,6 +55,8 @@ public class Course {
         mapSchedule.put("time", "0:00 - 0:00 PM");
         mapSchedule.put("start", "0:00 PM");
         mapSchedule.put("end", "0:00 PM");
+        mapSchedule.put("location", "BYUI");
+        mapSchedule.put("method", "Method");
         schedules.add(mapSchedule);
 
         singleDaysArray = new ArrayList<>();
