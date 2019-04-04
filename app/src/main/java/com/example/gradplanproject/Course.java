@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class designed to represent a BYU Idaho Course as stored in FireBase
+ */
 public class Course {
 
     private String code;

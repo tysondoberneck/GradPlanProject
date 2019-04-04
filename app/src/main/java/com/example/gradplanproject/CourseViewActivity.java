@@ -38,16 +38,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * An activity designed to display all courses the user has added via SearchActivity, as well as provide an option to delete them.
+ */
 public class CourseViewActivity extends AppCompatActivity {
 
     public static final String TAG = "CourseViewActivity";
 
+    /**
+     * The view displaying the CourseList.
+     */
     private RecyclerView recyclerView;
     private RecyclerView.Adapter rAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
 
+    /**
+     * Editor to access the list of courses stored in SharedPreferences
+     */
     protected static SharedPreferences prefs;
 
     @Override
@@ -67,6 +75,7 @@ public class CourseViewActivity extends AppCompatActivity {
             Log.e(TAG, e.getMessage());
         }
 
+        //Initialize SharedPreferences
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
 
         Spinner spinner = findViewById(R.id.spinner5);
@@ -77,6 +86,7 @@ public class CourseViewActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
+        //Initialize SharedPreferences if nothing is stored.
         if(!prefs.contains(String.valueOf(R.string.spring_2019_list))) {
             SharedPreferences.Editor prefsEditor = prefs.edit();
             Course defaultCourse = new Course();
@@ -96,6 +106,9 @@ public class CourseViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(rAdapter);
     }
 
+    /**
+     * Load CourseList when this activity is resumed.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -114,6 +127,9 @@ public class CourseViewActivity extends AppCompatActivity {
         rAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Save CourseList to SharedPreferences when this activity is paused.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -188,6 +204,10 @@ public class CourseViewActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Load CourseList from SharedPreferences and parse it using Json.
+     * @return An ArrayList of Strings. Each String is a Course object stored as a Json String.
+     */
     public List loadCourseList() {
         Gson gson = new Gson();
         String def = "";

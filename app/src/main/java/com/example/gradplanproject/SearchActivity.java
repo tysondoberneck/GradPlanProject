@@ -32,14 +32,23 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Activity that allows the user to search for BYU Idaho courses and add them to a list stored in SharedPreferences.
+ */
 public class SearchActivity extends AppCompatActivity {
 
+    /**
+     * Editor to store list in SharedPreferences.
+     */
     protected static SharedPreferences prefs;
 
     private boolean switchState = false;
 
     public static final String TAG = "SearchActivity";
 
+    /**
+     * The view that displays courses that fit search criteria.
+     */
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
