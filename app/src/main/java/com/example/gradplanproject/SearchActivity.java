@@ -338,6 +338,10 @@ public class SearchActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Saves a course to the list in SharedPreferences
+     * @param course The course to be saved
+     */
     public static void saveCourse(Course course) {
         SharedPreferences.Editor prefsEditor = prefs.edit();
         Gson gson = new Gson();

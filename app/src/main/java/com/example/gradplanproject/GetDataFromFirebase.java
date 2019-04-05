@@ -22,7 +22,7 @@ import static android.content.ContentValues.TAG;
  * This class is not used in the actual app but we left it for future reference if and when
  * we would like to work with Firebase again.
  */
-public class getDataFromFirebase {
+public class GetDataFromFirebase {
 
     /**
      * This is our first try to test getting data from Firestore.

@@ -72,15 +72,6 @@ public class ScheduleActivity extends AppCompatActivity {
         ViewGroup fridayParent = (ViewGroup)findViewById(R.id.fridayInsertPoint);
         ViewGroup onlineParent = (ViewGroup)findViewById(R.id.onlineInsertPoint);
 
-//        RelativeLayout.LayoutParams timelineParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//
-//        Date currentTime = Calendar.getInstance().getTime();
-//        View timeline = (View) getLayoutInflater().inflate(R.layout.timeline, null);
-//        timelineParams.topMargin = (currentTime.getHours() * 60) + currentTime.getMinutes();
-//        ViewGroup timelineParent = (ViewGroup)findViewById(R.id.currentTimeMarkerLinearLayout);
-//
-//        timelineParent.addView(timeline);
-
         for(int i = 0; i < courseList.size(); i++) {
             //Create template textview
             TextView textView = (TextView) getLayoutInflater().inflate(R.layout.schedule_class_textview, null);

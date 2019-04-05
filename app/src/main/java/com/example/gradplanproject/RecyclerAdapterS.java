@@ -32,6 +32,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
         public TextView courseName;
         public TextView courseDetails;
+        public TextView courseDetails2;
         public ImageButton addButton;
         public View layout;
 
@@ -41,6 +42,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
+            courseDetails2 = (TextView) v.findViewById(R.id.courseDetails2);
             addButton = v.findViewById(R.id.addButton);
         }
     }
@@ -98,29 +100,38 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
         String firstLine;
         String secondLine;
+        String thirdLine;
 
-        if( c.getType().equals("ONLN") ) {
+        if ( c.getCode().equals("NO RESULTS") ) {
+            firstLine = c.getCode() + " - " + c.getName();
+            secondLine = "";
+            thirdLine = "";
+        }
+        else if ( c.getType().equals("ONLN") ) {
 
-            firstLine = c.getCourse() + " - " + c.getName();
+            firstLine = c.getCode() + " - " + c.getName();
 
             if (c.getInstructors().size() == 0) {
-                secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+                secondLine = "None" + " - ";
             } else {
-                secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
-                        + " - ";
+                secondLine = c.getInstructors().get(0).get("first") + ", "
+                        + c.getInstructors().get(0).get("last") + " - ";
             }
 
             secondLine += "Online Course";
+
+            thirdLine = "Credits: " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
+                    + c.getSeatsTotal() + " Seats Filled";
         }
         else {
 
-            firstLine = c.getCourse() + " - " + c.getName();
+            firstLine = c.getCode() + " - " + c.getName();
 
             if (c.getInstructors().size() == 0) {
-                secondLine = "Section " + c.getSection() + ": " + "None" + " - ";
+                secondLine = "None" + " - ";
             } else {
-                secondLine = "Section " + c.getSection() + ": " + c.getInstructors().get(0).get("first")
-                        + " - ";
+                secondLine = c.getInstructors().get(0).get("first") + ", "
+                        + c.getInstructors().get(0).get("last") + " - ";
             }
 
             List<String> daysList = c.getSingleDaysArray();
@@ -129,10 +140,13 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
             secondLine += " - " + c.getSchedules().get(0).get("time");
 
+            thirdLine = "Credits: " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
+                    + c.getSeatsTotal() + " Seats Filled";
         }
 
         holder.courseName.setText(firstLine);
         holder.courseDetails.setText(secondLine);
+        holder.courseDetails2.setText(thirdLine);
 
         /**
          * An onClickListener that applies to each individual object in the RecyclerView; in other
@@ -143,9 +157,15 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchActivity.saveCourse(list.get(position));
-                Toast.makeText(weakRef.get().getApplicationContext(),
-                        "Adding course...", Toast.LENGTH_LONG).show();
+                if ( list.get(position).getCode().equals("NO RESULTS") ) {
+                    Toast.makeText(weakRef.get().getApplicationContext(),
+                            "You can't save this course!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(weakRef.get().getApplicationContext(),
+                            "Adding course...", Toast.LENGTH_LONG).show();
+                    SearchActivity.saveCourse(list.get(position));
+                }
             }
         });
     }
