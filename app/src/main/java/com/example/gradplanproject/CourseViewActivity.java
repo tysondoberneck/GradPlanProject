@@ -140,11 +140,6 @@ public class CourseViewActivity extends AppCompatActivity {
         prefsEditor.apply();
     }
 
-    public void onClickLogin(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
     public void onClickNext(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
