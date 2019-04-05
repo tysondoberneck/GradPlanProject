@@ -288,4 +288,17 @@
     <string name="time10pm">10 PM</string>
     <string name="time11pm">11 PM</string>
     <string name="online">Online</string>
+    <string name="loading">Loading...</string>
+    <string name="instructor_hint">Instructor (Last Name)...</string>
+    <string name="course_hint">Course Code...</string>
+    <string name="filter_sections">Filter out filled sections:</string>
+    <string name="search">Search</string>
+    <string name="mondayBox">M</string>
+    <string name="tuesdayBox">T</string>
+    <string name="wednesdayBox">W</string>
+    <string name="thursdayBox">R</string>
+    <string name="fridayBox">F</string>
+    <string name="update">Update</string>
+    <string name="online_only">Online sections only:</string>
+    <string name="search_button">Search</string>
 </resources>

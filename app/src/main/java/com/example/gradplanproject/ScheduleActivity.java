@@ -50,8 +50,7 @@ public class ScheduleActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
 
             DrawerUtil.getDrawer(this, toolbar);
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
 
