@@ -24,7 +24,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -178,13 +177,13 @@ public class SearchActivity extends AppCompatActivity {
      * @param view
      */
     public void onCheckedChanged(View view) {
-        Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
+        Switch simpleSwitch = findViewById(R.id.switch1);
 
         switchState = simpleSwitch.isChecked();
         System.out.println("Switch: " + switchState);
     }
 
-    public WidgetDataStorage getDataFromForm(View view) {
+    public WidgetDataStorage getDataFromForm() {
 
         // Get the data from the two text boxes and two spinners
         //Course Code Search Box
@@ -202,21 +201,21 @@ public class SearchActivity extends AppCompatActivity {
         //Instructor Search Box
         EditText editText = findViewById(R.id.editText);
         String instructor = "";
-        String tempinstructor = editText.getText().toString().replaceAll("[^a-zA-Z]+", "");
-        if (tempinstructor.length()>= 2) {
-            instructor = Character.toUpperCase(tempinstructor.charAt(0)) + tempinstructor.substring(1);
+        String tempInstructor = editText.getText().toString().replaceAll("[^a-zA-Z]+", "");
+        if (tempInstructor.length()>= 2) {
+            instructor = Character.toUpperCase(tempInstructor.charAt(0)) + tempInstructor.substring(1);
         }
 
         //check if the "filled section" switch is on or off
         boolean sectionFull = false;
-        Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
+        Switch simpleSwitch = findViewById(R.id.switch1);
         if (simpleSwitch.isChecked()) {
             sectionFull = true;
         }
 
         //check if the "online only" switch is on or off
         boolean onlineOnly = false;
-        Switch simpleSwitch2 = (Switch) findViewById(R.id.switch2);
+        Switch simpleSwitch2 = findViewById(R.id.switch2);
         if (simpleSwitch2.isChecked()) {
             onlineOnly = true;
         }
@@ -242,7 +241,7 @@ public class SearchActivity extends AppCompatActivity {
         Toast.makeText(weakRef.get().getApplicationContext(),
                 "Searching...", Toast.LENGTH_LONG).show();
 
-        final WidgetDataStorage wds = getDataFromForm(view);
+        final WidgetDataStorage wds = getDataFromForm();
 
         //Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
 
@@ -266,49 +265,13 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                 }
 
-                                if (wds.getInstructor().length() != 0) {
-                                    if (!(wds.getInstructor().equals(course.getInstructors().get(0).get("first"))))
-                                        continue;
-                                }
-
-                                if (!(wds.getStartTime().equals("Starts after..."))) {
-                                    Resources res = getResources();
-                                    String[] startTimeArray = res.getStringArray(R.array.startTime_list);
-                                    ArrayList<String> startTimeList = new ArrayList<>(Arrays.asList(startTimeArray));
-                                    int index = startTimeList.indexOf(wds.getStartTime());
-
-                                    boolean matchesStart = false;
-                                    for (; index < startTimeList.size(); index++)
-                                        if (startTimeList.get(index).equals(course.getSchedules().get(0).get("start"))) {
-                                            matchesStart = true;
-                                            break;
-                                        }
-
-                                    if (!matchesStart) {
-                                        continue;
-                                    }
-                                }
-
-                                if (!(wds.getEndTime().equals("Ends before..."))) {
-                                    Resources res = getResources();
-                                    String[] endTimeArray = res.getStringArray(R.array.endTime_list);
-                                    ArrayList<String> endTimeList = new ArrayList<>(Arrays.asList(endTimeArray));
-                                    int index = endTimeList.indexOf(wds.getEndTime());
-
-                                    boolean matchesEnd = false;
-                                    for (; index > 0; index--)
-                                        if (endTimeList.get(index).equals(course.getSchedules().get(0).get("end"))) {
-                                            matchesEnd = true;
-                                            break;
-                                        }
-
-                                    if (!matchesEnd) {
-                                        continue;
-                                    }
-                                }
-
                                 if (wds.isSectionFull()) {
                                     if (course.getSeatsFilled() >= course.getSeatsTotal())
+                                        continue;
+                                }
+
+                                if (wds.getInstructor().length() != 0) {
+                                    if (!(wds.getInstructor().equals(course.getInstructors().get(0).get("first"))))
                                         continue;
                                 }
 
@@ -324,6 +287,40 @@ public class SearchActivity extends AppCompatActivity {
                                 if (!matchesDays)
                                     continue;
 
+                                if (!(wds.getStartTime().equals("Starts after..."))) {
+                                    Resources res = getResources();
+                                    String[] startTimeArray = res.getStringArray(R.array.startTime_list);
+                                    ArrayList<String> startTimeList = new ArrayList<>(Arrays.asList(startTimeArray));
+                                    int index = startTimeList.indexOf(wds.getStartTime());
+
+                                    boolean matchesStart = false;
+                                    for (; index < startTimeList.size(); index++)
+                                        if (startTimeList.get(index).equals(course.getSchedules().get(0).get("start"))) {
+                                            matchesStart = true;
+                                            break;
+                                        }
+
+                                    if (!matchesStart)
+                                        continue;
+                                }
+
+                                if (!(wds.getEndTime().equals("Ends before..."))) {
+                                    Resources res = getResources();
+                                    String[] endTimeArray = res.getStringArray(R.array.endTime_list);
+                                    ArrayList<String> endTimeList = new ArrayList<>(Arrays.asList(endTimeArray));
+                                    int index = endTimeList.indexOf(wds.getEndTime());
+
+                                    boolean matchesEnd = false;
+                                    for (; index > 0; index--)
+                                        if (endTimeList.get(index).equals(course.getSchedules().get(0).get("end"))) {
+                                            matchesEnd = true;
+                                            break;
+                                        }
+
+                                    if (!matchesEnd)
+                                        continue;
+                                }
+
                                 courseList.add(course);
                                 adapter.notifyDataSetChanged();
                             }
@@ -335,9 +332,8 @@ public class SearchActivity extends AppCompatActivity {
                                 courseList.add(noResults);
                                 adapter.notifyDataSetChanged();
                             }
-                        } else {
+                        } else
                             Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
                     }
                 });
         //Log.d(TAG, "This is the result of filtering: " + sections);
