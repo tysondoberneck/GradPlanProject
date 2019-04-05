@@ -9,9 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.ViewHolder> {
 
-    private List<Map<String, String>> values;
     private List<Course> list;
     private WeakReference<Activity> weakRef;
 
@@ -50,8 +47,6 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             removeButton = v.findViewById(R.id.removeButton);
         }
     }
-
-    // Provided by the tutorial
 
     /*
     public void add(int position, String item) {
@@ -116,12 +111,13 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             if (c.getInstructors().size() == 0) {
                 secondLine = "None" + " - ";
             } else {
-                secondLine = c.getInstructors().get(0).get("first") + " - ";
+                secondLine = c.getInstructors().get(0).get("first") + ", "
+                        + c.getInstructors().get(0).get("last") + " - ";
             }
 
             secondLine += "Online Course";
 
-            thirdLine = "Credits : " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
+            thirdLine = "Credits: " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
                 + c.getSeatsTotal() + " Seats Filled";
         }
         else {
@@ -131,43 +127,20 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             if (c.getInstructors().size() == 0) {
                 secondLine = "None" + " - ";
             } else {
-                secondLine = c.getInstructors().get(0).get("first") + " - ";
+                secondLine = c.getInstructors().get(0).get("first") + ", "
+                        + c.getInstructors().get(0).get("last") + " - ";
             }
 
             List<String> daysList = c.getSingleDaysArray();
             for (int i = 0; i <= 5; i++)
                 secondLine += daysList.get(i);
 
-//        ArrayList<String> daysList;
-//        ArrayList<String> daysList2;
-//        ArrayList<String> daysList3;
-//
-//        if ( c.getSchedules().size() == 1 ) {
-//            daysList = (ArrayList) c.getSchedules().get(0).get("days");
-//            for (int i = 0; i <= 5; i++)
-//                secondLine += daysList.get(i);
-//        }
-//
-//        if ( c.getSchedules().size() == 2 ) {
-//            daysList = (ArrayList)c.getSchedules().get(0).get("days");
-//            daysList2 = (ArrayList)c.getSchedules().get(1).get("days");
-//            for (int i = 0; i <= 5; i++) {
-//                if ( daysList.get(i) == daysList2.get(i) )
-//                    secondLine += daysList.get(i);
-//                else if ( daysList.get(i).length() != 0)
-//                    secondLine += daysList.get(i);
-//                else if ( daysList2.get(i).length() != 0)
-//                    secondLine += daysList2.get(i);
-//            }
-//        }
-
             secondLine += " - " + c.getSchedules().get(0).get("time");
 
-            thirdLine = "Credits : " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
+            thirdLine = "Credits: " + c.getCredits() + " - " + c.getSeatsFilled() + "/"
                     + c.getSeatsTotal() + " Seats Filled";
         }
 
-        //holder.courseCode.setText(values.get(position).get("code"));
         holder.courseName.setText(firstLine);
         holder.courseDetails.setText(secondLine);
         holder.courseDetails2.setText(thirdLine);

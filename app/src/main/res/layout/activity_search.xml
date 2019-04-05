@@ -88,9 +88,10 @@
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginLeft="200dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="12dp"
         android:onClick="onCheckboxClicked"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
@@ -119,11 +120,9 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:ems="10"
-        android:hint="Instructor (last name)..."
+        android:hint="Instructor (Last Name)..."
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,10 +153,9 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:text="Filter out filled sections:"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 

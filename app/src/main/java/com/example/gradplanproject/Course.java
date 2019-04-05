@@ -35,9 +35,9 @@ public class Course {
 
         instructors = new ArrayList<Map<String, String>>();
         Map<String, String> mapInstructor = new HashMap<>();
-        mapInstructor.put("first", "Instructor");
-        mapInstructor.put("middle", "Name");
-        mapInstructor.put("last", "Here");
+        mapInstructor.put("first", "LastName");
+        mapInstructor.put("middle", "MiddleName");
+        mapInstructor.put("last", "FirstName");
         instructors.add(mapInstructor);
 
         name = "Name";

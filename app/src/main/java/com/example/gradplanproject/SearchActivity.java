@@ -90,26 +90,6 @@ public class SearchActivity extends AppCompatActivity {
 
         courseList = new ArrayList<>();
 
-//        Course course1 = new Course("Software Design and Development", "CS235",
-//                "Section 01: Burton - MWF - 9:00-10:00 AM", 3);
-//        courseList.add(course1);
-//
-//        Course course2 = new Course("Foundations of the Restoration", "FDREL225",
-//                "Section 03: Taylor - TR - 7:45-8:45 AM", 3);
-//        courseList.add(course2);
-//
-//        Course course3 = new Course("Linear Algebra", "MATH341",
-//                "Section 07: Nelson - MWF - 11:30-12:30 PM", 3);
-//        courseList.add(course3);
-//
-//        courseList.add(course1);
-//        courseList.add(course2);
-//        courseList.add(course3);
-//        courseList.add(course1);
-//        courseList.add(course2);
-//        courseList.add(course3);
-
-
         /**
          * Instantiating recyclerView and setting layoutManager and custom Adapter class
          */
@@ -205,29 +185,6 @@ public class SearchActivity extends AppCompatActivity {
         System.out.println("Switch: " + switchState);
     }
 
-//    public void testSearchViewData(View view) {
-//
-//        SearchView sv = findViewById(R.id.searchView1);
-//        String text = sv.get().toString();
-//
-//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//                adapter.getFilter().filter(newText);
-//            }
-//            return false;
-//        }
-//    });
-//    }
-
-
     public WidgetDataStorage getDataFromForm(View view) {
 
         // Get the data from the two text boxes and two spinners
@@ -250,9 +207,6 @@ public class SearchActivity extends AppCompatActivity {
         if (tempinstructor.length()>= 2) {
             instructor = Character.toUpperCase(tempinstructor.charAt(0)) + tempinstructor.substring(1);
         }
-
-
-
 
         //check if the switch is on or off
         boolean sectionFull = false;
@@ -284,10 +238,8 @@ public class SearchActivity extends AppCompatActivity {
                 "Searching...", Toast.LENGTH_LONG).show();
 
         final WidgetDataStorage wds = getDataFromForm(view);
-        //final List<Course> courses = new ArrayList<>();
 
-        //test data
-        Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
+        //Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
 
         courseList.clear();
         adapter.notifyDataSetChanged();
@@ -303,8 +255,6 @@ public class SearchActivity extends AppCompatActivity {
                                 // Remove this line from the above to have SEARCH call the whole course list
                                 // .whereEqualTo("course", wds.getCourseCodeOrName())
 
-                                //This is how we can access the data
-
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                 //Log.d(TAG, "This is the amount of credits of this course: " + document.get("credits"));
                                 //Log.i(TAG, document.toString());
@@ -312,17 +262,10 @@ public class SearchActivity extends AppCompatActivity {
                                 String courseString = gson.toJson(document.getData());
                                 Course course = gson.fromJson(courseString, Course.class);
 
-                                // wds.getInstructor().equals(course.getInstructors().get(0).get("first"))
-
                                 if (wds.getInstructor().length() != 0) {
                                     if (!(wds.getInstructor().equals(course.getInstructors().get(0).get("first"))))
                                         continue;
                                 }
-
-//                                if (!(wds.getStartTime().equals("Starts after..."))) {
-//                                    if (!(wds.getStartTime().equals(course.getSchedules().get(0).get("start"))))
-//                                        continue;
-//                                }
 
                                 if (!(wds.getStartTime().equals("Starts after..."))) {
                                     Resources res = getResources();
@@ -341,11 +284,6 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                     }
                                 }
-
-//                                if (!(wds.getEndTime().equals("Ends before..."))) {
-//                                    if (!(wds.getEndTime().equals(course.getSchedules().get(0).get("end"))))
-//                                        continue;
-//                                }
 
                                 if (!(wds.getEndTime().equals("Ends before..."))) {
                                     Resources res = getResources();
@@ -382,43 +320,13 @@ public class SearchActivity extends AppCompatActivity {
                                 if (!matchesDays)
                                     continue;
 
-
-//                                if (course.getSchedules().size() == 1) {
-//                                    boolean matches = true;
-//                                    ArrayList<String> daysList = (ArrayList) course.getSchedules().get(0).get("days");
-//
-//                                    for (int i = 0; i < 5; i++) {
-//                                        if (wds.getDays().get(i).length() != 0)
-//                                            if (!(wds.getDays().get(i).equals(daysList.get(i)))) {
-//                                                matches = false;
-//                                                break;
-//                                            }
-//                                    }
-//                                    if (matches == false)
-//                                        continue;
-//                                }
-//
-//                                if (course.getSchedules().size() == 2) {
-//                                    boolean matches = true;
-//                                    List<String> daysList = course.getSingleDaysArray();
-//                                    for (int i = 0; i < 5; i++) {
-//                                        if (wds.getDays().get(i).length() != 0)
-//                                            if (!(wds.getDays().get(i).equals(daysList.get(i)))) {
-//                                                matches = false;
-//                                                break;
-//                                            }
-//                                    }
-//                                    if (matches == false)
-//                                        continue;
-//                                }
-
                                 courseList.add(course);
                                 adapter.notifyDataSetChanged();
                             }
 
                             if (courseList.size() == 0) {
                                 Course noResults = new Course();
-                                noResults.setCourse("NO RESULTS");
+                                noResults.setCode("NO RESULTS");
                                 noResults.setName("Try adjusting filter options");
                                 courseList.add(noResults);
                                 adapter.notifyDataSetChanged();

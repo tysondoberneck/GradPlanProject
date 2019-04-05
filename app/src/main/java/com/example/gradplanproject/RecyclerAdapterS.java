@@ -1,9 +1,7 @@
 package com.example.gradplanproject;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +21,6 @@ import android.widget.Toast;
 
 public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.ViewHolder> {
 
-    private List<Map<String, String>> values;
     private List<Course> list;
     private WeakReference<Activity> weakRef;
 
@@ -33,7 +30,6 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //public TextView courseCode;
         public TextView courseName;
         public TextView courseDetails;
         public ImageButton addButton;
@@ -43,14 +39,11 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
             super(v);
             layout = v;
 
-            //courseCode = (TextView) v.findViewById(R.id.courseCode);
             courseName = (TextView) v.findViewById(R.id.courseName);
             courseDetails = (TextView) v.findViewById(R.id.courseDetails);
             addButton = v.findViewById(R.id.addButton);
         }
     }
-
-    // Provided by the tutorial; neither are useful yet, but could be modified for use later...
 
     /*
     public void add(int position, String item) {
@@ -133,29 +126,6 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
             List<String> daysList = c.getSingleDaysArray();
             for (int i = 0; i <= 5; i++)
                 secondLine += daysList.get(i);
-
-//        ArrayList<String> daysList;
-//        ArrayList<String> daysList2;
-//        ArrayList<String> daysList3;
-//
-//        if ( c.getSchedules().size() == 1 ) {
-//            daysList = (ArrayList) c.getSchedules().get(0).get("days");
-//            for (int i = 0; i <= 5; i++)
-//                secondLine += daysList.get(i);
-//        }
-//
-//        if ( c.getSchedules().size() == 2 ) {
-//            daysList = (ArrayList)c.getSchedules().get(0).get("days");
-//            daysList2 = (ArrayList)c.getSchedules().get(1).get("days");
-//            for (int i = 0; i <= 5; i++) {
-//                if ( daysList.get(i) == daysList2.get(i) )
-//                    secondLine += daysList.get(i);
-//                else if ( daysList.get(i).length() != 0)
-//                    secondLine += daysList.get(i);
-//                else if ( daysList2.get(i).length() != 0)
-//                    secondLine += daysList2.get(i);
-//            }
-//        }
 
             secondLine += " - " + c.getSchedules().get(0).get("time");
 
