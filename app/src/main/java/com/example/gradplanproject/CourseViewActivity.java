@@ -3,13 +3,6 @@ package com.example.gradplanproject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,13 +15,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * An activity designed to display all courses the user has added via SearchActivity, as well as provide an option to delete them.
@@ -49,6 +47,7 @@ public class CourseViewActivity extends AppCompatActivity {
      * Editor to access the list of courses stored in SharedPreferences
      */
     protected static SharedPreferences prefs;
+    private WidgetDataStorage wds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,25 +174,9 @@ public class CourseViewActivity extends AppCompatActivity {
     }
 
 
-    public void callFirebaseCollection(View view) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("semesters").document("2019;SP").collection("sections")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            System.out.println("Task is successful");
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                            System.out.println("In the else");
-                        }
-                        System.out.println("outside");
-                    }
-                });
+    public void openSchedule(View view) {
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        view.getContext().startActivity(intent);
     }
 
     /**
@@ -210,5 +193,23 @@ public class CourseViewActivity extends AppCompatActivity {
         List<String> courseList = new ArrayList<>(gson.fromJson(courseStrings, List.class));
 
         return courseList;
+    }
+
+    /**
+     * Function similar to searchCourseByFilter in SearchActivity. This is the function that refreshes the list
+     * of courses the student made when the ,"Update" button is pressed.
+     * @param view
+     */
+    public void updateList(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", wds.getCourseCodeOrName()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    Gson gson = new Gson();
+                }
+            }
+        });
     }
 }
