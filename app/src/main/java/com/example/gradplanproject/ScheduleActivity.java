@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,11 +12,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -76,15 +71,6 @@ public class ScheduleActivity extends AppCompatActivity {
         ViewGroup thursdayParent = (ViewGroup)findViewById(R.id.thursdayInsertPoint);
         ViewGroup fridayParent = (ViewGroup)findViewById(R.id.fridayInsertPoint);
         ViewGroup onlineParent = (ViewGroup)findViewById(R.id.onlineInsertPoint);
-
-//        RelativeLayout.LayoutParams timelineParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//
-//        Date currentTime = Calendar.getInstance().getTime();
-//        View timeline = (View) getLayoutInflater().inflate(R.layout.timeline, null);
-//        timelineParams.topMargin = (currentTime.getHours() * 60) + currentTime.getMinutes();
-//        ViewGroup timelineParent = (ViewGroup)findViewById(R.id.currentTimeMarkerLinearLayout);
-//
-//        timelineParent.addView(timeline);
 
         for(int i = 0; i < courseList.size(); i++) {
             //Create template textview

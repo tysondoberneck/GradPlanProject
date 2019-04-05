@@ -19,7 +19,7 @@ import static android.content.ContentValues.TAG;
  * This class is a test in which we check how android communicates with Firebase.
  * We have data in Firestore(one of Firebases' applications) and this class we try to get that data.
  */
-public class getDataFromFirebase {
+public class GetDataFromFirebase {
 
     /**
      * This is our first try to test getting data from Firestore.

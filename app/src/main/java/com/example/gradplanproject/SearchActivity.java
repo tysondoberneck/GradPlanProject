@@ -339,6 +339,10 @@ public class SearchActivity extends AppCompatActivity {
         //Log.d(TAG, "This is the result of filtering: " + sections);
     }
 
+    /**
+     * Saves a course to the list in SharedPreferences
+     * @param course The course to be saved
+     */
     public static void saveCourse(Course course) {
         SharedPreferences.Editor prefsEditor = prefs.edit();
         Gson gson = new Gson();
@@ -356,14 +360,5 @@ public class SearchActivity extends AppCompatActivity {
 
         prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(courseStrings));
         prefsEditor.apply();
-
-//        String json = gson.toJson(course);
-//        Set<String> defaultCourseSet = new HashSet<>();
-//        Set<String> courseSet;
-//        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourseSet);
-//        courseSet.add(json);
-//        prefsEditor.putStringSet(String.valueOf(R.string.spring_2019), courseSet);
-//        prefsEditor.apply();
-//        Log.d(TAG, "course saved to SharedPreferences");
     }
 }
