@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
@@ -42,6 +44,7 @@ public class CourseViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter rAdapter;
     private RecyclerView.LayoutManager layoutManager;
     public List<Course> courseList;
+    private WeakReference<Activity> weakRef;
 
     /**
      * Editor to access the list of courses stored in SharedPreferences
@@ -64,6 +67,8 @@ public class CourseViewActivity extends AppCompatActivity {
         } catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
+
+        weakRef = new WeakReference<Activity>(this);
 
         //Initialize SharedPreferences
         prefs = getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
@@ -195,15 +200,36 @@ public class CourseViewActivity extends AppCompatActivity {
      * @param view
      */
     public void updateList(View view) {
+
+        Toast.makeText(weakRef.get().getApplicationContext(),
+                "Updating saved courses...", Toast.LENGTH_LONG).show();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", wds.getCourseCodeOrName()).get()
+
+        int listSize = courseList.size();
+
+        for (Course c : courseList) {
+
+            db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("code", c.getCode()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    Gson gson = new Gson();
-                }
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Gson gson = new Gson();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String courseString = gson.toJson(document.getData());
+                                Course course = gson.fromJson(courseString, Course.class);
+
+                                courseList.add(course);
+                                rAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
+        }
+        for (int i = 0; i < listSize; i++) {
+            courseList.remove(0);
+        }
+        rAdapter.notifyDataSetChanged();
     }
 }
