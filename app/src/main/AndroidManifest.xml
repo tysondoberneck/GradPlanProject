@@ -15,11 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".RestartActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ScheduleActivity" />
-        <activity android:name=".CourseViewActivity" />
-        <activity android:name=".LoadingActivity">
+        <activity android:name=".SearchActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ScheduleActivity" android:screenOrientation="portrait" />
+        <activity android:name=".CourseViewActivity" android:screenOrientation="portrait" />
+        <activity android:name=".LoadingActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
