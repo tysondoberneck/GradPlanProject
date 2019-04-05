@@ -11,6 +11,7 @@ public class WidgetDataStorage {
     private String endTime;
     private String instructor;
     private boolean sectionFull;
+    private boolean onlineOnly;
     private ArrayList<String> days;
 
     /**
@@ -26,15 +27,17 @@ public class WidgetDataStorage {
      *                   True - filter the course
      *                   False - don't filter the course
      * @param days An ArrayList of strings to contain the days that the given course is offered.
-     *             Right now it is being inizialied to 5 (Monday - Friday) and if the course is offered
+     *             Right now it is being initialized to 5 (Monday - Friday) and if the course is offered
      *             on a particular day, for example Monday, then it would be represented by days[0] == "M"
      */
-    public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull, ArrayList<String> days) {
+    public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime,
+                             String instructor, boolean filterFull, boolean onlineOnly, ArrayList<String> days) {
         this.courseCodeOrName = courseCodeOrName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.instructor = instructor;
         this.sectionFull = filterFull;
+        this.onlineOnly = onlineOnly;
         this.days = days;
     }
 
@@ -76,6 +79,14 @@ public class WidgetDataStorage {
 
     public void setSectionFull(boolean sectionFull) {
         this.sectionFull = sectionFull;
+    }
+
+    public boolean isOnlineOnly() {
+        return onlineOnly;
+    }
+
+    public void setOnlineOnly(boolean onlineOnly) {
+        this.onlineOnly = onlineOnly;
     }
 
     public ArrayList<String> getDays() { return days; }

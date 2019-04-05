@@ -54,7 +54,6 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private WeakReference<Activity> weakRef;
 
-    public List<Map<String, String>> courseListExample;
     public List<Course> courseList;
 
     private ArrayList<String> days;
@@ -208,11 +207,18 @@ public class SearchActivity extends AppCompatActivity {
             instructor = Character.toUpperCase(tempinstructor.charAt(0)) + tempinstructor.substring(1);
         }
 
-        //check if the switch is on or off
+        //check if the "filled section" switch is on or off
         boolean sectionFull = false;
         Switch simpleSwitch = (Switch) findViewById(R.id.switch1);
         if (simpleSwitch.isChecked()) {
             sectionFull = true;
+        }
+
+        //check if the "online only" switch is on or off
+        boolean onlineOnly = false;
+        Switch simpleSwitch2 = (Switch) findViewById(R.id.switch2);
+        if (simpleSwitch2.isChecked()) {
+            onlineOnly = true;
         }
 
         //run the function to retrieve data from the checkboxes.
@@ -222,8 +228,7 @@ public class SearchActivity extends AppCompatActivity {
         //create a new WidgetDataStorage object with the parameters
         //retrieved from the widgets
         //and then return it
-        WidgetDataStorage wds = new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, sectionFull, days);
-        return wds;
+        return ( new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, sectionFull, onlineOnly, days) );
     }
 
     /**
@@ -255,6 +260,11 @@ public class SearchActivity extends AppCompatActivity {
 
                                 String courseString = gson.toJson(document.getData());
                                 Course course = gson.fromJson(courseString, Course.class);
+
+                                if (wds.isOnlineOnly()) {
+                                    if (!(course.getType().equals("ONLN")))
+                                        continue;
+                                }
 
                                 if (wds.getInstructor().length() != 0) {
                                     if (!(wds.getInstructor().equals(course.getInstructors().get(0).get("first"))))
