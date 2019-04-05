@@ -13,6 +13,22 @@ public class WidgetDataStorage {
     private boolean sectionFull;
     private ArrayList<String> days;
 
+    /**
+     *
+     * A Non-Default Constructor
+     * @param courseCodeOrName A string to contain the course code or name.
+     *                         Right now the app only works with course codes.
+     * @param startTime A string to contain the start time of a given course.
+     * @param endTime   A string to contain the end time of a given course.
+     * @param instructor A string to contain the name of the instructor of the course.
+     * @param filterFull A boolean to indicate if the current course should be filtered
+     *                   out in the case of it being full.
+     *                   True - filter the course
+     *                   False - don't filter the course
+     * @param days An ArrayList of strings to contain the days that the given course is offered.
+     *             Right now it is being inizialied to 5 (Monday - Friday) and if the course is offered
+     *             on a particular day, for example Monday, then it would be represented by days[0] == "M"
+     */
     public WidgetDataStorage(String courseCodeOrName, String startTime, String endTime, String instructor, boolean filterFull, ArrayList<String> days) {
         this.courseCodeOrName = courseCodeOrName;
         this.startTime = startTime;

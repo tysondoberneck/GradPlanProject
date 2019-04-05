@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".RestartActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".ScheduleActivity" />

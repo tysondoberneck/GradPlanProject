@@ -61,12 +61,10 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         notifyItemRangeChanged(position, list.size());
     }
 
-
     public RecyclerAdapterCV(List<Course> courseList, WeakReference<Activity> wr) {
         list = courseList;
         weakRef = wr;
     }
-
 
     /**
      * LayoutManager will call this function once for every item in the provided container, using
@@ -158,7 +156,6 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             }
         });
     }
-
 
     /**
      * LayoutManager calls this function to know how many ViewHolders to set.

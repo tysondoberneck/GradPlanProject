@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * This is the first activity of the app. For now it's only a small loading screen.
+ * In the future we might some more features to it.
+ */
 public class LoadingActivity extends AppCompatActivity {
 
     final Activity activity = this;
@@ -29,18 +33,5 @@ public class LoadingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }, 1500);
-
     }
-
-    protected void testStuff() {
-        System.out.println("Android Studio marks 'Evgeniy' as a spelling mistake :D");
-        System.out.println("It marks Bekker the same way...");
-        System.out.println("Doberneck is a real word guys");
-    }
-
-//    Will go through with this tutorial on monday. Too many resolving issues, so Id like to
-//    resolve those before pushing large chunks of code. The idea though is we can do a splash screen
-//    if the page takes too long. This will be good if our API proves harder to load than we originally
-//    thought. The tutorial is here: http://wiki.netbeans.org/Splash_Screen_Beginner_Tutorial
-
 }

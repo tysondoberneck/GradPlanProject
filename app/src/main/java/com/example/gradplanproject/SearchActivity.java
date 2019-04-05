@@ -186,7 +186,6 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public WidgetDataStorage getDataFromForm(View view) {
-
         // Get the data from the two text boxes and two spinners
         //Course Code Search Box
         EditText editText2 = findViewById(R.id.editText2);
@@ -215,10 +214,6 @@ public class SearchActivity extends AppCompatActivity {
             sectionFull = true;
         }
 
-        //run the function to retrieve data from the checkboxes.
-        //There are private global variables to store that data
-        //onCheckboxClicked(view);
-
         //create a new WidgetDataStorage object with the parameters
         //retrieved from the widgets
         //and then return it
@@ -239,8 +234,6 @@ public class SearchActivity extends AppCompatActivity {
 
         final WidgetDataStorage wds = getDataFromForm(view);
 
-        //Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
-
         courseList.clear();
         adapter.notifyDataSetChanged();
 
@@ -257,16 +250,19 @@ public class SearchActivity extends AppCompatActivity {
 
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                 //Log.d(TAG, "This is the amount of credits of this course: " + document.get("credits"));
-                                //Log.i(TAG, document.toString());
 
+                                //creat a Json string of the current section
+                                //and create a new course with that data
                                 String courseString = gson.toJson(document.getData());
                                 Course course = gson.fromJson(courseString, Course.class);
 
+                                //check if the user wants to filter by instructor name
                                 if (wds.getInstructor().length() != 0) {
                                     if (!(wds.getInstructor().equals(course.getInstructors().get(0).get("first"))))
                                         continue;
                                 }
 
+                                //filter by start time
                                 if (!(wds.getStartTime().equals("Starts after..."))) {
                                     Resources res = getResources();
                                     String[] startTimeArray = res.getStringArray(R.array.startTime_list);
@@ -285,6 +281,7 @@ public class SearchActivity extends AppCompatActivity {
                                     }
                                 }
 
+                                //filter by end time
                                 if (!(wds.getEndTime().equals("Ends before..."))) {
                                     Resources res = getResources();
                                     String[] endTimeArray = res.getStringArray(R.array.endTime_list);
@@ -303,6 +300,7 @@ public class SearchActivity extends AppCompatActivity {
                                     }
                                 }
 
+                                //if the user wants to filter out the full sections, dont add them to the list
                                 if (wds.isSectionFull()) {
                                     if (course.getSeatsFilled() >= course.getSeatsTotal())
                                         continue;
@@ -324,6 +322,8 @@ public class SearchActivity extends AppCompatActivity {
                                 adapter.notifyDataSetChanged();
                             }
 
+                            //if at the end of the search there are no courses or sections that passed the filters
+                            //create a new course that would just prompt the user to check filters.
                             if (courseList.size() == 0) {
                                 Course noResults = new Course();
                                 noResults.setCode("NO RESULTS");
@@ -336,7 +336,6 @@ public class SearchActivity extends AppCompatActivity {
                         }
                     }
                 });
-        //Log.d(TAG, "This is the result of filtering: " + sections);
     }
 
     public static void saveCourse(Course course) {
@@ -356,14 +355,5 @@ public class SearchActivity extends AppCompatActivity {
 
         prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(courseStrings));
         prefsEditor.apply();
-
-//        String json = gson.toJson(course);
-//        Set<String> defaultCourseSet = new HashSet<>();
-//        Set<String> courseSet;
-//        courseSet = prefs.getStringSet(String.valueOf(R.string.spring_2019), defaultCourseSet);
-//        courseSet.add(json);
-//        prefsEditor.putStringSet(String.valueOf(R.string.spring_2019), courseSet);
-//        prefsEditor.apply();
-//        Log.d(TAG, "course saved to SharedPreferences");
     }
 }

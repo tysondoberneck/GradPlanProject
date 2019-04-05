@@ -150,7 +150,6 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         });
     }
 
-
     /**
      * LayoutManager calls this function to know how many ViewHolders to set.
      * @return Size of the implemented container.

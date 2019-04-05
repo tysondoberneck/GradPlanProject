@@ -26,7 +26,12 @@ public class Course {
     // member variable used only for filler tests
     private String details;
 
-
+    /**
+     * This is a default constructor for the course class.
+     * All the data that is initialized is just filler data.
+     * For example, we want to initialize all the values in the arrays so that we won't
+     * get cases where we are trying to dereference a NULL.
+     */
     public Course() {
 
         code = "Code";
@@ -68,13 +73,6 @@ public class Course {
         type = "Type";
 
         details = "NULL";
-    }
-
-    public Course(String name, String code, String details, int credits) {
-        this.name = name;
-        this.code = code;
-        this.details = details;
-        this.credits = credits;
     }
 
     /**

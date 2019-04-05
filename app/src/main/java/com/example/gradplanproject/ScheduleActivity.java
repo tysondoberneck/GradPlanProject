@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,11 +12,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,7 +23,7 @@ import androidx.appcompat.widget.Toolbar;
  */
 public class ScheduleActivity extends AppCompatActivity {
 
-    public static final String TAG = "CourseViewActivity";
+    public static final String TAG = "ScheduleActivity";
 
     /**
      * Pixel density value for dp calculations

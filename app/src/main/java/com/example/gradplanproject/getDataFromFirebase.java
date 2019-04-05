@@ -16,8 +16,11 @@ import androidx.annotation.NonNull;
 import static android.content.ContentValues.TAG;
 
 /**
+ *
  * This class is a test in which we check how android communicates with Firebase.
  * We have data in Firestore(one of Firebases' applications) and this class we try to get that data.
+ * This class is not used in the actual app but we left it for future reference if and when
+ * we would like to work with Firebase again.
  */
 public class getDataFromFirebase {
 
