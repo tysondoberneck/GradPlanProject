@@ -1,7 +1,5 @@
 <resources>
     <!-- Our strings defined here -->
-    <string name="toLogin_button">Login to I-Plan</string>
-    <string name="next_button">Next Step</string>
     <string-array name="startTime_list">
         <item>Starts after...</item>
         <item>7:45 AM</item>
@@ -301,4 +299,6 @@
     <string name="update">Update</string>
     <string name="online_only">Online sections only:</string>
     <string name="search_button">Search</string>
+
+    <string name="add_button_description">Adds this course to the list of saved courses</string>
 </resources>

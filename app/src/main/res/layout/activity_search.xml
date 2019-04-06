@@ -62,7 +62,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox2"
         app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         android:onClick="onCheckboxClicked"/>
@@ -72,7 +71,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox3"
         app:layout_constraintEnd_toStartOf="@+id/checkBox3"
         android:onClick="onCheckboxClicked"/>
@@ -93,7 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox3"
         app:layout_constraintStart_toEndOf="@+id/checkBox3"
         android:onClick="onCheckboxClicked"/>
@@ -103,7 +100,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox4"
         app:layout_constraintStart_toEndOf="@+id/checkBox4"
         android:onClick="onCheckboxClicked"/>
@@ -115,7 +111,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
-        android:hint="Instructor (Last Name)..."
+        android:hint="@string/instructor_hint"
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,12 +124,10 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:ems="10"
-        android:hint="Course Code..."
+        android:hint="@string/course_hint"
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +141,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:text="Filter out filled sections:"
+        android:text="@string/filter_sections"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -157,7 +151,7 @@
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
-        android:text="Online sections only:"
+        android:text="@string/online_only"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +162,6 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/editText"
@@ -191,7 +184,7 @@
         android:layout_marginEnd="30dp"
         android:onClick="searchCoursesByFilter"
         android:padding="16dp"
-        android:text="Search"
+        android:text="@string/search_button"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -200,16 +193,16 @@
         android:id="@+id/textView2"
         android:layout_width="20dp"
         android:layout_height="32dp"
-        android:text="M"
+        android:text="@string/mondayBox"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox1"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox1"/>
+        app:layout_constraintEnd_toStartOf="@+id/checkBox1" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="20dp"
         android:layout_height="32dp"
-        android:text="T"
+        android:text="@string/tuesdayBox"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox2"
         app:layout_constraintEnd_toStartOf="@+id/checkBox2" />
@@ -218,7 +211,7 @@
         android:id="@+id/textView4"
         android:layout_width="20dp"
         android:layout_height="32dp"
-        android:text="W"
+        android:text="@string/wednesdayBox"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox3"
         app:layout_constraintEnd_toStartOf="@+id/checkBox3" />
@@ -227,7 +220,7 @@
         android:id="@+id/textView5"
         android:layout_width="20dp"
         android:layout_height="32dp"
-        android:text="R"
+        android:text="@string/thursdayBox"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox4"
         app:layout_constraintEnd_toStartOf="@+id/checkBox4" />
@@ -236,7 +229,7 @@
         android:id="@+id/textView6"
         android:layout_width="20dp"
         android:layout_height="32dp"
-        android:text="F"
+        android:text="@string/fridayBox"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkBox5"
         app:layout_constraintEnd_toStartOf="@+id/checkBox5" />

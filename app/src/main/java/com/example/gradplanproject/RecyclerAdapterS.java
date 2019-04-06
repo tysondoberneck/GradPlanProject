@@ -30,22 +30,24 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView courseName;
-        public TextView courseDetails;
-        public TextView courseDetails2;
-        public ImageButton addButton;
+        TextView courseName;
+        TextView courseDetails;
+        TextView courseDetails2;
+        ImageButton addButton;
         public View layout;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             layout = v;
 
-            courseName = (TextView) v.findViewById(R.id.courseName);
-            courseDetails = (TextView) v.findViewById(R.id.courseDetails);
-            courseDetails2 = (TextView) v.findViewById(R.id.courseDetails2);
+            courseName = v.findViewById(R.id.courseName);
+            courseDetails = v.findViewById(R.id.courseDetails);
+            courseDetails2 = v.findViewById(R.id.courseDetails2);
             addButton = v.findViewById(R.id.addButton);
         }
     }
+
+    // These methods were provided by the tutorial used to make this RecyclerAdapter.
 
     /*
     public void add(int position, String item) {
@@ -59,8 +61,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
     }
     */
 
-
-    public RecyclerAdapterS(List<Course> courseList, WeakReference<Activity> wr) {
+    RecyclerAdapterS(List<Course> courseList, WeakReference<Activity> wr) {
         list = courseList;
         weakRef = wr;
     }
@@ -68,7 +69,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
     /**
      * LayoutManager will call this function once for every item in the provided container, using
-     * the layout we provide to format each View object.
+     * the given layout to format each View object.
      * @param parent The group the new View will be a part of.
      * @param viewType The type of View to be generated.
      * @return The newly generated ViewHolder
@@ -79,9 +80,8 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.search_layout, parent, false);
-        ViewHolder vh = new ViewHolder(v);
 
-        return vh;
+        return (new ViewHolder(v));
     }
 
 
@@ -101,6 +101,19 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         String firstLine;
         String secondLine;
         String thirdLine;
+
+        /**
+         * This next series of if-statements determines what text goes into each item in the RecyclerAdapter.
+         *
+         * NO RESULTS is the "code" given to the Course that is created when a search returns no results.
+         * secondLine and thirdLine are left blank to make it look like a message.
+         *
+         * "ONLN" goes in the "type" field for all online courses. In this case, the days and time do
+         * not need to be filled.
+         *
+         * The final case will apply to most courses, filling the View with the Course's code, name,
+         * instructor, days, time, etc.
+         */
 
         if ( c.getCode().equals("NO RESULTS") ) {
             firstLine = c.getCode() + " - " + c.getName();
@@ -149,9 +162,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         holder.courseDetails2.setText(thirdLine);
 
         /**
-         * An onClickListener that applies to each individual object in the RecyclerView; in other
-         * words, clicking on a single section in the list could add it to the user's list
-         * of saved sections.
+         * An onClickListener attached to the button provided in each View.
          */
 
         holder.addButton.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +180,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
             }
         });
     }
+
 
     /**
      * LayoutManager calls this function to know how many ViewHolders to set.
