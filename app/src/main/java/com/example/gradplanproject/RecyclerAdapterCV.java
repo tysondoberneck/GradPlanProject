@@ -11,7 +11,9 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 /**
  * A RecyclerView.Adapter class must be overridden by any program that makes use of the
@@ -24,29 +26,32 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     private List<Course> list;
     private WeakReference<Activity> weakRef;
 
+
     /**
      * The ViewHolder class represents each item in the RecyclerView's list.
      */
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //public TextView courseCode;
-        public TextView courseName;
-        public TextView courseDetails;
-        public TextView courseDetails2;
-        public ImageButton removeButton;
+        TextView courseName;
+        TextView courseDetails;
+        TextView courseDetails2;
+        ImageButton removeButton;
         public View layout;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             layout = v;
 
-            courseName = (TextView) v.findViewById(R.id.courseName);
-            courseDetails = (TextView) v.findViewById(R.id.courseDetails);
-            courseDetails2 = (TextView) v.findViewById(R.id.courseDetails2);
+            courseName = v.findViewById(R.id.courseName);
+            courseDetails = v.findViewById(R.id.courseDetails);
+            courseDetails2 = v.findViewById(R.id.courseDetails2);
             removeButton = v.findViewById(R.id.removeButton);
         }
     }
+
+
+    // This method was provided by the tutorial used to make this RecyclerAdapter.
 
     /*
     public void add(int position, String item) {
@@ -55,16 +60,24 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
     }
     */
 
-    public void remove(int position) {
+    /**
+     * Called by the onClickListener given to the remove button in each ViewHolder. Removes the
+     * Course from the list and notifies the Adapter that the list of items has changed.
+     * @param position Index used to specify which Course is being removed.
+     */
+
+    private void remove(int position) {
         list.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, list.size());
     }
 
-    public RecyclerAdapterCV(List<Course> courseList, WeakReference<Activity> wr) {
+
+    RecyclerAdapterCV(List<Course> courseList, WeakReference<Activity> wr) {
         list = courseList;
         weakRef = wr;
     }
+
 
     /**
      * LayoutManager will call this function once for every item in the provided container, using
@@ -75,32 +88,45 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
      */
 
     @Override
-    public RecyclerAdapterCV.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public RecyclerAdapterCV.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.course_view_layout, parent, false);
-        ViewHolder vh = new ViewHolder(v);
 
-        return vh;
+        return new ViewHolder(v);
     }
 
 
     /**
      * LayoutManager uses this to set the data for each ViewHolder. This is called automatically
-     * each item in the implemented container.
+     * for each item in the implemented container.
      * @param holder Specifies the ViewHolder currently being managed.
-     * @param position The "index" variable that LayoutManager uses to iterate through the
+     * @param position The index variable that LayoutManager uses to iterate through the
      *                 container.
      */
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         Course c = list.get(position);
 
         String firstLine;
         String secondLine;
         String thirdLine;
+
+        /*
+         * This next series of if-statements determines what text goes into each item in the RecyclerAdapter.
+         *
+         * NO RESULTS is the "code" given to the Course that is created when a search returns no results.
+         * secondLine and thirdLine are left blank to make it look like a message.
+         *
+         * "ONLN" goes in the "type" field for all online courses. In this case, the days and time do
+         * not need to be filled.
+         *
+         * The final case will apply to most courses, filling the View with the Course's code, name,
+         * instructor, days, time, etc.
+         */
 
         if( c.getType().equals("ONLN") ) {
 
@@ -143,10 +169,8 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
         holder.courseDetails.setText(secondLine);
         holder.courseDetails2.setText(thirdLine);
 
-        /**
-         * An onClickListener that applies to each individual object in the RecyclerView
-         */
 
+        // An onClickListener attached to the button provided in each View.
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +180,7 @@ public class RecyclerAdapterCV extends RecyclerView.Adapter<RecyclerAdapterCV.Vi
             }
         });
     }
+
 
     /**
      * LayoutManager calls this function to know how many ViewHolders to set.
