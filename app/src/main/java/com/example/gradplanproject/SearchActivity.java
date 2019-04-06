@@ -104,6 +104,7 @@ public class SearchActivity extends AppCompatActivity {
      * appropriate value in the days array is changed to reflect the state of the CheckBox.
      * @param view Specifies which CheckBox was clicked
      */
+
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -205,7 +206,7 @@ public class SearchActivity extends AppCompatActivity {
 
         final WidgetDataStorage wds = getDataFromForm();
 
-        // Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName()
+        // Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCode()
         // + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime()
         // + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
 
@@ -217,7 +218,7 @@ public class SearchActivity extends AppCompatActivity {
         // course code provided by the user.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("semesters").document("2019;SP").collection("sections")
-                .whereEqualTo("course", wds.getCourseCodeOrName()).get()
+                .whereEqualTo("course", wds.getCourseCode()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -325,6 +326,7 @@ public class SearchActivity extends AppCompatActivity {
      * SharedPreferences with the new one.
      * @param course The course to be saved
      */
+
     public static void saveCourse(Course course) {
 
         SharedPreferences.Editor prefsEditor = prefs.edit();
