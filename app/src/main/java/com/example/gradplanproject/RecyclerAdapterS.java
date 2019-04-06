@@ -3,6 +3,7 @@ package com.example.gradplanproject;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -76,7 +77,8 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
      */
 
     @Override
-    public RecyclerAdapterS.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public RecyclerAdapterS.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.search_layout, parent, false);
@@ -94,7 +96,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
      */
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         Course c = list.get(position);
 
@@ -102,7 +104,7 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         String secondLine;
         String thirdLine;
 
-        /**
+        /*
          * This next series of if-statements determines what text goes into each item in the RecyclerAdapter.
          *
          * NO RESULTS is the "code" given to the Course that is created when a search returns no results.
@@ -161,10 +163,8 @@ public class RecyclerAdapterS extends RecyclerView.Adapter<RecyclerAdapterS.View
         holder.courseDetails.setText(secondLine);
         holder.courseDetails2.setText(thirdLine);
 
-        /**
-         * An onClickListener attached to the button provided in each View.
-         */
 
+        // An onClickListener attached to the button provided in each View.
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

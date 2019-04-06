@@ -36,72 +36,49 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class SearchActivity extends AppCompatActivity {
 
-    /**
-     * Editor to store list in SharedPreferences.
-     */
     protected static SharedPreferences prefs;
-
-    private boolean switchState = false;
 
     public static final String TAG = "SearchActivity";
 
-    /**
-     * The view that displays courses that fit search criteria.
-     */
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private WeakReference<Activity> weakRef;
 
     public List<Course> courseList;
-
     private ArrayList<String> days;
 
-    /**
-     * Creates the Toolbar/NavDrawer
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
 
+            // Set the toolbar and navDrawer for this Activity
             Toolbar toolbar = findViewById(R.id.toolbar);
             toolbar.setTitle(getResources().getString(R.string.gpp));
             setSupportActionBar(toolbar);
-
             DrawerUtil.getDrawer(this, toolbar);
         } catch(Exception e) {
             Log.e(TAG, e.getMessage());
         }
 
+
+        // Instantiate some of the main variables
         prefs = getSharedPreferences("PREF_NAME", MODE_PRIVATE);
         weakRef = new WeakReference<Activity>(this);
-
-        /**
-         * courseListExample is just filler data at this point. We will be implementing
-         * a pull from FireStore to populate the RecyclerView box. It currently just returns
-         * null - null, but it will get fixed.
-         */
-
         courseList = new ArrayList<>();
 
-        /**
-         * Instantiating recyclerView and setting layoutManager and custom Adapter class
-         */
-
+        // Instantiate RecyclerView and setting LayoutManager and custom Adapter class
         recyclerView = findViewById(R.id.recyclerView1);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerAdapterS(courseList, new WeakReference<Activity>(this));
         recyclerView.setAdapter(adapter);
 
-        /**
-         * Filling each Spinner with appropriate text (from strings.xml) using ArrayAdapter
-         */
 
-
+        // Fill each Spinner with appropriate text (from strings.xml) using ArrayAdapter
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.startTime_list, android.R.layout.simple_spinner_item);
@@ -114,25 +91,18 @@ public class SearchActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
-        // For filtering from the checkBoxes; used in onCheckboxClicked()
+
+        // Initialize the list used for filtering from the checkBoxes; used in onCheckboxClicked()
         days = new ArrayList<>(5);
         for (int i = 0; i < 5; i++)
             days.add(i, "");
     }
 
-    /**
-     * Just a test to see what spinner data is returned into the log.
-     * @param view
-     */
-    public void testSpinnerData(View view) {
-        Spinner mySpinner = findViewById(R.id.spinner1);
-        String text = mySpinner.getSelectedItem().toString();
-        Log.i(TAG, "This is the data from the spinner: " + text);
-    }
 
     /**
-     * Early version of the day selector checkboxes. Boolean true/false returns based on click.
-     * @param view
+     * The function called when any one of the CheckBoxes is clicked. Whenever one is clicked, the
+     * appropriate value in the days array is changed to reflect the state of the CheckBox.
+     * @param view Specifies which CheckBox was clicked
      */
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
@@ -171,33 +141,30 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Test function for the switch to check what it returns.
-     * @param view
-     */
-    public void onCheckedChanged(View view) {
-        Switch simpleSwitch = findViewById(R.id.switch1);
 
-        switchState = simpleSwitch.isChecked();
-        System.out.println("Switch: " + switchState);
-    }
+    /**
+     * This function pulls filter parameters from all the Views in SearchActivity and puts them
+     * in WidgetDataStorage so they can be referenced later in searchCoursesByFilter().
+     * @return An instantiated and appropriately filled WidgetDataStorage object
+     */
 
     public WidgetDataStorage getDataFromForm() {
 
         // Get the data from the two text boxes and two spinners
-        //Course Code Search Box
-        EditText editText2 = findViewById(R.id.editText2);
-        String courseCodeOrName = editText2.getText().toString().toUpperCase().replaceAll("[^a-zA-Z0-9]+", "");
 
-        //Start Time
+        // Course Code Search Box
+        EditText editText2 = findViewById(R.id.editText2);
+        String courseCode = editText2.getText().toString().toUpperCase().replaceAll("[^a-zA-Z0-9]+", "");
+
+        // Start Time
         Spinner mySpinner1 = findViewById(R.id.spinner1);
         String startTime = mySpinner1.getSelectedItem().toString();
 
-        //End Time
+        // End Time
         Spinner mySpinner2 = findViewById(R.id.spinner2);
         String endTime = mySpinner2.getSelectedItem().toString();
 
-        //Instructor Search Box
+        // Instructor Search Box
         EditText editText = findViewById(R.id.editText);
         String instructor = "";
         String tempInstructor = editText.getText().toString().replaceAll("[^a-zA-Z]+", "");
@@ -205,36 +172,32 @@ public class SearchActivity extends AppCompatActivity {
             instructor = Character.toUpperCase(tempInstructor.charAt(0)) + tempInstructor.substring(1);
         }
 
-        //check if the "filled section" switch is on or off
+        // Check if the "filled section" switch is on or off
         boolean sectionFull = false;
         Switch simpleSwitch = findViewById(R.id.switch1);
         if (simpleSwitch.isChecked()) {
             sectionFull = true;
         }
 
-        //check if the "online only" switch is on or off
+        // Check if the "online only" switch is on or off
         boolean onlineOnly = false;
         Switch simpleSwitch2 = findViewById(R.id.switch2);
         if (simpleSwitch2.isChecked()) {
             onlineOnly = true;
         }
 
-        //run the function to retrieve data from the checkboxes.
-        //There are private global variables to store that data
-        //onCheckboxClicked(view);
-
-        //create a new WidgetDataStorage object with the parameters
-        //retrieved from the widgets
-        //and then return it
-        return ( new WidgetDataStorage(courseCodeOrName, startTime, endTime, instructor, sectionFull, onlineOnly, days) );
+        // Return a new WidgetDataStorage object with the parameters retrieved from each widget
+        return ( new WidgetDataStorage(courseCode, startTime, endTime, instructor, sectionFull, onlineOnly, days) );
     }
+
 
     /**
      * This function will call the getDataFromForm function to get all the data from the widgets
-     * and then it will filter and display the courses according to those parameters that
-     * the user has input in the widgets
-     * @param view
+     * and then it will filter and display the courses according to the parameters that
+     * the user has put in the widgets.
+     * @param view Specifies the button attached to this method (the "Search" button)
      */
+
     public void searchCoursesByFilter(View view) {
 
         Toast.makeText(weakRef.get().getApplicationContext(),
@@ -242,18 +205,29 @@ public class SearchActivity extends AppCompatActivity {
 
         final WidgetDataStorage wds = getDataFromForm();
 
-        //Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName() + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime() + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
+        // Log.d(TAG, "Here are the values: Course Code - " + wds.getCourseCodeOrName()
+        // + " Start Time -  " + wds.getStartTime() + " End Time - " + wds.getEndTime()
+        // + " instructor - " + wds.getInstructor() + " filter courses - " + wds.isSectionFull());
 
+        // Any currently displayed Courses are removed from the list and the RecyclerView
         courseList.clear();
         adapter.notifyDataSetChanged();
 
+        // Instantiate the required Firestore object, then search for all Courses that match the
+        // course code provided by the user.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("semesters").document("2019;SP").collection("sections").whereEqualTo("course", wds.getCourseCodeOrName()).get()
+        db.collection("semesters").document("2019;SP").collection("sections")
+                .whereEqualTo("course", wds.getCourseCodeOrName()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             Gson gson = new Gson();
+
+                            // This for-statement will pass over every Course returned from Firestore
+                            // and check to see if it matches all the filters saved in WidgetDataStorage.
+                            // If it fails any one of the filter checks, "continue" will be called
+                            // immediately and the Course will not be added to the display list.
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 String courseString = gson.toJson(document.getData());
@@ -320,10 +294,15 @@ public class SearchActivity extends AppCompatActivity {
                                         continue;
                                 }
 
+                                // Course must have passed all filter checks to reach this point, so
+                                // it can now be added to the list.
                                 courseList.add(course);
                                 adapter.notifyDataSetChanged();
                             }
 
+                            // If the list is still empty, the filtering must not have returned any
+                            // results. A Course will be instantiated and displayed in the guise of
+                            // a message box.
                             if (courseList.size() == 0) {
                                 Course noResults = new Course();
                                 noResults.setCode("NO RESULTS");
@@ -338,14 +317,21 @@ public class SearchActivity extends AppCompatActivity {
         //Log.d(TAG, "This is the result of filtering: " + sections);
     }
 
+
     /**
-     * Saves a course to the list in SharedPreferences
+     * Saves the provided Course to the list in SharedPreferences. Pulls the String currently saved
+     * in SharedPreferences, converts it to a list of Courses using Gson, adds the new Course to the
+     * list, converts the list back into a Json String, then overwrites the old String in
+     * SharedPreferences with the new one.
      * @param course The course to be saved
      */
     public static void saveCourse(Course course) {
+
         SharedPreferences.Editor prefsEditor = prefs.edit();
+
         Gson gson = new Gson();
         String jsonCourse = gson.toJson(course);
+
         String def = "";
         String jsonCourseList = prefs.getString(String.valueOf(R.string.spring_2019_list), def);
 
@@ -360,4 +346,20 @@ public class SearchActivity extends AppCompatActivity {
         prefsEditor.putString(String.valueOf(R.string.spring_2019_list), gson.toJson(courseStrings));
         prefsEditor.apply();
     }
+
+    /* Function for attempting to retrieve the current "state" of a Spinner
+    public void testSpinnerData(View view) {
+        Spinner mySpinner = findViewById(R.id.spinner1);
+        String text = mySpinner.getSelectedItem().toString();
+        Log.i(TAG, "This is the data from the spinner: " + text);
+    }*/
+
+    /* Function for attempting to retrieve the current "state" of a Switch
+    public void onCheckedChanged(View view) {
+        boolean switchState;
+        Switch simpleSwitch = findViewById(R.id.switch1);
+
+        switchState = simpleSwitch.isChecked();
+        System.out.println("Switch: " + switchState);
+    }*/
 }
